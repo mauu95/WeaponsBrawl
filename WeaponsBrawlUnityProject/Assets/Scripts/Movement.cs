@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
+using UnityEngine.Networking;
 
-public class Movement : MonoBehaviour {
+public class Movement : NetworkBehaviour {
     public float jumpForce = 10;
     public float speed = 400f;
     public GameObject GroundCheck;
@@ -16,14 +17,21 @@ public class Movement : MonoBehaviour {
     }
 
     void Update () {
-        horizontalMove = Input.GetAxisRaw("Horizontal") * speed;
+        if (hasAuthority)
+        {
+            horizontalMove = Input.GetAxisRaw("Horizontal") * speed;
+        }
     }
 
     private void FixedUpdate(){
-        Move(horizontalMove * Time.fixedDeltaTime);
-        if (Input.GetButtonDown("Jump"))
-            Jump();
-        //isGrounded = Physics2D.Linecast(transform.position, GroundCheck.transform.position, playerMask);
+        if (hasAuthority)
+        {
+            Move(horizontalMove * Time.fixedDeltaTime);
+            if (Input.GetButtonDown("Jump"))
+                Jump();
+            //isGrounded = Physics2D.Linecast(transform.position, GroundCheck.transform.position, playerMask);
+        }
+
     }
 
     public void Move(float move) {
@@ -45,4 +53,6 @@ public class Movement : MonoBehaviour {
         m_FacingRight = !m_FacingRight;
         transform.Rotate(0f, 180f, 0f);
     }
+
+
 }
