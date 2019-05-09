@@ -5,28 +5,28 @@ using System;
 public class CameraController : MonoBehaviour
 {
     private Cinemachine.CinemachineVirtualCamera cam;
-    private CinemachineCameraOffset offsetManager;
-    //public GameObject player;       //Public variable to store a reference to the player game object
-    //private Vector3 offset;         //Private variable to store the offset distance between the player and camera
+    private CinemachineCameraOffset offsetManager;  
+    //public GameObject player;                     //Public variable to store a reference to the player game object
 
-    private Func<float> GetCameraZoom;
-    private bool isLooking = false;
-    public float lookAroundSpeed = 100f;
-    private float zoom;
-    public float beginZoom = 5f;
-    public float cameraZoomSpeed = 5f;
-    public float zoomChange = 20f;
-    public float scrollBoost = 5f;
-    public float maxZoomIn = 5f;
-    public float maxZoomOut = 100f;
-
-
+    private Vector3 offsetToReach;                  //the distance beetween what we are looking and the transform
+    private bool targetReach = true;                //have we reach our target offset?  
+    //private Func<float> GetCameraZoom;        
+    private bool isLooking = false;                 //are we looking around(flag)
+    public float lookAroundSpeed = 100f;            //the speed of the camera when we look around
+    private float zoom;                             //the target zoom to reach
+    public float beginZoom = 5f;                    //the initial camera zooom
+    public float cameraZoomSpeed = 5f;              //the speed of the transaciton when the zoom chagne N.B. this will not increase the zoom amount
+    public float zoomChange = 20f;                  //the zoom change amount 
+    public float scrollBoost = 5f;                  //zooming with mouse scroll must be faster
+    public float maxZoomIn = 5f;                    //the minimum bound for our zoom
+    public float maxZoomOut = 100f;                 //the maximum bound for our zoom
+    public float cameraComebackSpeed = 15f;         //the speed of the camera when come back form a look around action
+    public bool costantComebackSpeed=true;          //the comeback speed is costant or propotionated to the distance
+    public float acceptableDinstanceToLag = 0.2f;   //as far as we are getting closer to the target but never able to reach the target when comeback speed is not constant we need to set a distance to say it's ok stop to coming closer
 
     void Start()
     {
         cam = transform.GetComponent<Cinemachine.CinemachineVirtualCamera>();
-        //Calculate and store the offset value by getting the distance between the player's position and camera's position.
-        //offset = transform.position - player.transform.position;
         offsetManager = transform.GetComponent<CinemachineCameraOffset>();
         zoom = beginZoom;
         cam.m_Lens.OrthographicSize = beginZoom;
@@ -48,29 +48,17 @@ public class CameraController : MonoBehaviour
 
     }
 
-    public void OnGUI()
+    private void ZoomHandler()
     {
 
-        if (Event.current.type == EventType.ScrollWheel)
-        {
-            MouseZoom(Event.current.delta.y);
-        }
-    }
-
-    void MouseZoom(float delta)
-    {
-        if (delta < 0)
-        {
-            zoom -= zoomChange * Time.deltaTime * scrollBoost;
-            Debug.Log(zoom);
-        }
-        if (delta > 0)
-        {
-            zoom += zoomChange * Time.deltaTime * scrollBoost;
-            Debug.Log(zoom);
-        }
+        KeyZoom();
+        // MouseZoom(Input.GetAxis("Mouse ScrollWheel"));
+        zoom = Mathf.Clamp(zoom, maxZoomIn, maxZoomOut);
+        float cameraZoomDifference = zoom - cam.m_Lens.OrthographicSize;
+        cam.m_Lens.OrthographicSize += cameraZoomDifference * cameraZoomSpeed * Time.deltaTime;
 
     }
+
     void KeyZoom()
     {
         if (Input.GetKey(KeyCode.KeypadPlus))
@@ -87,64 +75,107 @@ public class CameraController : MonoBehaviour
 
     }
 
+    void MouseZoom(float delta)
+    {
+        if (delta < 0)
+        {
+            zoom -= zoomChange * Time.deltaTime * scrollBoost;
+            Debug.Log(zoom);
+        }
+        if (delta > 0)
+        {
+            zoom += zoomChange * Time.deltaTime * scrollBoost;
+            Debug.Log(zoom);
+        }
 
-    private void ZoomHandler()
+    }
+
+    public void OnGUI()
     {
 
-        KeyZoom();
-
-        // MouseZoom(Input.GetAxis("Mouse ScrollWheel"));
-
-        zoom = Mathf.Clamp(zoom, maxZoomIn, maxZoomOut);
-
-        float cameraZoomDifference = zoom - cam.m_Lens.OrthographicSize;
-        cam.m_Lens.OrthographicSize += cameraZoomDifference * cameraZoomSpeed * Time.deltaTime;
-
-
+        if (Event.current.type == EventType.ScrollWheel)
+        {
+            MouseZoom(Event.current.delta.y);
+        }
     }
 
     private void MovementHandler()
     {
-        if (Input.GetMouseButtonDown(1))
-        {
 
+        if (Input.GetMouseButtonDown(1))
+        {   //right mouse button is down so we are looking around
+            //TODO  remove after using player.isMoving( look below)
+            //transform.hasChanged = false;
             isLooking = true;
-            Debug.Log(isLooking);
         }
+
         if (Input.GetMouseButtonUp(1))
-        {
+        {   //right mouse button has comed up so we heve stopped to look around
+            offsetToReach = new Vector3(0, 0, 0);
+            targetReach = false;
             isLooking = false;
-            Debug.Log(isLooking);
         }
+        //TODO come back when user moves the code below works but bad(remember to uncomment also up)
+       /* if (transform.hasChanged)
+        {   //we are moving, better reset the camera offset
+            offsetManager.m_Offset = new Vector3(0, 0, 0);
+            transform.hasChanged = false;
+        }*/
 
         if (isLooking)
-        {
+        {   //we are looking around let's look around
             LookAroundBehaviour();
         }
-        else
-        {
-            offsetManager.m_Offset = new Vector3(0,0,0);
-            //follow player behaviour
-            // transform.position = player.transform.position + offset;
+        else if (!targetReach)
+        {   //the camera isn't where it should be, lets get it back smoothly
+            ComebackBehaviour();   
         }
+
     }
 
     private void LookAroundBehaviour()
     {
-        if (Input.GetAxis("Mouse X") < 0)
+        if (Input.GetAxis("Mouse X") != 0)
         {
             offsetManager.m_Offset -= new Vector3(Input.GetAxisRaw("Mouse X") * Time.deltaTime * lookAroundSpeed,
                                         Input.GetAxisRaw("Mouse Y") * Time.deltaTime * lookAroundSpeed, 0.0f);
-            Debug.Log("fhit");
+            
         }
+       
+    }
 
-        else if (Input.GetAxis("Mouse X") > 0)
+    private void ComebackBehaviour()
+    {
+
+        Vector3 actualOffset = offsetManager.m_Offset;
+        Vector3 movingDir = (offsetToReach - actualOffset).normalized;
+        Vector3 newOffset;
+        float distance = Vector3.Distance(offsetToReach, actualOffset);
+
+        if (distance > acceptableDinstanceToLag)
         {
-            Debug.Log("nhit");
-            offsetManager.m_Offset -= new Vector3(Input.GetAxisRaw("Mouse X") * Time.deltaTime * lookAroundSpeed,
-                                        Input.GetAxisRaw("Mouse Y") * Time.deltaTime * lookAroundSpeed, 0.0f);
+            if (costantComebackSpeed)
+            {
+                newOffset = actualOffset + movingDir * cameraComebackSpeed * Time.deltaTime;
+            }
+            else
+            {
+                newOffset = actualOffset + movingDir * distance * cameraComebackSpeed * Time.deltaTime;
+            }
+
+            float distanceAfterMoving = Vector3.Distance(newOffset, offsetToReach);
+            if (distanceAfterMoving > distance)
+            {
+                newOffset = offsetToReach;
+                targetReach = true;
+            }
+            offsetManager.m_Offset = newOffset;
         }
-        Debug.Log("hit");
+        else
+        {
+            offsetManager.m_Offset = offsetToReach;
+            targetReach = true;
+        }
     }
 }
 
