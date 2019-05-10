@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.Tilemaps;
+﻿using UnityEngine;
 using UnityEngine.Networking;
 
 public class BulletScript : NetworkBehaviour {
@@ -15,7 +12,6 @@ public class BulletScript : NetworkBehaviour {
 
     void Start () {
         rb.velocity = transform.right * speed;
-        //rb.gameObject.transform.rotation = Quaternion.Euler(0f, 0f, 90f);
         map = FindObjectOfType<MapController>();
     }
 

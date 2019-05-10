@@ -11,7 +11,6 @@ public class SpawnPlayer : NetworkBehaviour {
     public GameObject mainCamera;
     public GameObject  virtualCamera;
 	
-    // Use this for initialization
 	void Start () {
         if (isLocalPlayer)
         {
@@ -26,11 +25,7 @@ public class SpawnPlayer : NetworkBehaviour {
         }
         
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+
     [Command]
     public void CmdSpawnPlayer()
     {

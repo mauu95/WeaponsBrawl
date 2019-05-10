@@ -29,7 +29,6 @@ public class Movement : NetworkBehaviour {
             Move(horizontalMove * Time.fixedDeltaTime);
             if (Input.GetButtonDown("Jump"))
                 Jump();
-            //isGrounded = Physics2D.Linecast(transform.position, GroundCheck.transform.position, playerMask);
         }
 
     }

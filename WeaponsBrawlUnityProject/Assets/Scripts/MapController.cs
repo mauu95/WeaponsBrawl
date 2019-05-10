@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.Tilemaps;
 
@@ -8,15 +6,10 @@ public class MapController : NetworkBehaviour {
 
     public Tilemap map;
 
-    // Use this for initialization
     void Start () {
         map = GetComponent<Tilemap>();
     }
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+
     [Command]  
     public void CmdDestroyTile(int x, int y, int z)
     {
