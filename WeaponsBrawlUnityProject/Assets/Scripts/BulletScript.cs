@@ -20,13 +20,11 @@ public class BulletScript : NetworkBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        CmdExplodeCircle();
-
+        ExplodeCircle();
         Destroy(gameObject);
     }
 
-    [Command]
-    void CmdExplodeCircle()
+    void ExplodeCircle()
     {
         foreach (var p in new BoundsInt(-ExplosionRadius, -ExplosionRadius, 0, 2 * ExplosionRadius + 1, 2 * ExplosionRadius + 1, 1).allPositionsWithin)
         {
@@ -40,12 +38,31 @@ public class BulletScript : NetworkBehaviour
                 map.CmdDestroyTile(destroyPos.x, destroyPos.y, destroyPos.z);
             }
         }
-        explosionEffect.transform.localScale = new Vector3(ExplosionRadius, ExplosionRadius, 0);
-        Instantiate(explosionEffect, transform.position, Quaternion.identity);
-        DamageWhoIsInsideTheExplosion();
+        CmdExplosionAnimation();
+        CmdDamageWhoIsInsideTheExplosion();
     }
 
-    void DamageWhoIsInsideTheExplosion()
+    [Command]
+    void CmdExplosionAnimation()
+    {
+        ExplosionAnimation();
+        RpcExplosionAnimation();
+    }
+
+    [ClientRpc]
+    void RpcExplosionAnimation()
+    {
+        ExplosionAnimation();
+    }
+
+    private void ExplosionAnimation()
+    {
+        explosionEffect.transform.localScale = new Vector3(ExplosionRadius, ExplosionRadius, 0);
+        Instantiate(explosionEffect, transform.position, Quaternion.identity);
+    }
+
+    [Command]
+    void CmdDamageWhoIsInsideTheExplosion()
     {
         Collider2D[] hittedList = Physics2D.OverlapCircleAll(transform.position, ExplosionRadius);
         foreach (Collider2D hitted in hittedList)
@@ -56,6 +73,7 @@ public class BulletScript : NetworkBehaviour
             }
         }
     }
+
 
     //Gizmo explosion radius
     void OnDrawGizmosSelected()

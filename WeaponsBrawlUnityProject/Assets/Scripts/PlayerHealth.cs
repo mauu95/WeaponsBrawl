@@ -2,6 +2,8 @@
 using UnityEngine.Networking;
 
 public class PlayerHealth : NetworkBehaviour {
+
+    [SyncVar]
     public int hp = 100;
 	
     public void TakeDamage(int damage)
@@ -9,14 +11,26 @@ public class PlayerHealth : NetworkBehaviour {
         hp -= damage;
         if (hp <= 0)
         {
-            CmdRpcPlayerDie();
+            CmdPlayerDie();
         }
     }
 
     [Command]
+    void CmdPlayerDie()
+    {
+        PlayerDie();
+        RpcPlayerDie();
+    }
+
     [ClientRpc]
-    void CmdRpcPlayerDie()
+    void RpcPlayerDie()
+    {
+       PlayerDie();
+    }
+
+    void PlayerDie()
     {
         this.gameObject.SetActive(false);
     }
+
 }
