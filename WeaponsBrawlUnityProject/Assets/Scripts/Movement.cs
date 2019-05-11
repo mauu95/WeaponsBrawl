@@ -14,6 +14,7 @@ public class Movement : NetworkBehaviour {
 
     private void Start(){
         m_Rigidbody2D = GetComponent<Rigidbody2D>();
+
     }
 
     void Update () {
@@ -34,7 +35,7 @@ public class Movement : NetworkBehaviour {
     }
 
     public void Move(float move) {
-            Vector3 targetVelocity = new Vector2(move, m_Rigidbody2D.velocity.y);
+            Vector2 targetVelocity = new Vector2(move, m_Rigidbody2D.velocity.y);
             m_Rigidbody2D.velocity = targetVelocity;
 
             if (move > 0 && !m_FacingRight) Flip();

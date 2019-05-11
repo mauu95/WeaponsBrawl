@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Networking;
+using System.Collections;
+using System.Collections.Generic;
 
 public class BulletScript : NetworkBehaviour
 {
@@ -11,6 +13,7 @@ public class BulletScript : NetworkBehaviour
     public MapController map;
     public GameObject explosionEffect;
     public int BulletPower = 20;
+    public int FlingIntensity = 10;
 
     void Start()
     {
@@ -40,6 +43,24 @@ public class BulletScript : NetworkBehaviour
         }
         CmdExplosionAnimation();
         CmdDamageWhoIsInsideTheExplosion();
+        CmdFlingWhoIsInsideTheExplosion();
+    }
+
+    void CmdFlingWhoIsInsideTheExplosion()
+    {
+        Collider2D[] hittedList = Physics2D.OverlapCircleAll(transform.position, ExplosionRadius);
+        foreach (Collider2D hitted in hittedList)
+        {
+            if (hitted.CompareTag("Player"))
+            {
+                Vector3 heading = hitted.transform.position - transform.position;
+                var distance = heading.magnitude;
+                var direction = heading / distance;
+                hitted.gameObject.GetComponent<Movement>().enabled = false;
+                hitted.gameObject.GetComponent<Rigidbody2D>().velocity = direction * FlingIntensity;
+                hitted.gameObject.GetComponent<PlayerHealth>().ActivateMovementAfterSec();
+            }
+        }
     }
 
     [Command]
@@ -74,8 +95,6 @@ public class BulletScript : NetworkBehaviour
         }
     }
 
-
-    //Gizmo explosion radius
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;
