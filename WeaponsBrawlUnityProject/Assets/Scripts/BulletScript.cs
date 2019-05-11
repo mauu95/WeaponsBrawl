@@ -52,7 +52,7 @@ public class BulletScript : NetworkBehaviour
         {
             if (hitted.CompareTag("Player"))
             {
-                hitted.gameObject.GetComponent<PlayerHealth>().TakeDamage(Mathf.FloorToInt(BulletPower / 2)); // divido per 2 perchè il player ha 2 collider e TakeDamage viene chiamato per ogni collider
+                hitted.gameObject.GetComponent<PlayerHealth>().TakeDamage(BulletPower);
             }
         }
     }

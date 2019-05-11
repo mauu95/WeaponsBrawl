@@ -64,12 +64,12 @@ public class CameraController : MonoBehaviour
         if (Input.GetKey(KeyCode.KeypadPlus))
         {
             zoom -= zoomChange * Time.deltaTime;
-            Debug.Log(zoom);
+            //Debug.Log(zoom);
         }
         if (Input.GetKey(KeyCode.KeypadMinus))
         {
             zoom += zoomChange * Time.deltaTime;
-            Debug.Log(zoom);
+            //Debug.Log(zoom);
 
         }
 
@@ -80,12 +80,12 @@ public class CameraController : MonoBehaviour
         if (delta < 0)
         {
             zoom -= zoomChange * Time.deltaTime * scrollBoost;
-            Debug.Log(zoom);
+            //Debug.Log(zoom);
         }
         if (delta > 0)
         {
             zoom += zoomChange * Time.deltaTime * scrollBoost;
-            Debug.Log(zoom);
+            //Debug.Log(zoom);
         }
 
     }
