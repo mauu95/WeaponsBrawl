@@ -41,9 +41,7 @@ public class PlayerHealth : NetworkBehaviour {
 
     IEnumerator ActivateMovement()
     {
-        print("start");
         yield return new WaitForSeconds(2f);
-        print("end");
         this.GetComponent<Movement>().enabled = true;
     }
 
