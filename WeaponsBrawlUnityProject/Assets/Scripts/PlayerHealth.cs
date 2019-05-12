@@ -15,6 +15,7 @@ public class PlayerHealth : NetworkBehaviour {
     public void TakeDamage(int damage)
     {
         hp -= damage;
+        this.GetComponentInChildren<TextMesh>().text = hp.ToString();
         if (hp <= 0)
         {
             CmdPlayerDie();
