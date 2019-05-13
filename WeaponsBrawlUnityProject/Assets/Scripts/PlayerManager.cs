@@ -16,9 +16,7 @@ public class PlayerManager : MonoBehaviour {
     IEnumerator ActivateMovement()
     {
         while (gameObject.GetComponent<Rigidbody2D>().velocity != Vector2.zero)
-        {
             yield return 0;
-        }
         this.GetComponent<Movement>().enabled = true;
     }
 }

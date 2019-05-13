@@ -12,12 +12,17 @@ public class PlayerHealth : NetworkBehaviour {
     public void CmdTakeDamage(int damage)
     {
         hp -= damage;
+        CmdRefreshHpText();
+        if (hp <= 0)
+            CmdPlayerDie();
+    }
+
+
+
+    void CmdRefreshHpText()
+    {
         this.GetComponentInChildren<TextMesh>().text = hp.ToString();
         RpcRefreshHp(hp);
-        if (hp <= 0)
-        {
-            CmdPlayerDie();
-        }
     }
 
     [ClientRpc]

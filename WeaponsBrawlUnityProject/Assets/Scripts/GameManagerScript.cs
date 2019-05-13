@@ -9,8 +9,6 @@ public class GameManagerScript : NetworkBehaviour {
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.P))
-        {
                 NetworkManager.singleton.ServerChangeScene(SceneManager.GetActiveScene().name);
-        }
     }
 }

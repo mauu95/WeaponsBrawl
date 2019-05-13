@@ -6,11 +6,11 @@ using UnityEngine.Networking;
 
 public class SpawnPlayer : NetworkBehaviour
 {
-
-    private GameObject player;
     public GameObject playerToSpawn;
     public GameObject mainCamera;
     public GameObject virtualCamera;
+
+    private GameObject player;
 
     void Start()
     {
@@ -36,6 +36,9 @@ public class SpawnPlayer : NetworkBehaviour
         RpcSetCameraFollow(player);
 
     }
+
+
+
     [ClientRpc]
     public void RpcSetCameraFollow(GameObject p)
     {
@@ -45,4 +48,8 @@ public class SpawnPlayer : NetworkBehaviour
             virtualController.m_Follow = p.transform;
         }
     }
+
+
+
+
 }

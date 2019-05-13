@@ -10,20 +10,22 @@ public class Weapon : NetworkBehaviour{
     public GameObject bulletPrefab;
 
 	void Update () {
+
         if (hasAuthority)
-        {
             if (Input.GetButtonDown("Fire1"))
-            {
                 CmdShoot();
-            }
-        }
 
 	}
+
+
 
     [Command]
     void CmdShoot()
     {
-        GameObject bla=Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
-        NetworkServer.Spawn(bla);
+        GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+        NetworkServer.Spawn(bullet);
     }
+
+
+
 }

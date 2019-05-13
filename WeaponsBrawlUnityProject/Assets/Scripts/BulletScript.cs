@@ -23,12 +23,29 @@ public class BulletScript : NetworkBehaviour
         map = FindObjectOfType<MapController>();
     }
 
+
+
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         ExplodeCircle();
     }
 
+
+
+
+
     void ExplodeCircle()
+    {
+        DestroyMapCircle();
+        CmdDamageWhoIsInsideTheExplosion();
+        CmdFlingWhoIsInsideTheExplosion();
+        CmdExplosionAnimation();
+    }
+
+
+
+    private void DestroyMapCircle()
     {
         foreach (var p in new BoundsInt(-ExplosionRadius, -ExplosionRadius, 0, 2 * ExplosionRadius + 1, 2 * ExplosionRadius + 1, 1).allPositionsWithin)
         {
@@ -42,10 +59,11 @@ public class BulletScript : NetworkBehaviour
                 map.CmdDestroyTile(destroyPos.x, destroyPos.y, destroyPos.z);
             }
         }
-        CmdExplosionAnimation();
-        CmdDamageWhoIsInsideTheExplosion();
-        CmdFlingWhoIsInsideTheExplosion();
     }
+
+
+
+
 
     void CmdFlingWhoIsInsideTheExplosion()
     {
@@ -64,6 +82,9 @@ public class BulletScript : NetworkBehaviour
         }
     }
 
+
+
+
     [Command]
     void CmdExplosionAnimation()
     {
@@ -71,11 +92,17 @@ public class BulletScript : NetworkBehaviour
         RpcExplosionAnimation();
     }
 
+
+
+
     [ClientRpc]
     void RpcExplosionAnimation()
     {
         ExplosionAnimation();
     }
+
+
+
 
     private void ExplosionAnimation()
     {
@@ -83,6 +110,9 @@ public class BulletScript : NetworkBehaviour
         Instantiate(explosionEffect, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
+
+
+
 
     [Command]
     void CmdDamageWhoIsInsideTheExplosion()
@@ -96,6 +126,9 @@ public class BulletScript : NetworkBehaviour
             }
         }
     }
+
+
+
 
     void OnDrawGizmosSelected()
     {
