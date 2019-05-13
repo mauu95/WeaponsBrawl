@@ -92,13 +92,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ExplosionRadius: 9
+  BulletPower: 20
+  FlingIntensity: 20
   speed: 29.73
   rb: {fileID: 50539139174037850}
   map: {fileID: 0}
   explosionEffect: {fileID: 1899417354638636, guid: f3179cb56389b6d4f837e4ddd1b2ee3c,
     type: 2}
-  BulletPower: 20
-  FlingIntensity: 10
 --- !u!114 &114387181941987966
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -8,12 +8,14 @@ public class BulletScript : NetworkBehaviour
 
     [Range(2, 60)] [SerializeField] public int ExplosionRadius = 2;
 
+    public int BulletPower = 20;
+    public int FlingIntensity = 10;
     public float speed = 20f;
+
     public Rigidbody2D rb;
     public MapController map;
     public GameObject explosionEffect;
-    public int BulletPower = 20;
-    public int FlingIntensity = 10;
+
 
     void Start()
     {
@@ -90,7 +92,7 @@ public class BulletScript : NetworkBehaviour
         {
             if (hitted.CompareTag("Player"))
             {
-                hitted.gameObject.GetComponent<PlayerHealth>().TakeDamage(BulletPower);
+                hitted.gameObject.GetComponent<PlayerHealth>().CmdTakeDamage(BulletPower);
             }
         }
     }
