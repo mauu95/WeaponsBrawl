@@ -59,7 +59,7 @@ public class BulletScript : NetworkBehaviour
                 var direction = heading / distance;
                 hitted.gameObject.GetComponent<Movement>().enabled = false;
                 hitted.gameObject.GetComponent<Rigidbody2D>().velocity = direction * FlingIntensity;
-                hitted.gameObject.GetComponent<PlayerHealth>().ActivateMovementAfterSec();
+                hitted.gameObject.GetComponent<PlayerManager>().ActivateMovementAfterSec();
             }
         }
     }

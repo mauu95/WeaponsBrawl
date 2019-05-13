@@ -8,4 +8,14 @@ public class PlayerManager : MonoBehaviour {
     {
         GetComponentInChildren<MeshRenderer>().sortingOrder = 10;
     }
+
+    public void ActivateMovementAfterSec()
+    {
+        StartCoroutine(ActivateMovement());
+    }
+    IEnumerator ActivateMovement()
+    {
+        yield return new WaitForSeconds(2f);
+        this.GetComponent<Movement>().enabled = true;
+    }
 }

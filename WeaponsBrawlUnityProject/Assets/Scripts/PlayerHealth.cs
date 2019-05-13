@@ -8,11 +8,6 @@ public class PlayerHealth : NetworkBehaviour {
     [SyncVar]
     public int hp = 100;
 
-    public void ActivateMovementAfterSec()
-    {
-        StartCoroutine(ActivateMovement());
-    }
-
     [Command]
     public void CmdTakeDamage(int damage)
     {
@@ -48,11 +43,4 @@ public class PlayerHealth : NetworkBehaviour {
     {
         this.gameObject.SetActive(false);
     }
-
-    IEnumerator ActivateMovement()
-    {
-        yield return new WaitForSeconds(2f);
-        this.GetComponent<Movement>().enabled = true;
-    }
-
 }
