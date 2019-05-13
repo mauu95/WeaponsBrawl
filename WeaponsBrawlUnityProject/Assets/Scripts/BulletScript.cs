@@ -24,7 +24,6 @@ public class BulletScript : NetworkBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         ExplodeCircle();
-        Destroy(gameObject);
     }
 
     void ExplodeCircle()
@@ -80,6 +79,7 @@ public class BulletScript : NetworkBehaviour
     {
         explosionEffect.transform.localScale = new Vector3(ExplosionRadius, ExplosionRadius, 0);
         Instantiate(explosionEffect, transform.position, Quaternion.identity);
+        Destroy(gameObject);
     }
 
     [Command]
