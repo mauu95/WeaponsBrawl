@@ -8,11 +8,22 @@ public class PlayerAiming : NetworkBehaviour {
     public float firePointRadius = 3.15f;
     public float speed = 10;
 
+    private float upperAngle = 85f;
+    private float lowerAngle = 275f;
 
     void Update()
     {
         //if (hasAuthority)
-            transform.Rotate(0f, 0f, Input.GetAxisRaw("Vertical") * speed);
+        var rot = transform.rotation.eulerAngles.z;
+        var dir = Input.GetAxisRaw("Vertical");
+        var a = rot < upperAngle + 10f & dir < 0;
+        var b = rot > lowerAngle - 10f & dir > 0;
+        if(rot < upperAngle || rot > lowerAngle || a || b )
+            transform.Rotate(0f, 0f, dir * speed);
+
+
+            
+
     }
 
 
