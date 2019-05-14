@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviour {
 
+
+
     private void Awake()
     {
         GetComponentInChildren<MeshRenderer>().sortingOrder = 10;
@@ -19,4 +21,6 @@ public class PlayerManager : MonoBehaviour {
             yield return 0;
         this.GetComponent<Movement>().enabled = true;
     }
+
+
 }

@@ -9,7 +9,10 @@ public class Weapon : NetworkBehaviour{
     public Transform firePoint;
     public GameObject bulletPrefab;
 
-	void Update () {
+    public float bulletOffset;
+
+
+    void Update () {
 
         if (hasAuthority)
             if (Input.GetButtonDown("Fire1"))

@@ -16,8 +16,6 @@ public abstract class ExplosiveBullet : NetworkBehaviour {
     public GameObject explosionEffect;
 
 
-
-
     protected void Start()
     {
         map = FindObjectOfType<MapController>();
