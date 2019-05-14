@@ -18,7 +18,6 @@ public class Movement : NetworkBehaviour {
 
     private void Start(){
         m_Rigidbody2D = GetComponent<Rigidbody2D>();
-
     }
 
     void Update () {

@@ -69,7 +69,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4471321636788730}
-  - component: {fileID: 114245179497669522}
   m_Layer: 8
   m_Name: FirePointPivot
   m_TagString: Untagged
@@ -97,6 +96,7 @@ GameObject:
   - component: {fileID: 114163673899386150}
   - component: {fileID: 114118562007466566}
   - component: {fileID: 114794031163020780}
+  - component: {fileID: 114375544405647848}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -312,19 +312,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 100
---- !u!114 &114245179497669522
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1853822103938912}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cc79d82e91682b7478914477a4262861, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  firePointRadius: 3
-  speed: 5
 --- !u!114 &114249778459772358
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -352,6 +339,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   virtualCamera: {fileID: 0}
+--- !u!114 &114375544405647848
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1956134299243016}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4495d4cc9204f7f4c82bfee09317f3ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  firePointRadius: 3.15
+  speed: 10
+  FirePointPivot: {fileID: 1853822103938912}
 --- !u!114 &114451875916596948
 MonoBehaviour:
   m_ObjectHideFlags: 1
