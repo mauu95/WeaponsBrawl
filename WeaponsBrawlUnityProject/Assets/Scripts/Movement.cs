@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.Networking;
 
 public class Movement : NetworkBehaviour {
@@ -40,9 +41,9 @@ public class Movement : NetworkBehaviour {
         m_Rigidbody2D.velocity = targetVelocity;
 
         if (move > 0 && !m_FacingRight)
-            Flip();
+            CmdFlip();
         else if (move < 0 && m_FacingRight)
-            Flip();
+            CmdFlip();
     }
 
     public void Jump() {
@@ -50,6 +51,18 @@ public class Movement : NetworkBehaviour {
             m_Rigidbody2D.velocity += jumpForce * Vector2.up;
             isGrounded = false;
         }  
+    }
+
+    [Command]
+    void CmdFlip()
+    {
+        RpcFlip();
+    }
+
+    [ClientRpc]
+    void RpcFlip()
+    {
+        Flip();
     }
 
     void Flip() {
