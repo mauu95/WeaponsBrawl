@@ -97,6 +97,7 @@ GameObject:
   - component: {fileID: 114118562007466566}
   - component: {fileID: 114794031163020780}
   - component: {fileID: 114375544405647848}
+  - component: {fileID: 114018083728082616}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -289,6 +290,19 @@ TextMesh:
   m_Color:
     serializedVersion: 2
     rgba: 4294967295
+--- !u!114 &114018083728082616
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1956134299243016}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dae8bdc0bdd35604a9e645756e1207e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletPrefab: {fileID: 1603136879825324, guid: ebee4733026f6f347a13f7adfcffebd9,
+    type: 2}
 --- !u!114 &114118562007466566
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -466,10 +480,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 380d477beb86b6a4c9afb19cefb8b6a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firePoint: {fileID: 4098502839644278}
   bulletPrefab: {fileID: 1986680163493078, guid: 9395a93020e2b6242bb76785ba5c5cac,
     type: 2}
-  bulletOffset: 0
 --- !u!212 &212028243697867672
 SpriteRenderer:
   m_ObjectHideFlags: 1
