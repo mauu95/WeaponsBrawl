@@ -4,23 +4,28 @@ using UnityEngine;
 using UnityEngine.Networking;
 
 
-public class Weapon : NetworkBehaviour{
+public class Weapon2BombScript : NetworkBehaviour
+{
 
     public Transform firePoint;
     public GameObject bulletPrefab;
 
     public float bulletOffset;
 
+    private void Awake()
+    {
+        firePoint = transform.Find("FirePointPivot/FirePoint");
+        print(firePoint);
+    }
 
-
-
-    void Update () {
+    void Update()
+    {
 
         if (hasAuthority)
             if (Input.GetButtonDown("Fire1"))
                 CmdShoot();
 
-	}
+    }
 
 
 
