@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class GroundCheckScript : MonoBehaviour {
 
-    private Movement movementScript;
+    private PlayerMovement movementScript;
 
     private void Start()
     {
-        movementScript = GetComponentInParent<Movement>();
+        movementScript = GetComponentInParent<PlayerMovement>();
     }
 
     private void OnTriggerStay2D(Collider2D collision)

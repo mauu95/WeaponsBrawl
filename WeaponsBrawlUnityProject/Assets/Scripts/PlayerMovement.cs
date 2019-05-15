@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class Movement : NetworkBehaviour {
+public class PlayerMovement : NetworkBehaviour {
 
     public bool isGrounded = false;
     public float jumpForce = 10;
@@ -41,9 +41,15 @@ public class Movement : NetworkBehaviour {
         m_Rigidbody2D.velocity = targetVelocity;
 
         if (move > 0 && !m_FacingRight)
+        {
+            m_FacingRight = !m_FacingRight;
             CmdFlip();
+        }
         else if (move < 0 && m_FacingRight)
+        {
+            m_FacingRight = !m_FacingRight;
             CmdFlip();
+        }
     }
 
     public void Jump() {
@@ -66,7 +72,6 @@ public class Movement : NetworkBehaviour {
     }
 
     void Flip() {
-        m_FacingRight = !m_FacingRight;
         transform.Rotate(0f, 180f, 0f);
     }
 
