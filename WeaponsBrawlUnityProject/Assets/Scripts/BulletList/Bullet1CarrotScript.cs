@@ -3,7 +3,7 @@ using UnityEngine.Networking;
 using System.Collections;
 using System.Collections.Generic;
 
-public class BulletScript : ExplosiveBullet
+public class Bullet1CarrotScript : AbstractBulletExplosive
 {
 
     new void Start()

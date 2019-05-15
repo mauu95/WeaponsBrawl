@@ -4,8 +4,7 @@ using UnityEngine;
 using UnityEngine.Networking;
 
 
-public class Weapon2BombScript : BulletBasedWeapon
-{
+public class Weapon1CarrotScript : AbstractWeaponBulletBased{
 
 
 

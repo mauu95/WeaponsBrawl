@@ -3,7 +3,7 @@ using UnityEngine.Networking;
 using System.Collections;
 using System.Collections.Generic;
 
-public class Bullet2BombScript : ExplosiveBullet
+public class Bullet2BombScript : AbstractBulletExplosive
 {
     public float ExplosionDelay = 3f;
 

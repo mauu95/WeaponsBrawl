@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public abstract class ExplosiveBullet : NetworkBehaviour {
+public abstract class AbstractBulletExplosive : NetworkBehaviour {
 
     [Range(2, 60)] [SerializeField] public int ExplosionRadius = 2;
 

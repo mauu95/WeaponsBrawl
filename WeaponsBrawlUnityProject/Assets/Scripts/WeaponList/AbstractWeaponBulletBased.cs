@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Networking;
 
 
-public abstract class BulletBasedWeapon : NetworkBehaviour
+public abstract class AbstractWeaponBulletBased : NetworkBehaviour
 {
 
     private Transform firePoint;
