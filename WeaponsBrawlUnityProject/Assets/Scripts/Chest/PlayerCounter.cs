@@ -23,13 +23,13 @@ public class PlayerCounter : MonoBehaviour {
     private void OnTriggerEnter2D(Collider2D other)
     {
 
-        Debug.Log("in "+other+"::"+other.tag);
+        //Debug.Log("in "+other+"::"+other.tag);
         if (other.tag == "Player"&& (!inside.Contains(other.gameObject)))
         {
             inside.Add(other.gameObject);
             playerCounter++;
         }
-        Debug.Log(playerCounter);
+        //Debug.Log(playerCounter);
     }
 
     private void OnTriggerExit2D(Collider2D other)
@@ -40,7 +40,7 @@ public class PlayerCounter : MonoBehaviour {
             playerCounter--;
         }
         playerCounter = Mathf.Max(playerCounter, 0);
-        Debug.Log(playerCounter);
+        //Debug.Log(playerCounter);
     }
 
 }
