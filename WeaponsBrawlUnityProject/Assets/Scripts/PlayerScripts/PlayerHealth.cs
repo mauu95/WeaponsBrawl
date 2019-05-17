@@ -16,8 +16,12 @@ public class PlayerHealth : NetworkBehaviour {
         if (hp <= 0)
             CmdPlayerDie();
     }
-
-
+    [Command]
+    public void CmdGetLife(int life)
+    {
+        hp += life;
+        CmdRefreshHpText();
+    }
 
     void CmdRefreshHpText()
     {
