@@ -18,7 +18,13 @@ public class PlayerWeaponManager : NetworkBehaviour {
 
         if (hasAuthority)
             if (Input.GetButtonDown("Fire1"))
-                Weapon.CmdShoot();
+                CmdAttack();
 
+    }
+
+    [Command]
+    public void CmdAttack()
+    {
+        Weapon.Attack();
     }
 }

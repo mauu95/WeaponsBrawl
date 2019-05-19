@@ -16,11 +16,15 @@ public abstract class AbstractWeaponBulletBased : NetworkBehaviour
         firePoint = Player.Find("FirePointPivot/FirePoint");
     }
 
-    public void CmdShoot()
+    public void Shoot()
     {
-        print("bullet created");
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
         NetworkServer.Spawn(bullet);
+    }
+
+    public void Attack()
+    {
+        Shoot();
     }
 
 
