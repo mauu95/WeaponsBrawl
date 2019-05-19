@@ -6,30 +6,19 @@ using UnityEngine.Networking;
 
 public abstract class AbstractWeaponBulletBased : NetworkBehaviour
 {
-
     private Transform firePoint;
 
+    public Transform Player;
     public GameObject bulletPrefab;
 
     protected void Awake()
     {
-        firePoint = transform.Find("FirePointPivot/FirePoint");
+        firePoint = Player.Find("FirePointPivot/FirePoint");
     }
 
-    protected void Update()
+    public void CmdShoot()
     {
-
-        if (hasAuthority)
-            if (Input.GetButtonDown("Fire1"))
-                CmdShoot();
-
-    }
-
-
-
-    [Command]
-    protected void CmdShoot()
-    {
+        print("bullet created");
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
         NetworkServer.Spawn(bullet);
     }
