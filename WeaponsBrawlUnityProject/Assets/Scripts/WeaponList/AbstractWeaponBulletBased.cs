@@ -4,27 +4,21 @@ using UnityEngine;
 using UnityEngine.Networking;
 
 
-public abstract class AbstractWeaponBulletBased : NetworkBehaviour
+public abstract class AbstractWeaponBulletBased : AbstractWeaponGeneric
 {
-    private Transform firePoint;
-
-    public Transform Player;
     public GameObject bulletPrefab;
 
-    protected void Awake()
+
+    public override void Attack()
     {
-        firePoint = Player.Find("FirePointPivot/FirePoint");
+        Shoot();
     }
+
 
     public void Shoot()
     {
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
         NetworkServer.Spawn(bullet);
-    }
-
-    public void Attack()
-    {
-        Shoot();
     }
 
 

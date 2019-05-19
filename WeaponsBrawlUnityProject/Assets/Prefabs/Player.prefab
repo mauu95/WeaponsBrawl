@@ -395,7 +395,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firePointRadius: 3.15
-  speed: 10
+  speed: 3
   FirePointPivot: {fileID: 1853822103938912}
 --- !u!114 &114399992208742386
 MonoBehaviour:

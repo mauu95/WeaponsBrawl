@@ -5,11 +5,11 @@ using UnityEngine.Networking;
 
 public class PlayerWeaponManager : NetworkBehaviour {
 
-    public Weapon1CarrotScript Weapon;
+    public AbstractWeaponGeneric Weapon;
 
     private void Start()
     {
-        Weapon = transform.Find("FirePointPivot/FirePoint/Weapon1Carrot").GetComponent<Weapon1CarrotScript>();
+        Weapon = transform.Find("FirePointPivot/FirePoint/Weapon1Carrot").GetComponent<AbstractWeaponGeneric>();
     }
 
 
