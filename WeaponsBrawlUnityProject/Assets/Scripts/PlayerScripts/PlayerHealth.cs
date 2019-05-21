@@ -43,9 +43,7 @@ public class PlayerHealth : NetworkBehaviour {
 
     void RefreshHealth(int health)
     {
-        this.GetComponentInChildren<TextMesh>().text = health.ToString();
-        healthBar.GetComponent<HealthBarScript>().SetSize(health * 1f / 100);
-
+        healthBar.GetComponent<HealthBarScript>().SetHealth(health);
     }
 
     [Command]
