@@ -9,8 +9,6 @@ public abstract class AbstractChest : NetworkBehaviour {
 
     public int level;
     public CircleCollider2D playerNextToRay;
-    public CircleCollider2D interactionRay;
-
 
     public void Interact(PlayerChestManager p)
     {
@@ -49,7 +47,6 @@ public abstract class AbstractChest : NetworkBehaviour {
 
     // Use this for initialization
     void Start () {
-		
 	}
 	
 	// Update is called once per frame

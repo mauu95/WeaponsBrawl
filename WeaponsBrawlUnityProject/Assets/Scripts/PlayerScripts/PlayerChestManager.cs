@@ -6,9 +6,10 @@ using UnityEngine.Networking;
 
 
 public class PlayerChestManager : NetworkBehaviour {
+    public int InteractionRadius = 3;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
 		
 	}
 	
@@ -18,7 +19,6 @@ public class PlayerChestManager : NetworkBehaviour {
         {
             if (Input.GetKeyDown(KeyCode.I))
             {
-                Debug.Log("i pressed");
                 CmdInteract();
                 
             }
@@ -28,7 +28,7 @@ public class PlayerChestManager : NetworkBehaviour {
     private void CmdInteract()
     {
 
-        RaycastHit2D[] hits = Physics2D.CircleCastAll(transform.position, 3, new Vector2(0, 0));
+        RaycastHit2D[] hits = Physics2D.CircleCastAll(transform.position, InteractionRadius, new Vector2(0, 0));
         foreach(RaycastHit2D hit in hits){
             if (hit.collider != null && hit.collider.tag == "Chest")
             {

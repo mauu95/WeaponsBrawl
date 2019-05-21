@@ -57851,9 +57851,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39318781eed43b44ea49d3e91587ad78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level: 2
+  level: 0
   playerNextToRay: {fileID: 2129101682}
-  interactionRay: {fileID: 0}
 --- !u!114 &662970135
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -58352,7 +58351,7 @@ GameObject:
   - component: {fileID: 2129101683}
   - component: {fileID: 2129101682}
   m_Layer: 0
-  m_Name: Sphere
+  m_Name: PlayerCount
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
