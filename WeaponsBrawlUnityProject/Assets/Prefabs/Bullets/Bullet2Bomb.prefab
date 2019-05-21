@@ -126,11 +126,11 @@ MonoBehaviour:
   BulletPower: 20
   FlingIntensity: 10
   speed: 40
-  ExplosionDelay: 2
   rb: {fileID: 50575357874365502}
   map: {fileID: 0}
   explosionEffect: {fileID: 1899417354638636, guid: f3179cb56389b6d4f837e4ddd1b2ee3c,
     type: 2}
+  ExplosionDelay: 2
 --- !u!212 &212450604135190620
 SpriteRenderer:
   m_ObjectHideFlags: 1

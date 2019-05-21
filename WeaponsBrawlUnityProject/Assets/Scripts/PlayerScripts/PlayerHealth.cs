@@ -8,31 +8,42 @@ public class PlayerHealth : NetworkBehaviour {
     [SyncVar]
     public int hp = 100;
 
+    public GameObject healthBar;
+
     [Command]
     public void CmdTakeDamage(int damage)
     {
         hp -= damage;
-        CmdRefreshHpText();
+        CmdRefreshHealth();
         if (hp <= 0)
             CmdPlayerDie();
     }
+
+
     [Command]
     public void CmdGetLife(int life)
     {
         hp += life;
-        CmdRefreshHpText();
+        CmdRefreshHealth();
     }
 
-    void CmdRefreshHpText()
+
+
+    void CmdRefreshHealth()
     {
-        this.GetComponentInChildren<TextMesh>().text = hp.ToString();
+        RefreshHealth(hp);
         RpcRefreshHp(hp);
     }
 
     [ClientRpc]
     void RpcRefreshHp(int health)
     {
-        this.GetComponentInChildren<TextMesh>().text = health.ToString();
+        RefreshHealth(health);
+    }
+
+    void RefreshHealth(int health)
+    {
+        healthBar.GetComponent<HealthBarScript>().SetHealth(health);
     }
 
     [Command]
