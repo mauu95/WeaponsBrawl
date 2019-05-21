@@ -689,6 +689,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14ec54200c66c6342985d8ae7f555d96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  chargeSpeed: 1
+  Charge: 0
 --- !u!114 &114118562007466566
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -904,6 +906,7 @@ MonoBehaviour:
   Player: {fileID: 4216280841176650}
   bulletPrefab: {fileID: 1986680163493078, guid: 9395a93020e2b6242bb76785ba5c5cac,
     type: 2}
+  throwingChargeBar: {fileID: 1327557382243520}
 --- !u!114 &114900058869124300
 MonoBehaviour:
   m_ObjectHideFlags: 1
