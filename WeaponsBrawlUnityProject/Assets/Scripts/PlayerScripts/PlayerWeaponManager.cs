@@ -6,6 +6,7 @@ using UnityEngine.Networking;
 public class PlayerWeaponManager : NetworkBehaviour {
 
     public AbstractWeaponGeneric Weapon;
+    public GameObject throwingChargeBar;
 
     private void Start()
     {
@@ -18,13 +19,14 @@ public class PlayerWeaponManager : NetworkBehaviour {
 
         if (hasAuthority)
             if (Input.GetButtonDown("Fire1"))
-                CmdAttack();
+                CmdAttack(throwingChargeBar.GetComponent<ThrowingPowerBarScript>().Charge);
+
 
     }
 
     [Command]
-    public void CmdAttack()
+    public void CmdAttack(int charge)
     {
-        Weapon.Attack();
+        Weapon.Attack(charge);
     }
 }

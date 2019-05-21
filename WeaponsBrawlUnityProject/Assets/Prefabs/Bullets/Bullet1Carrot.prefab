@@ -91,10 +91,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea1b9152679331641b2b84c55a639455, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ExplosionRadius: 9
-  BulletPower: 20
+  ExplosionRadius: 2
+  BulletPower: 2
   FlingIntensity: 20
-  speed: 29.73
+  speed: 50
   rb: {fileID: 50539139174037850}
   map: {fileID: 0}
   explosionEffect: {fileID: 1899417354638636, guid: f3179cb56389b6d4f837e4ddd1b2ee3c,
@@ -110,7 +110,7 @@ MonoBehaviour:
   m_Script: {fileID: -1768714887, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_TransformSyncMode: 1
+  m_TransformSyncMode: 2
   m_SendInterval: 0.033333335
   m_SyncRotationAxis: 6
   m_RotationSyncCompression: 0
