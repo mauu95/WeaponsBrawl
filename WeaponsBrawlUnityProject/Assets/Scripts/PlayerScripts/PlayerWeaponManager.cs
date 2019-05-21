@@ -52,6 +52,9 @@ public class PlayerWeaponManager : NetworkBehaviour {
 
     public void SwitchWeapon(int id)
     {
+        if(CurrentWeapon)
+            CurrentWeapon.gameObject.GetComponent<SpriteRenderer>().enabled = false;
         CurrentWeapon = Weapons[id];
+        CurrentWeapon.gameObject.GetComponent<SpriteRenderer>().enabled = true;
     }
 }
