@@ -3,20 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class HealthBarScript : MonoBehaviour {
-    private Transform bar;
-    private GameObject barSprite;
+
+    private Transform barSprite;
 
     [Range(0, 100)] [SerializeField] public int HP = 100;
 
     void Start()
     {
-        bar = transform.Find("Bar");
-        barSprite = bar.Find("BarSprite").gameObject;
-        //barSprite.GetComponent<SpriteRenderer>().color = Color.yellow;
+        barSprite = transform.Find("Bar/BarSprite");
     }
 
     public void SetSize(float sizeNormalized)
     {
-        barSprite.transform.localScale = new Vector3(sizeNormalized, 1f);
+        barSprite.localScale = new Vector3(sizeNormalized, 1f);
+        if(sizeNormalized < 0.3f)
+            barSprite.Find("whiteBar").gameObject.GetComponent<SpriteRenderer>().color = Color.yellow;
     }
 }

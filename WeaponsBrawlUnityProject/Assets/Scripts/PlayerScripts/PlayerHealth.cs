@@ -14,7 +14,7 @@ public class PlayerHealth : NetworkBehaviour {
     public void CmdTakeDamage(int damage)
     {
         hp -= damage;
-        CmdRefreshHpText();
+        CmdRefreshHealth();
         if (hp <= 0)
             CmdPlayerDie();
     }
@@ -24,12 +24,12 @@ public class PlayerHealth : NetworkBehaviour {
     public void CmdGetLife(int life)
     {
         hp += life;
-        CmdRefreshHpText();
+        CmdRefreshHealth();
     }
 
 
 
-    void CmdRefreshHpText()
+    void CmdRefreshHealth()
     {
         RefreshHealth(hp);
         RpcRefreshHp(hp);
