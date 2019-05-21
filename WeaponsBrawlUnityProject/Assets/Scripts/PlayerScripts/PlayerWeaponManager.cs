@@ -13,6 +13,7 @@ public class PlayerWeaponManager : NetworkBehaviour {
     private void Start()
     {
         CmdSwitchWeapon(0);
+        throwingChargeBar.SetActive(false);
     }
 
 
@@ -20,16 +21,24 @@ public class PlayerWeaponManager : NetworkBehaviour {
     {
 
         if (hasAuthority)
+        {
             if (Input.GetButtonDown("Fire1"))
+                throwingChargeBar.SetActive(true);
+
+            if (Input.GetButtonUp("Fire1"))
+            {
                 CmdAttack(throwingChargeBar.GetComponent<ThrowingPowerBarScript>().Charge);
-        if (hasAuthority)
-            if (Input.GetKeyDown(KeyCode.Alpha2))
-                CmdSwitchWeapon(1);
-        if (hasAuthority)
+                throwingChargeBar.SetActive(false);
+            }
+                
+
+
+
             if (Input.GetKeyDown(KeyCode.Alpha1))
                 CmdSwitchWeapon(0);
-
-
+            if (Input.GetKeyDown(KeyCode.Alpha2))
+                CmdSwitchWeapon(1);
+        }
     }
 
     [Command]
