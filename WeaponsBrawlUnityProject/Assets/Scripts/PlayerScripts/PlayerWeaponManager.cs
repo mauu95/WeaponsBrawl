@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -11,7 +12,7 @@ public class PlayerWeaponManager : NetworkBehaviour {
 
     private void Start()
     {
-        SwitchWeapon(0);
+        CmdSwitchWeapon(0);
     }
 
 
@@ -23,10 +24,10 @@ public class PlayerWeaponManager : NetworkBehaviour {
                 CmdAttack(throwingChargeBar.GetComponent<ThrowingPowerBarScript>().Charge);
         if (hasAuthority)
             if (Input.GetKeyDown(KeyCode.Alpha2))
-                SwitchWeapon(1);
+                CmdSwitchWeapon(1);
         if (hasAuthority)
             if (Input.GetKeyDown(KeyCode.Alpha1))
-                SwitchWeapon(0);
+                CmdSwitchWeapon(0);
 
 
     }
@@ -35,6 +36,18 @@ public class PlayerWeaponManager : NetworkBehaviour {
     public void CmdAttack(int charge)
     {
         CurrentWeapon.Attack(charge);
+    }
+
+    [Command]
+    public void CmdSwitchWeapon(int id)
+    {
+        RpcSwitchWeapon(id);
+    }
+
+    [ClientRpc]
+    private void RpcSwitchWeapon(int id)
+    {
+        SwitchWeapon(id);
     }
 
     public void SwitchWeapon(int id)
