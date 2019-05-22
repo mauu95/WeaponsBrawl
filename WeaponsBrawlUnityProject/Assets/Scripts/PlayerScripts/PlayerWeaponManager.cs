@@ -57,14 +57,54 @@ public class PlayerWeaponManager : NetworkBehaviour {
         }
     }
 
+    void ActivateAxe(bool active)
+    {
+        Axe.SetActive(active);
+        FirePoint.SetActive(!active);
+    }
+
+    public void SwitchWeapon(int id)
+    {
+        if(CurrentWeapon)
+            CurrentWeapon.gameObject.GetComponent<SpriteRenderer>().enabled = false;
+        CurrentWeapon = Weapons[id];
+        CurrentWeapon.gameObject.GetComponent<SpriteRenderer>().enabled = true;
+    }
+
     IEnumerator SwingAxe()
     {
-        while (Pivot.transform.localRotation.eulerAngles.z <= 90 || Pivot.transform.localRotation.eulerAngles.z >300)
+        while (Pivot.transform.localRotation.eulerAngles.z <= 90 || Pivot.transform.localRotation.eulerAngles.z > 300)
         {
             Pivot.transform.Rotate(0f, 0f, -10f * AxeSpeed * Time.deltaTime);
             yield return 0;
         }
         CmdActivateAxe(false);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    [Command]
+    public void CmdAttack(int charge)
+    {
+        CurrentWeapon.Attack(charge);
     }
 
     [Command]
@@ -74,22 +114,12 @@ public class PlayerWeaponManager : NetworkBehaviour {
     }
 
     [ClientRpc]
-    private void RpcActivateAxe(bool active)
+    void RpcActivateAxe(bool active)
     {
         ActivateAxe(active);
     }
 
-    void ActivateAxe(bool active)
-    {
-        Axe.SetActive(active);
-        FirePoint.SetActive(!active);
-    }
 
-    [Command]
-    public void CmdAttack(int charge)
-    {
-        CurrentWeapon.Attack(charge);
-    }
 
     [Command]
     public void CmdSwitchWeapon(int id)
@@ -101,13 +131,5 @@ public class PlayerWeaponManager : NetworkBehaviour {
     private void RpcSwitchWeapon(int id)
     {
         SwitchWeapon(id);
-    }
-
-    public void SwitchWeapon(int id)
-    {
-        if(CurrentWeapon)
-            CurrentWeapon.gameObject.GetComponent<SpriteRenderer>().enabled = false;
-        CurrentWeapon = Weapons[id];
-        CurrentWeapon.gameObject.GetComponent<SpriteRenderer>().enabled = true;
     }
 }
