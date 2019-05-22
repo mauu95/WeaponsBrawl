@@ -15,5 +15,5 @@ public abstract class AbstractWeaponGeneric : NetworkBehaviour {
         firePoint = Player.Find("FirePointPivot/FirePoint");
     }
 
-    public abstract void Attack();
+    public abstract void Attack(int charge);
 }

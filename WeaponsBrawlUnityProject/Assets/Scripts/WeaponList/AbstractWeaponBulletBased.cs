@@ -8,16 +8,16 @@ public abstract class AbstractWeaponBulletBased : AbstractWeaponGeneric
 {
     public GameObject bulletPrefab;
 
-
-    public override void Attack()
+    public override void Attack(int charge)
     {
-        Shoot();
+        Shoot(charge);
     }
 
 
-    public void Shoot()
+    public void Shoot(int charge)
     {
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+        bullet.GetComponent<AbstractBulletExplosive>().speed *= charge / 100f;
         NetworkServer.Spawn(bullet);
     }
 
