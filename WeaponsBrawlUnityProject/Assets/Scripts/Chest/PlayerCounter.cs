@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class PlayerCounter : MonoBehaviour {
     private int playerCounter;
-
-	// Use this for initialization
-	void Start () {
+    private List<GameObject> inside = new List<GameObject>();
+    // Use this for initialization
+    void Start () {
         playerCounter = 0;	
 	}
 	
@@ -19,7 +19,7 @@ public class PlayerCounter : MonoBehaviour {
     {
         return playerCounter;
     }
-    private List<GameObject> inside = new List<GameObject>();
+    
     private void OnTriggerEnter2D(Collider2D other)
     {
 
