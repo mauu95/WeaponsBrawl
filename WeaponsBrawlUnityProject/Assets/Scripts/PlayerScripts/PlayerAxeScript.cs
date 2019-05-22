@@ -18,7 +18,7 @@ public class PlayerAxeScript : NetworkBehaviour
         if (collision.gameObject.CompareTag("Tree"))
         {
             resource.addResouces(50);
-            Destroy(collision.gameObject);
+            NetworkServer.Destroy(collision.gameObject);
         }
             
     }

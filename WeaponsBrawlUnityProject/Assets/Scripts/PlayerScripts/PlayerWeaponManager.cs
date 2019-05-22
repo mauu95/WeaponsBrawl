@@ -49,8 +49,7 @@ public class PlayerWeaponManager : NetworkBehaviour {
 
             if (Input.GetKeyDown(KeyCode.Q))
             {
-                Axe.SetActive(true);
-                FirePoint.SetActive(false);
+                CmdActivateAxe(true);
                 Pivot.transform.localRotation = Quaternion.Euler(0f, 0f, 90f);
                 StartCoroutine(SwingAxe());
             }
@@ -65,8 +64,25 @@ public class PlayerWeaponManager : NetworkBehaviour {
             Pivot.transform.Rotate(0f, 0f, -10f * AxeSpeed * Time.deltaTime);
             yield return 0;
         }
-        Axe.SetActive(false);
-        FirePoint.SetActive(true);
+        CmdActivateAxe(false);
+    }
+
+    [Command]
+    void CmdActivateAxe(bool active)
+    {
+        RpcActivateAxe(active);
+    }
+
+    [ClientRpc]
+    private void RpcActivateAxe(bool active)
+    {
+        ActivateAxe(active);
+    }
+
+    void ActivateAxe(bool active)
+    {
+        Axe.SetActive(active);
+        FirePoint.SetActive(!active);
     }
 
     [Command]
