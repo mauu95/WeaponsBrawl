@@ -9,11 +9,20 @@ public class PlayerWeaponManager : NetworkBehaviour {
     public List<AbstractWeaponGeneric> Weapons = new List<AbstractWeaponGeneric>();
     private AbstractWeaponGeneric CurrentWeapon;
     public GameObject throwingChargeBar;
+    public int AxeSpeed=10;
+
+    private GameObject Axe;
+    private GameObject FirePoint;
+    private GameObject Pivot;
 
     private void Start()
     {
         CmdSwitchWeapon(0);
         throwingChargeBar.SetActive(false);
+
+        Axe = transform.Find("FirePointPivot/Axe").gameObject;
+        FirePoint = transform.Find("FirePointPivot/FirePoint").gameObject;
+        Pivot = transform.Find("FirePointPivot").gameObject;
     }
 
 
@@ -32,13 +41,32 @@ public class PlayerWeaponManager : NetworkBehaviour {
             }
                 
 
-
-
             if (Input.GetKeyDown(KeyCode.Alpha1))
                 CmdSwitchWeapon(0);
             if (Input.GetKeyDown(KeyCode.Alpha2))
                 CmdSwitchWeapon(1);
+
+
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                Axe.SetActive(true);
+                FirePoint.SetActive(false);
+                Pivot.transform.localRotation = Quaternion.Euler(0f, 0f, 90f);
+                StartCoroutine(SwingAxe());
+            }
+                
         }
+    }
+
+    IEnumerator SwingAxe()
+    {
+        while (Pivot.transform.localRotation.eulerAngles.z <= 90 || Pivot.transform.localRotation.eulerAngles.z >300)
+        {
+            Pivot.transform.Rotate(0f, 0f, -10f * AxeSpeed * Time.deltaTime);
+            yield return 0;
+        }
+        Axe.SetActive(false);
+        FirePoint.SetActive(true);
     }
 
     [Command]

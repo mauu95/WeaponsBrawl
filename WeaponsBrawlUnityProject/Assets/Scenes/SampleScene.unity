@@ -57487,6 +57487,48 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   map: {fileID: 0}
+--- !u!1001 &275386923
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4216280841176650, guid: 8ba13d3e85bdac346b09b8da450d5b72, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -37.762268
+      objectReference: {fileID: 0}
+    - target: {fileID: 4216280841176650, guid: 8ba13d3e85bdac346b09b8da450d5b72, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 4.5774384
+      objectReference: {fileID: 0}
+    - target: {fileID: 4216280841176650, guid: 8ba13d3e85bdac346b09b8da450d5b72, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0.21875
+      objectReference: {fileID: 0}
+    - target: {fileID: 4216280841176650, guid: 8ba13d3e85bdac346b09b8da450d5b72, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4216280841176650, guid: 8ba13d3e85bdac346b09b8da450d5b72, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4216280841176650, guid: 8ba13d3e85bdac346b09b8da450d5b72, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4216280841176650, guid: 8ba13d3e85bdac346b09b8da450d5b72, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4216280841176650, guid: 8ba13d3e85bdac346b09b8da450d5b72, type: 2}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 8ba13d3e85bdac346b09b8da450d5b72, type: 2}
+  m_IsPrefabAsset: 0
 --- !u!1 &306028174
 GameObject:
   m_ObjectHideFlags: 0
@@ -57548,6 +57590,7 @@ MonoBehaviour:
   m_SpawnPrefabs:
   - {fileID: 1956134299243016, guid: 8ba13d3e85bdac346b09b8da450d5b72, type: 2}
   - {fileID: 1986680163493078, guid: 9395a93020e2b6242bb76785ba5c5cac, type: 2}
+  - {fileID: 1603136879825324, guid: ebee4733026f6f347a13f7adfcffebd9, type: 2}
   m_CustomConfig: 0
   m_MaxConnections: 4
   m_ConnectionConfig:
