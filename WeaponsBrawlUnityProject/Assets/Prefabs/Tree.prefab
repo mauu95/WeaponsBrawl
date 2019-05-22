@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 66927379959679648}
   - component: {fileID: 61105957735182960}
   - component: {fileID: 61337946587466358}
+  - component: {fileID: 114857837120154246}
   m_Layer: 0
   m_Name: Tree
   m_TagString: Tree
@@ -162,6 +163,38 @@ CompositeCollider2D:
       - {x: -1.1027272, y: -4.925}
       - {x: 1.1027272, y: -4.925}
   m_VertexDistance: 0.0005
+--- !u!114 &114857837120154246
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1670997124698934}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 135
+    i1: 226
+    i2: 53
+    i3: 244
+    i4: 75
+    i5: 246
+    i6: 235
+    i7: 164
+    i8: 59
+    i9: 12
+    i10: 108
+    i11: 46
+    i12: 48
+    i13: 178
+    i14: 30
+    i15: 67
+  m_ServerOnly: 1
+  m_LocalPlayerAuthority: 0
 --- !u!212 &212890854522118866
 SpriteRenderer:
   m_ObjectHideFlags: 1
