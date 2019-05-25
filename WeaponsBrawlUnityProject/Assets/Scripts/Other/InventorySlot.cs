@@ -1,11 +1,12 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class InventorySlot : MonoBehaviour
 {
     public Image icon;
 
-    AbstractWeaponGeneric item;
+    public AbstractWeaponGeneric item;
 
     public void AddItem(AbstractWeaponGeneric newItem)
     {
@@ -14,6 +15,36 @@ public class InventorySlot : MonoBehaviour
         icon.enabled = true;
     }
 
+    public void SwitchWeapon()
+    {
+        PlayerWeaponManager_Inventory inventory = GetGameObjectInRoot("Canvas").GetComponent<InventoryUI>().Player.GetComponent<PlayerWeaponManager_Inventory>();
+        int wid = inventory.Weapons.FindIndex(a => a == item);
+        inventory.SwitchWeapon(wid);
+    }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    private GameObject GetGameObjectInRoot(string objname)
+    {
+        GameObject[] root = SceneManager.GetActiveScene().GetRootGameObjects();
+        foreach (GameObject obj in root)
+            if (obj.name == objname)
+                return obj;
+        return null;
+    }
 }
