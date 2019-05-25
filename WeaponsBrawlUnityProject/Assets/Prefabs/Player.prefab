@@ -784,6 +784,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Player: {fileID: 4216280841176650}
+  info: {fileID: 11400000, guid: acf061ebd69f07a429687119cd233ff9, type: 2}
   bulletPrefab: {fileID: 1603136879825324, guid: ebee4733026f6f347a13f7adfcffebd9,
     type: 2}
 --- !u!114 &114100291977863818
@@ -891,6 +892,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4d4e4beb5a44eb4da7934e3c49b1ac7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  InteractionRadius: 3
 --- !u!114 &114375544405647848
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -919,6 +921,7 @@ MonoBehaviour:
   Weapons:
   - {fileID: 114810577240394090}
   - {fileID: 114098965042524706}
+  space: 18
   throwingChargeBar: {fileID: 1327557382243520}
   AxeSpeed: 30
 --- !u!114 &114439985612114638
@@ -964,6 +967,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e5dd560d739e654db1cc6a988856a36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ignoreTag:
+  - Chest
+  - Destroyer
 --- !u!114 &114572224886439304
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1091,6 +1097,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Player: {fileID: 4216280841176650}
+  info: {fileID: 11400000, guid: 3a01c83d2a060ee408fddde98a04e262, type: 2}
   bulletPrefab: {fileID: 1986680163493078, guid: 9395a93020e2b6242bb76785ba5c5cac,
     type: 2}
 --- !u!114 &114900058869124300

@@ -54,6 +54,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Player: {fileID: 0}
+  info: {fileID: 11400000, guid: acf061ebd69f07a429687119cd233ff9, type: 2}
   bulletPrefab: {fileID: 1603136879825324, guid: ebee4733026f6f347a13f7adfcffebd9,
     type: 2}
 --- !u!114 &114687973416873424
