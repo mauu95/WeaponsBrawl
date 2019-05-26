@@ -55,6 +55,7 @@ public class PlayerMovement : NetworkBehaviour {
     public void Jump() {
         if (isGrounded){
             m_Rigidbody2D.velocity += jumpForce * Vector2.up;
+            m_Rigidbody2D.velocity =new Vector2(m_Rigidbody2D.velocity.x, Mathf.Min(m_Rigidbody2D.velocity.y, 25));
             isGrounded = false;
         }  
     }
