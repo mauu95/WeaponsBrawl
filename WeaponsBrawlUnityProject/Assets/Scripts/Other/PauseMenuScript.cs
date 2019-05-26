@@ -5,13 +5,13 @@ using UnityEngine.SceneManagement;
 using UnityEngine.Audio;
 using UnityEngine.UI;
 
-public class MainMenuScript : MonoBehaviour {
-
+public class PauseMenuScript : MonoBehaviour
+{
+    public GameObject PauseMenuUI;
     public AudioMixer audioMixer;
+    public Dropdown resolutionDropDown;
 
     Resolution[] resolutions;
-
-    public Dropdown resolutionDropDown;
 
     private void Start()
     {
@@ -27,7 +27,7 @@ public class MainMenuScript : MonoBehaviour {
             string option = resolutions[i].width + " x " + resolutions[i].height;
             options.Add(option);
 
-            if(resolutions[i].width == Screen.currentResolution.width && resolutions[i].height == Screen.currentResolution.height)
+            if (resolutions[i].width == Screen.currentResolution.width && resolutions[i].height == Screen.currentResolution.height)
             {
                 currentResolutionIndex = i;
             }
@@ -37,20 +37,31 @@ public class MainMenuScript : MonoBehaviour {
         resolutionDropDown.RefreshShownValue();
     }
 
-    public void SetResolution(int resolutionIndex)
+    private void Update()
     {
-        Resolution resolution = resolutions[resolutionIndex];
-        Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
+        if (Input.GetKeyDown(KeyCode.Escape))
+            OpenClosePauseMenu();
     }
 
-    public void PlayGame()
+    public void OpenClosePauseMenu()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        PauseMenuUI.SetActive(!PauseMenuUI.activeSelf);
+    }
+
+    public void LoadMenu()
+    {
+        SceneManager.LoadScene(0);
     }
 
     public void QuitGame()
     {
         Application.Quit();
+    }
+
+    public void SetResolution(int resolutionIndex)
+    {
+        Resolution resolution = resolutions[resolutionIndex];
+        Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
     }
 
     public void SetVolume(float volume)
@@ -63,3 +74,6 @@ public class MainMenuScript : MonoBehaviour {
         Screen.fullScreen = fullScreen;
     }
 }
+
+
+
