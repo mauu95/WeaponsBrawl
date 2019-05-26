@@ -4,17 +4,31 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class PlayerWeaponManager : NetworkBehaviour {
+public class PlayerWeaponManager_Inventory : NetworkBehaviour {
 
+    //Inventory Stuff
     public List<AbstractWeaponGeneric> Weapons = new List<AbstractWeaponGeneric>();
-    private AbstractWeaponGeneric CurrentWeapon;
+
+    public delegate void OnItemChanged();
+    public OnItemChanged onItemChangedCallBack;
+
+    //Weapon Manager Stuff
     public GameObject throwingChargeBar;
     public int AxeSpeed=10;
 
+    private AbstractWeaponGeneric CurrentWeapon;
     private GameObject Axe;
     private GameObject FirePoint;
     private GameObject Pivot;
 
+
+    public void Add(AbstractWeaponGeneric weapon)
+    {
+        Weapons.Add(weapon);
+        if (onItemChangedCallBack != null)
+            onItemChangedCallBack.Invoke();
+    }
+        
     private void Start()
     {
         CmdSwitchWeapon(0);

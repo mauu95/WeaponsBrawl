@@ -1,14 +1,22 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerManager : MonoBehaviour {
 
+    private void Start()
+    {
+        InventoryUI inventory = GetGameObjectInRoot("Canvas").GetComponent<InventoryUI>();
+        inventory.InitializeInventoryUI(this.gameObject);
+    }
 
     public void ActivateMovementAfterSec()
     {
         StartCoroutine(ActivateMovement());
     }
+
     IEnumerator ActivateMovement()
     {
         while (gameObject.GetComponent<Rigidbody2D>().velocity != Vector2.zero)
@@ -16,5 +24,26 @@ public class PlayerManager : MonoBehaviour {
         this.GetComponent<PlayerMovement>().enabled = true;
     }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+    private GameObject GetGameObjectInRoot(string objname)
+    {
+        GameObject[] root = SceneManager.GetActiveScene().GetRootGameObjects();
+        foreach (GameObject obj in root)
+            if (obj.name == objname)
+                return obj;
+        return null;
+    }
 
 }

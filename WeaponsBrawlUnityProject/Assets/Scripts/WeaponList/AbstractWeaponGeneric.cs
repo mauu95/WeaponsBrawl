@@ -9,6 +9,8 @@ public abstract class AbstractWeaponGeneric : NetworkBehaviour {
 
     public Transform Player;
 
+    public WeaponInfo info;
+
 
     protected void Awake()
     {
