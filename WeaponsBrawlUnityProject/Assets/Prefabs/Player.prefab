@@ -866,13 +866,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5bd723e8b2a3434db53d809d89dc79d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buildingType: 0
-  buildings:
-  - {fileID: 1330903242153776, guid: 1f4081af530ec44489a66908f2e01d3e, type: 2}
-  - {fileID: 1143302734639574, guid: aa2759320823bfe45a37408fe64c33ec, type: 2}
+  zRotation: 0
+  building: {fileID: 1330903242153776, guid: 1f4081af530ec44489a66908f2e01d3e, type: 2}
   spawnPoint: {fileID: 0}
   inBuildingObject: {fileID: 0}
   isBuilding: 0
+  rotationLock: 1
 --- !u!114 &114249778459772358
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -940,7 +939,6 @@ MonoBehaviour:
   Weapons:
   - {fileID: 114810577240394090}
   - {fileID: 114098965042524706}
-  space: 18
   throwingChargeBar: {fileID: 1327557382243520}
   AxeSpeed: 30
 --- !u!114 &114439985612114638

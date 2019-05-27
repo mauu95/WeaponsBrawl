@@ -3,17 +3,17 @@ using UnityEngine.Networking;
 
 
 public class BuildingController : NetworkBehaviour {
-    [SyncVar]
-    public int buildingType=0;
-    public GameObject[] buildings;
-    public GameObject spawnPoint;
-    //public GameObject toSpawn;
-    public GameObject inBuildingObject;
-    public bool isBuilding;
+   [SyncVar]
+    public int zRotation; //syncvar doesn't work well
+    public GameObject building;
     public bool rotationLock=true;
 
-    // Use this for initialization
+    private GameObject spawnPoint;
+    private GameObject inBuildingObject;
+    private bool isBuilding;
 
+    
+    // Use this for initialization
     void Start () {
         isBuilding = false;
         spawnPoint = transform.Find("FirePointPivot/FirePoint").gameObject;
@@ -31,7 +31,7 @@ public class BuildingController : NetworkBehaviour {
                 isBuilding = !isBuilding;
                 if (isBuilding)
                 {
-                    inBuildingObject = Instantiate(buildings[buildingType], spawnPoint.transform);
+                    inBuildingObject = Instantiate(building, spawnPoint.transform);
                 }
                 else
                 {
@@ -42,68 +42,52 @@ public class BuildingController : NetworkBehaviour {
 
             if (isBuilding && rotationLock)
             {
-                inBuildingObject.transform.rotation = Quaternion.Euler(0, 0, 0);
+                inBuildingObject.transform.rotation = Quaternion.Euler(0, 0, zRotation);
             }
 
             if (isBuilding && Input.GetKeyDown(KeyCode.F))
             {
-                buildingType--;
-                while (buildingType <= 0)
-                {
-                    buildingType += buildings.Length;
-                }
-                buildingType = buildingType % buildings.Length;
-                RefreshConstruction();
+                zRotation-=45;  
             }
 
             if (isBuilding && Input.GetKeyDown(KeyCode.G))
             {
-                buildingType++;
-                buildingType = buildingType % buildings.Length;
-                RefreshConstruction();
+                zRotation+=45;
             }
 
             if (isBuilding && Input.GetKeyDown(KeyCode.Z))
             {
-                
-                //inBuildingObject.transform.parent = null;
-                //inBuildingObject.GetComponent<BoxCollider2D>().enabled=true;
-                CmdSpawnConstruction();
-                //inBuildingObject= Instantiate(toSpawn, spawnPoint.transform);
+                CmdSpawnConstruction(zRotation); //syncvar doesn't work well
             }
            
         }
     }
 
-    private void RefreshConstruction()
-    {
-        Destroy(inBuildingObject);
-        inBuildingObject = Instantiate(buildings[buildingType], spawnPoint.transform);
-    }
-
     [Command]
-    public void CmdSpawnConstruction()
+    public void CmdSpawnConstruction(int rotation)
     {
         PlayerResourceScript resource= gameObject.GetComponent<PlayerResourceScript>();
-        Debug.Log(resource.UseResource(10));
 
         if (resource.UseResource(10))
         {
-            RpcRealBuild();          
+            RpcRealBuild(rotation);          
         }
 
     }
     [ClientRpc]
-    public void RpcRealBuild()
+    public void RpcRealBuild(int rotation)
     {
-        GameObject toBuild = Instantiate(buildings[buildingType], spawnPoint.transform);
+        GameObject toBuild = Instantiate(building, spawnPoint.transform);
         if (rotationLock)
         {
-            toBuild.transform.rotation = Quaternion.Euler(0, 0, 0);
+            toBuild.transform.rotation = Quaternion.Euler(0, 0, rotation);
         }
-        //toBuild.transform.parent = null;
-        toBuild.GetComponent<BoxCollider2D>().enabled = true;
-        //NetworkServer.Spawn(toBuild);
         toBuild.transform.parent = null;
+        toBuild.GetComponent<BoxCollider2D>().enabled = true;
+        Color spriteColor = toBuild.GetComponent<SpriteRenderer>().color;
+        spriteColor.a = 1;
+        toBuild.GetComponent<SpriteRenderer>().color = spriteColor;
+
+
     }
 }
