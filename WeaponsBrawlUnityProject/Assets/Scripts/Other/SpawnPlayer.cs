@@ -14,18 +14,7 @@ public class SpawnPlayer : NetworkBehaviour
 
     void Start()
     {
-        if (isLocalPlayer)
-        {
-            CmdSpawnPlayer();
-            mainCamera.SetActive(true);
-            virtualCamera.SetActive(true);
-        }
-        else
-        {
-            mainCamera.SetActive(false);
-            virtualCamera.SetActive(false);
-        }
-
+        StartCoroutine("SpawnPlayerWithDelay");
     }
 
     [Command]
@@ -48,6 +37,23 @@ public class SpawnPlayer : NetworkBehaviour
             virtualController.m_Follow = p.transform;
         }
     }
+
+    IEnumerator SpawnPlayerWithDelay()
+    {
+        yield return new WaitForSeconds(0.01f);
+        if (isLocalPlayer)
+        {
+            CmdSpawnPlayer();
+            mainCamera.SetActive(true);
+            virtualCamera.SetActive(true);
+        }
+        else
+        {
+            mainCamera.SetActive(false);
+            virtualCamera.SetActive(false);
+        }
+    }
+
 
 
 
