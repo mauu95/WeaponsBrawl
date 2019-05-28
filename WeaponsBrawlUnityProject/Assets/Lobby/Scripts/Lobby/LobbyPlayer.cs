@@ -11,10 +11,10 @@ namespace Prototype.NetworkLobby
     //Any LobbyHook can then grab it and pass those value to the game player prefab (see the Pong Example in the Samples Scenes)
     public class LobbyPlayer : NetworkLobbyPlayer
     {
-        static Color[] Colors = new Color[] { Color.magenta, Color.red, Color.cyan, Color.blue, Color.green, Color.yellow };
         //used on server to avoid assigning the same color to two player
-        static List<int> _colorInUse = new List<int>();
-
+        static int red=0;
+        static int blue=0;
+        public int maxPlayerPerColor=2;
         public Button colorButton;
         public InputField nameInput;
         public Button readyButton;
@@ -201,7 +201,7 @@ namespace Prototype.NetworkLobby
         //so that all client get the new value throught syncvar
         public void OnColorClicked()
         {
-            CmdColorChange();
+            //CmdColorChange();
         }
 
         public void OnReadyClicked()
@@ -249,40 +249,18 @@ namespace Prototype.NetworkLobby
         [Command]
         public void CmdColorChange()
         {
-            int idx = System.Array.IndexOf(Colors, playerColor);
-
-            int inUseIdx = _colorInUse.IndexOf(idx);
-
-            if (idx < 0) idx = 0;
-
-            idx = (idx + 1) % Colors.Length;
-
-            bool alreadyInUse = false;
-
-            do
+            if (blue < red && maxPlayerPerColor>blue)
             {
-                alreadyInUse = false;
-                for (int i = 0; i < _colorInUse.Count; ++i)
-                {
-                    if (_colorInUse[i] == idx)
-                    {//that color is already in use
-                        alreadyInUse = true;
-                        idx = (idx + 1) % Colors.Length;
-                    }
-                }
+                playerColor = Color.blue;
+                blue++;
             }
-            while (alreadyInUse);
-
-            if (inUseIdx >= 0)
-            {//if we already add an entry in the colorTabs, we change it
-                _colorInUse[inUseIdx] = idx;
-            }
-            else
-            {//else we add it
-                _colorInUse.Add(idx);
+            else if(maxPlayerPerColor > red)
+            {
+                playerColor = Color.red;
+                red++;
             }
 
-            playerColor = Colors[idx];
+            
         }
 
         [Command]
@@ -296,20 +274,16 @@ namespace Prototype.NetworkLobby
         {
             LobbyPlayerList._instance.RemovePlayer(this);
             if (LobbyManager.s_Singleton != null) LobbyManager.s_Singleton.OnPlayersNumberModified(-1);
-
-            int idx = System.Array.IndexOf(Colors, playerColor);
-
-            if (idx < 0)
-                return;
-
-            for (int i = 0; i < _colorInUse.Count; ++i)
+            if (playerColor == Color.blue)
             {
-                if (_colorInUse[i] == idx)
-                {//that color is already in use
-                    _colorInUse.RemoveAt(i);
-                    break;
-                }
+                blue--;
             }
+            if (playerColor == Color.red)
+            {
+                red--;
+            }
+
+
         }
     }
 }

@@ -40,6 +40,7 @@ GameObject:
   - component: {fileID: 114571728771802334}
   - component: {fileID: 114167043965519492}
   - component: {fileID: 114804712237600016}
+  - component: {fileID: 114449654797727794}
   m_Layer: 0
   m_Name: PlayerObject
   m_TagString: Untagged
@@ -286,6 +287,19 @@ MonoBehaviour:
   m_MaximumFOV: 60
   m_MinimumOrthoSize: 1
   m_MaximumOrthoSize: 5000
+--- !u!114 &114449654797727794
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1401003072170470}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e71537243258d94b850367c998381ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pname: 
+  team: 
 --- !u!114 &114571728771802334
 MonoBehaviour:
   m_ObjectHideFlags: 1
