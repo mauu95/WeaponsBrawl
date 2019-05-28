@@ -13,28 +13,33 @@ public class MainMenuScript : MonoBehaviour {
 
     public Dropdown resolutionDropDown;
 
+    public Toggle fullScreenToggle;
+
     private void Start()
     {
         resolutions = Screen.resolutions;
-
         resolutionDropDown.ClearOptions();
-
         List<string> options = new List<string>();
-
         int currentResolutionIndex = 0;
+
         for (int i = 0; i < resolutions.Length; i++)
         {
             string option = resolutions[i].width + " x " + resolutions[i].height;
-            options.Add(option);
+
+            if (i==0 || !option.Equals(options[options.Count - 1]))
+                options.Add(option);
 
             if(resolutions[i].width == Screen.currentResolution.width && resolutions[i].height == Screen.currentResolution.height)
             {
                 currentResolutionIndex = i;
             }
         }
+        
         resolutionDropDown.AddOptions(options);
-        resolutionDropDown.value = currentResolutionIndex;
+        //resolutionDropDown.value = currentResolutionIndex;
         resolutionDropDown.RefreshShownValue();
+
+        fullScreenToggle.isOn = Screen.fullScreen;
     }
 
     public void SetResolution(int resolutionIndex)
