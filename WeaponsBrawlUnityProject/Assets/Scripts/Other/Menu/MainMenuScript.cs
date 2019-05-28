@@ -1,11 +1,20 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MainMenuScript : AbstractMenu {
 
-    public void PlayGame()
+    public Button PlayButton;
+
+    private void Start()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        PlayButton.onClick.RemoveAllListeners();
+        print(LobbyMyFeature.Instance);
+        PlayButton.onClick.AddListener(Ciao);
     }
 
+    private void Ciao()
+    {
+        LobbyMyFeature.Instance.SetActive(true);
+    }
 }
