@@ -7,7 +7,7 @@ public class PlayerHealth : NetworkBehaviour {
 
     [SyncVar]
     public int hp = 100;
-
+    public int maxHealth = 100;
     public GameObject healthBar;
 
     [Command]
@@ -24,6 +24,7 @@ public class PlayerHealth : NetworkBehaviour {
     public void CmdGetLife(int life)
     {
         hp += life;
+        hp = Math.Min(hp, maxHealth);
         CmdRefreshHealth();
     }
 

@@ -843,6 +843,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 100
+  maxHealth: 100
   healthBar: {fileID: 1979760286997830}
 --- !u!114 &114171395597215982
 MonoBehaviour:
@@ -868,9 +869,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   zRotation: 0
   building: {fileID: 1330903242153776, guid: 1f4081af530ec44489a66908f2e01d3e, type: 2}
-  spawnPoint: {fileID: 0}
-  inBuildingObject: {fileID: 0}
-  isBuilding: 0
   rotationLock: 1
 --- !u!114 &114249778459772358
 MonoBehaviour:
@@ -987,6 +985,7 @@ MonoBehaviour:
   ignoreTag:
   - Chest
   - Destroyer
+  - NotJumpable
 --- !u!114 &114572224886439304
 MonoBehaviour:
   m_ObjectHideFlags: 1

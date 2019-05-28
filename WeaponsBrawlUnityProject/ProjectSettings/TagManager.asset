@@ -7,6 +7,9 @@ TagManager:
   - Chest
   - Destroyer
   - Ground
+  - Tree
+  - Wall
+  - NotJumpable
   layers:
   - Default
   - TransparentFX

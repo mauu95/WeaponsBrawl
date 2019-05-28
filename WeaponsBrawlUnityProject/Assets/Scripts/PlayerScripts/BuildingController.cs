@@ -70,24 +70,21 @@ public class BuildingController : NetworkBehaviour {
 
         if (resource.UseResource(10))
         {
-            RpcRealBuild(rotation);          
+            CmdRealBuild(rotation);          
         }
 
     }
-    [ClientRpc]
-    public void RpcRealBuild(int rotation)
+    [Command]
+    public void CmdRealBuild(int rotation )
     {
         GameObject toBuild = Instantiate(building, spawnPoint.transform);
         if (rotationLock)
         {
             toBuild.transform.rotation = Quaternion.Euler(0, 0, rotation);
         }
-        toBuild.transform.parent = null;
-        toBuild.GetComponent<BoxCollider2D>().enabled = true;
-        Color spriteColor = toBuild.GetComponent<SpriteRenderer>().color;
-        spriteColor.a = 1;
-        toBuild.GetComponent<SpriteRenderer>().color = spriteColor;
-
+        toBuild.transform.parent = null;        
+        NetworkServer.Spawn(toBuild);
+        toBuild.GetComponent<WallScript>().RpcSetup(toBuild.transform.localScale.x, toBuild.transform.localScale.y, toBuild.transform.localScale.z);
 
     }
 }

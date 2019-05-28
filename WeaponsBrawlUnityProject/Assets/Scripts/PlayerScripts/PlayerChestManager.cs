@@ -17,7 +17,7 @@ public class PlayerChestManager : NetworkBehaviour {
 	void Update () {
         if (hasAuthority)
         {
-            if (Input.GetKeyDown(KeyCode.I))
+            if (Input.GetKeyDown(KeyCode.R))
             {
                 CmdInteract();
                 

@@ -25,6 +25,7 @@ public abstract class AbstractBulletExplosive : NetworkBehaviour {
     public void ExplodeCircle()
     {
         DestroyMapCircle();
+        CmdDestroyWalls();
         CmdDamageWhoIsInsideTheExplosion();
         CmdFlingWhoIsInsideTheExplosion();
         CmdExplosionAnimation();
@@ -110,6 +111,20 @@ public abstract class AbstractBulletExplosive : NetworkBehaviour {
             if (hitted.CompareTag("Player"))
             {
                 hitted.gameObject.GetComponent<PlayerHealth>().CmdTakeDamage(BulletPower);
+            }
+        }
+    }
+
+    [Command]
+    void CmdDestroyWalls()
+    {
+        Collider2D[] hittedList = Physics2D.OverlapCircleAll(transform.position, ExplosionRadius);
+        foreach (Collider2D hitted in hittedList)
+        {
+            if (hitted.CompareTag("Wall"))
+            {
+                NetworkServer.UnSpawn(hitted.gameObject);
+                Destroy(hitted.gameObject);
             }
         }
     }
