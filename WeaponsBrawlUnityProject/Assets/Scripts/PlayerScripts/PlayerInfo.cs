@@ -7,7 +7,7 @@ public class PlayerInfo : NetworkBehaviour {
     [SyncVar]
     public string pname;
     [SyncVar]
-    public string team;
+    public Color team;
     // Use this for initialization
     void Start () {
 		

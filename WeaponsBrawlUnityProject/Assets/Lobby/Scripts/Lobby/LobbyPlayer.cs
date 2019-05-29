@@ -259,7 +259,6 @@ namespace Prototype.NetworkLobby
                 playerColor = Color.red;
                 red++;
             }
-
             
         }
 

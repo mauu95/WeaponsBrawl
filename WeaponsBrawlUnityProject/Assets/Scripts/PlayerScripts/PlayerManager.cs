@@ -2,14 +2,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
 
-public class PlayerManager : MonoBehaviour {
+public class PlayerManager : NetworkBehaviour {
 
     private void Start()
     {
-        InventoryUI inventory = GetGameObjectInRoot("Canvas").GetComponent<InventoryUI>();
-        inventory.InitializeInventoryUI(this.gameObject);
+        if (hasAuthority)
+        {
+            InventoryUI inventory = GetGameObjectInRoot("Canvas").GetComponent<InventoryUI>();
+            BuildInterfaceUI build = GetGameObjectInRoot("Canvas").GetComponent<BuildInterfaceUI>();
+            inventory.InitializeInventoryUI(this.gameObject);
+            build.InitializeInventoryUI(this.gameObject);
+            Debug.Log("stated a player");
+        }
+
     }
 
     public void ActivateMovementAfterSec()

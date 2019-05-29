@@ -25,19 +25,11 @@ public class BuildingController : NetworkBehaviour {
 	void Update () {
         
         if (hasAuthority)
-        {
+        {/*
             if (Input.GetKeyDown(KeyCode.C))
             {
-                isBuilding = !isBuilding;
-                if (isBuilding)
-                {
-                    inBuildingObject = Instantiate(building, spawnPoint.transform);
-                }
-                else
-                {
-                    Destroy(inBuildingObject);
-                }
-            }
+                ChangeBuildingStatus();   
+            }*/
                 
 
             if (isBuilding && rotationLock)
@@ -60,6 +52,19 @@ public class BuildingController : NetworkBehaviour {
                 CmdSpawnConstruction(zRotation); //syncvar doesn't work well
             }
            
+        }
+    }
+
+    public void ChangeBuildingStatus()
+    {
+        isBuilding = !isBuilding;
+        if (isBuilding)
+        {
+            inBuildingObject = Instantiate(building, spawnPoint.transform);
+        }
+        else
+        {
+            Destroy(inBuildingObject);
         }
     }
 
