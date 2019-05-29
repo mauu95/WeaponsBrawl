@@ -51,6 +51,7 @@ public class PlayerHealth : NetworkBehaviour {
     void CmdPlayerDie()
     {
         PlayerDie();
+        gameObject.GetComponent<PlayerManager>().PlayerDie();
         RpcPlayerDie();
     }
 

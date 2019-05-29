@@ -12,7 +12,6 @@ public class NetworkLobbyHook : LobbyHook {
     {
         var cc = lobbyPlayer.GetComponent<LobbyPlayer>();
         var player = gamePlayer.GetComponent<PlayerInfo>();
-        int i = 0;
         foreach (Color c in teamsColor)
         {
             if (c==cc.playerColor)
@@ -26,6 +25,11 @@ public class NetworkLobbyHook : LobbyHook {
             Destroy(lobbyPlayer);
             Destroy(gamePlayer);
         }
+        else
+        {
+            MatchManager._instance.AddPlayer(player);
+        }
+
     }
 
 

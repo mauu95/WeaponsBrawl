@@ -31,16 +31,17 @@ public abstract class AbstractChest : NetworkBehaviour {
 
     public bool IsInteractable(PlayerChestManager p)
     {
-        if (NumberOfPlayerIntheRay() >= level)
+        Color team= p.gameObject.GetComponent<PlayerManager>().GetTeam();
+        if (NumberOfPlayerIntheRay(team) >= level)
         {
             return true;
         }
         return false;
     }
 
-    private int NumberOfPlayerIntheRay()
+    private int NumberOfPlayerIntheRay(Color team)
     {
-        return playerNextToRay.GetComponent<PlayerCounter>().GetPlayerCounter();
+        return playerNextToRay.GetComponent<PlayerCounter>().GetPlayerCounter(team);
     }
 
 

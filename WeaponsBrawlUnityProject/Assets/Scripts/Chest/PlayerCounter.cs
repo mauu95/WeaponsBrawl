@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerCounter : MonoBehaviour {
-    private int playerCounter;
+    //private int playerCounter;
+    private Dictionary<Color, int> playerCounter;
     private List<GameObject> inside = new List<GameObject>();
     // Use this for initialization
     void Start () {
-        playerCounter = 0;	
+        playerCounter = new Dictionary<Color, int>();	
 	}
 	
 	// Update is called once per frame
@@ -15,21 +16,29 @@ public class PlayerCounter : MonoBehaviour {
 		
 	}
 
-    public int GetPlayerCounter()
+    public int GetPlayerCounter(Color c)
     {
-        return playerCounter;
+        if (!playerCounter.ContainsKey(c))
+        {
+            playerCounter[c] = 0;
+        }
+        //Debug.Log("key:" + c + " value:" + playerCounter[c]);
+        return playerCounter[c];
     }
     
     private void OnTriggerEnter2D(Collider2D other)
     {
-
-        //Debug.Log("in "+other+"::"+other.tag);
         if (other.tag == "Player"&& (!inside.Contains(other.gameObject)))
         {
             inside.Add(other.gameObject);
-            playerCounter++;
+            Color team=other.gameObject.GetComponent<PlayerManager>().GetTeam();
+            if (!playerCounter.ContainsKey(team))
+            {
+                playerCounter[team] = 0;
+            }
+            playerCounter[team]++;
+            //Debug.Log("key:" + team + " value" + playerCounter[team]);
         }
-        //Debug.Log(playerCounter);
     }
 
     private void OnTriggerExit2D(Collider2D other)
@@ -37,10 +46,15 @@ public class PlayerCounter : MonoBehaviour {
         if (other.tag == "Player")
         {
             inside.Remove(other.gameObject);
-            playerCounter--;
+            Color team = other.gameObject.GetComponent<PlayerManager>().GetTeam();
+            if (!playerCounter.ContainsKey(team))
+            {
+                playerCounter[team] = 0;
+            }
+            playerCounter[team]--;
+            playerCounter[team] = Mathf.Max(playerCounter[team], 0);
+            //Debug.Log("key:" + team + " value" + playerCounter[team]);
         }
-        playerCounter = Mathf.Max(playerCounter, 0);
-        //Debug.Log(playerCounter);
     }
 
 }

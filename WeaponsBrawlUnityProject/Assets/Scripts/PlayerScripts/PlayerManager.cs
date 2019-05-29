@@ -7,6 +7,8 @@ using UnityEngine.SceneManagement;
 
 public class PlayerManager : NetworkBehaviour {
 
+    public GameObject controller;
+
     private void Start()
     {
         if (hasAuthority)
@@ -15,14 +17,17 @@ public class PlayerManager : NetworkBehaviour {
             BuildInterfaceUI build = GetGameObjectInRoot("Canvas").GetComponent<BuildInterfaceUI>();
             inventory.InitializeInventoryUI(this.gameObject);
             build.InitializeInventoryUI(this.gameObject);
-            Debug.Log("stated a player");
         }
-
     }
 
     public void ActivateMovementAfterSec()
     {
         StartCoroutine(ActivateMovement());
+    }
+
+    internal Color GetTeam()
+    {
+        return controller.GetComponent<PlayerInfo>().team;
     }
 
     IEnumerator ActivateMovement()
@@ -33,18 +38,6 @@ public class PlayerManager : NetworkBehaviour {
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
     private GameObject GetGameObjectInRoot(string objname)
     {
         GameObject[] root = SceneManager.GetActiveScene().GetRootGameObjects();
@@ -53,5 +46,12 @@ public class PlayerManager : NetworkBehaviour {
                 return obj;
         return null;
     }
-
+    public void PlayerDie()
+    {
+        if (isServer)
+        {
+            controller.GetComponent<PlayerInfo>().status=PlayerInfo.Status.dead;
+        }
+        
+    }
 }

@@ -22,6 +22,8 @@ public class SpawnPlayer : NetworkBehaviour
     {
         player = (GameObject)Instantiate(playerToSpawn, transform);
         NetworkServer.SpawnWithClientAuthority(player, connectionToClient);
+        player.GetComponent<PlayerManager>().controller = this.gameObject;
+        this.gameObject.GetComponent<PlayerInfo>().status = PlayerInfo.Status.alive;
         RpcSetCameraFollow(player);
 
     }
