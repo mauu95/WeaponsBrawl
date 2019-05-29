@@ -4,17 +4,9 @@ using UnityEngine.UI;
 
 public class MainMenuScript : AbstractMenu {
 
-    public Button PlayButton;
-
-    private void Start()
+    public void LoadLobby()
     {
-        PlayButton.onClick.RemoveAllListeners();
-        print(LobbyMyFeature.Instance);
-        PlayButton.onClick.AddListener(Ciao);
+        SceneManager.LoadScene(1);
     }
 
-    private void Ciao()
-    {
-        LobbyMyFeature.Instance.SetActive(true);
-    }
 }

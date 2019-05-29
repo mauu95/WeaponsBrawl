@@ -18,7 +18,10 @@ public class PauseMenuScript : AbstractMenu
 
     public void LoadMenu()
     {
-        SceneManager.LoadScene(0);
+
+        Prototype.NetworkLobby.LobbyManager.s_Singleton.GoBackButton();
+        //SceneManager.LoadScene(0);
+
     }
 }
 
