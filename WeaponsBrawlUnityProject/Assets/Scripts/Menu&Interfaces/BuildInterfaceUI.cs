@@ -3,22 +3,30 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BuildInterfaceUI : MonoBehaviour {
+public class BuildInterfaceUI : AbstractInGameInterfaces {
 
-    public GameObject buildInterfaceUI;
     public BuildingController buildManager;
 
 	void Update () {
+
         if (Input.GetKeyDown(KeyCode.C))
-        {
-            OpenCloseBuildInterface();
-        }       
+            OpenClose();  
+
     }
 
-    public void OpenCloseBuildInterface()
+    public override void OpenClose()
     {
-        buildInterfaceUI.SetActive(!buildInterfaceUI.activeSelf);
+        base.OpenClose();
         buildManager.ChangeBuildingStatus();
+    }
+
+    public override void Close()
+    {
+        if (isActive)
+        {
+            base.Close();
+            buildManager.ChangeBuildingStatus();
+        }
     }
 
     public void SelectBuilding(int rotation)

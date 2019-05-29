@@ -2,15 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ResurrectionMenuUI : MonoBehaviour {
+public class ResurrectionMenuUI : AbstractInGameInterfaces {
 
     public GameObject ResurrectButtonPrefab;
     public Transform ItemsParent;
-
-	public void OpenCloseResurrectionMenu()
-    {
-        gameObject.SetActive(!gameObject.activeSelf);
-    }
 
     private void AddResurrectButton()
     {

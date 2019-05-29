@@ -4,6 +4,12 @@ using UnityEngine.SceneManagement;
 public class PauseMenuScript : AbstractMenu
 {
     public GameObject PauseMenuUI;
+    public AbstractInGameInterfaces[] otherMenu;
+
+    private void Start()
+    {
+        otherMenu = GetComponents<AbstractInGameInterfaces>();
+    }
 
     private void Update()
     {
@@ -13,10 +19,19 @@ public class PauseMenuScript : AbstractMenu
 
     public void OpenClosePauseMenu()
     {
+        if(PauseMenuUI.activeSelf == false)
+            CloseAllOtherMenu();
+
         PauseMenuUI.SetActive(!PauseMenuUI.activeSelf);
     }
 
-    public void LoadMenu()
+    private void CloseAllOtherMenu()
+    {
+        foreach (AbstractInGameInterfaces menu in otherMenu)
+            menu.Close();
+    }
+
+    public void LoadStartMenu()
     {
 
         Prototype.NetworkLobby.LobbyManager.s_Singleton.GoBackButton();
