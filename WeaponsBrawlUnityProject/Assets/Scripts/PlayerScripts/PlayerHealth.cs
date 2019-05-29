@@ -64,5 +64,6 @@ public class PlayerHealth : NetworkBehaviour {
     void PlayerDie()
     {
         this.gameObject.SetActive(false);
+        this.gameObject.transform.position = new Vector3();
     }
 }

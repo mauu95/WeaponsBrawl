@@ -29,7 +29,7 @@ public abstract class AbstractChest : NetworkBehaviour {
 
     internal abstract void DoSomething(PlayerChestManager p);
 
-    public bool IsInteractable(PlayerChestManager p)
+    public virtual bool IsInteractable(PlayerChestManager p)
     {
         Color team= p.gameObject.GetComponent<PlayerManager>().GetTeam();
         if (NumberOfPlayerIntheRay(team) >= level)

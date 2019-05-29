@@ -32,7 +32,57 @@ using System.Collections.Generic;
             _players.Remove(player);
     }
 
-
-
+    public int PlayerAlive()
+    {
+        int alivePlayer = 0;
+        foreach(PlayerInfo p in _players)
+        {
+            if (p != null&& p.status==PlayerInfo.Status.alive)
+            {
+                alivePlayer++;
+            }
+        }
+        return alivePlayer;
     }
+
+    public int PlayerAlive(Color team)
+    {
+        int alivePlayer = 0;
+        foreach (PlayerInfo p in _players)
+        {
+            if (p != null && p.status == PlayerInfo.Status.alive && p.team==team)
+            {
+                alivePlayer++;
+            }
+        }
+        return alivePlayer;
+    }
+
+    public int PlayerDead()
+    {
+        int alivePlayer = 0;
+        foreach (PlayerInfo p in _players)
+        {
+            if (p != null && p.status == PlayerInfo.Status.dead)
+            {
+                alivePlayer++;
+            }
+        }
+        return alivePlayer;
+    }
+
+    public int PlayerDead(Color team)
+    {
+        int alivePlayer = 0;
+        foreach (PlayerInfo p in _players)
+        {
+            if (p != null && p.status == PlayerInfo.Status.dead && p.team == team)
+            {
+                alivePlayer++;
+            }
+        }
+        return alivePlayer;
+    }
+
+}
 

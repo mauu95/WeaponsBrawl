@@ -20,5 +20,11 @@ public class DestroyOnExit : MonoBehaviour {
         {
             Destroy(collision.gameObject);
         }
+        else
+        {
+            PlayerHealth ph=collision.gameObject.GetComponentInChildren<PlayerHealth>();
+            ph.CmdTakeDamage(ph.maxHealth);
+
+        }
     }
 }

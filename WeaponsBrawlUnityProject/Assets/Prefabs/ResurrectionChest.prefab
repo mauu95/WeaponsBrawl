@@ -37,14 +37,14 @@ GameObject:
   m_Component:
   - component: {fileID: 4187664235151188}
   - component: {fileID: 114333517182466386}
-  - component: {fileID: 114484590978776602}
   - component: {fileID: 50305508265824548}
   - component: {fileID: 61863713454385570}
   - component: {fileID: 212590162353384096}
-  - component: {fileID: 114461014515531842}
-  - component: {fileID: 114637364635985142}
+  - component: {fileID: 114738263745859860}
+  - component: {fileID: 114801431605622662}
+  - component: {fileID: 114687575186691380}
   m_Layer: 0
-  m_Name: LifeChest
+  m_Name: ResurrectionChest
   m_TagString: Chest
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -151,25 +151,68 @@ MonoBehaviour:
   m_SceneId:
     m_Value: 0
   m_AssetId:
-    i0: 130
-    i1: 17
-    i2: 72
-    i3: 189
-    i4: 237
-    i5: 206
-    i6: 85
-    i7: 228
-    i8: 121
-    i9: 242
-    i10: 56
-    i11: 83
-    i12: 45
-    i13: 172
-    i14: 111
-    i15: 215
+    i0: 244
+    i1: 2
+    i2: 164
+    i3: 141
+    i4: 121
+    i5: 29
+    i6: 241
+    i7: 4
+    i8: 248
+    i9: 230
+    i10: 214
+    i11: 177
+    i12: 87
+    i13: 239
+    i14: 124
+    i15: 107
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 0
---- !u!114 &114461014515531842
+--- !u!114 &114612549987982580
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1508372291598278}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f473f2a9035d78d4498e4ba58474838a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114687575186691380
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1563611236196784}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1267208747, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Target: {fileID: 4542414023091850}
+  m_ChildIndex: 0
+  m_SendInterval: 0.1
+  m_SyncRotationAxis: 7
+  m_RotationSyncCompression: 0
+  m_MovementThreshold: 0.001
+  m_InterpolateRotation: 0.5
+  m_InterpolateMovement: 0.5
+--- !u!114 &114738263745859860
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1563611236196784}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ea99d65d0584f54ca6444207fc74648, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  level: 0
+  playerNextToRay: {fileID: 58154068151065850}
+--- !u!114 &114801431605622662
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -190,49 +233,6 @@ MonoBehaviour:
   m_SnapThreshold: 5
   m_InterpolateRotation: 1
   m_InterpolateMovement: 1
---- !u!114 &114484590978776602
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1563611236196784}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 39318781eed43b44ea49d3e91587ad78, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  level: 0
-  playerNextToRay: {fileID: 58154068151065850}
---- !u!114 &114612549987982580
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1508372291598278}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f473f2a9035d78d4498e4ba58474838a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &114637364635985142
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1563611236196784}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -1267208747, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Target: {fileID: 4542414023091850}
-  m_ChildIndex: 0
-  m_SendInterval: 0.033333335
-  m_SyncRotationAxis: 7
-  m_RotationSyncCompression: 0
-  m_MovementThreshold: 0.001
-  m_InterpolateRotation: 0.5
-  m_InterpolateMovement: 0.5
 --- !u!212 &212590162353384096
 SpriteRenderer:
   m_ObjectHideFlags: 1
