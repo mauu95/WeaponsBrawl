@@ -22,13 +22,19 @@ public class SpawnPlayer : NetworkBehaviour
     {
         player = (GameObject)Instantiate(playerToSpawn, transform);
         NetworkServer.SpawnWithClientAuthority(player, connectionToClient);
-        player.GetComponent<PlayerManager>().controller = this.gameObject;
+        RpcSetController(player);
         this.gameObject.GetComponent<PlayerInfo>().status = PlayerInfo.Status.alive;
         RpcSetCameraFollow(player);
 
     }
 
-
+    [ClientRpc]
+    public void RpcSetController(GameObject p)
+    {
+        Debug.Log("trythatshit");
+        p.GetComponent<PlayerManager>().controller = gameObject;
+    }
+    
 
     [ClientRpc]
     public void RpcSetCameraFollow(GameObject p)

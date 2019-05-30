@@ -6,7 +6,7 @@ using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
 
 public class PlayerManager : NetworkBehaviour {
-
+    [SyncVar]
     public GameObject controller;
 
     private void Start()

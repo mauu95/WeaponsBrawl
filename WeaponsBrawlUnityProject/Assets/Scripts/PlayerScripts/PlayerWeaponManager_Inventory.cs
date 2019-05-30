@@ -32,6 +32,7 @@ public class PlayerWeaponManager_Inventory : NetworkBehaviour {
     private void Start()
     {
         CmdSwitchWeapon(0);
+        SwitchWeapon(0);
         throwingChargeBar.SetActive(false);
 
         Axe = transform.Find("FirePointPivot/Axe").gameObject;
