@@ -14,7 +14,7 @@ public class PlayerInfo : NetworkBehaviour {
 
     // Use this for initialization
     void Start () {
-		
+        MatchManager._instance.AddPlayer(this);	
 	}
 	
 	// Update is called once per frame

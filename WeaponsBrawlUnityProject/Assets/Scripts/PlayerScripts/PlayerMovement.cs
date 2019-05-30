@@ -13,7 +13,7 @@ public class PlayerMovement : NetworkBehaviour {
     private float horizontalMove = 0f;
     private bool m_FacingRight = true;
 
-    private Vector3 m_Velocity = Vector3.zero;
+    //private Vector3 m_Velocity = Vector3.zero; bored from the same warning
     private Rigidbody2D m_Rigidbody2D;
 
 

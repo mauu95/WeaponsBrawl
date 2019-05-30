@@ -10,6 +10,12 @@ public abstract class AbstractChest : NetworkBehaviour {
     public int level;
     public CircleCollider2D playerNextToRay;
 
+    public virtual void ClientPreInteract(PlayerChestManager p)
+    {
+        p.waitingUser = false;
+        return;
+    }
+
     public void Interact(PlayerChestManager p)
     {
         if (IsInteractable(p))
