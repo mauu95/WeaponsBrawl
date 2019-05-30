@@ -21,7 +21,7 @@ public class InventorySlot : MonoBehaviour
         PlayerWeaponManager_Inventory weaponManager = inventory.Player.GetComponent<PlayerWeaponManager_Inventory>();
         int wid = weaponManager.Weapons.FindIndex(a => a == item);
         weaponManager.CmdSwitchWeapon(wid);
-        inventory.OpenCloseInventory();
+        inventory.OpenClose();
     }
 
 

@@ -3,10 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InventoryUI : MonoBehaviour {
+public class InventoryUI : AbstractInGameInterfaces {
 
     public Transform itemsParent;
-    public GameObject inventoryUI;
     public GameObject Player;
     public GameObject SlotPrefab;
 
@@ -27,12 +26,7 @@ public class InventoryUI : MonoBehaviour {
     private void Update()
     {
         if (Input.GetButtonDown("Inventory"))
-            OpenCloseInventory();
-    }
-
-    public void OpenCloseInventory()
-    {
-        inventoryUI.SetActive(!inventoryUI.activeSelf);
+            OpenClose();
     }
 
     private void UpdateUI()
