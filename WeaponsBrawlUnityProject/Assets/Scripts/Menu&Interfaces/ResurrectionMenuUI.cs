@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -30,9 +31,8 @@ public class ResurrectionMenuUI : AbstractInGameInterfaces {
     }
 
 
-    public void AddResurrectButton(string text, PlayerChestManager p)
+    public void AddResurrectButton(string text)
     {
-        this.p = p;
         GameObject button = Instantiate(ResurrectButtonPrefab);
         button.transform.SetParent(ItemsParent);
         Text t = button.GetComponentInChildren<Text>();
@@ -43,9 +43,8 @@ public class ResurrectionMenuUI : AbstractInGameInterfaces {
         button.transform.localScale = Vector3.one;
     }
 
-    
-
-
-
-
+    internal void InizializeInventoryUI(GameObject player)
+    {
+        p = player.GetComponent<PlayerChestManager>();
+    }
 }

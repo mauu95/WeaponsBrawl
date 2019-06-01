@@ -15,8 +15,10 @@ public class PlayerManager : NetworkBehaviour {
         {
             InventoryUI inventory = GetGameObjectInRoot("Canvas").GetComponent<InventoryUI>();
             BuildInterfaceUI build = GetGameObjectInRoot("Canvas").GetComponent<BuildInterfaceUI>();
+            ResurrectionMenuUI resurrection = GetGameObjectInRoot("Canvas").GetComponent<ResurrectionMenuUI>();
             inventory.InitializeInventoryUI(this.gameObject);
             build.InitializeInventoryUI(this.gameObject);
+            resurrection.InizializeInventoryUI(this.gameObject);
         }
     }
 

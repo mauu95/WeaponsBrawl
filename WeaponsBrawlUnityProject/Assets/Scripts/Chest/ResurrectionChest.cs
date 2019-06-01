@@ -18,7 +18,7 @@ public class ResurrectionChest : AbstractChest {
         resurrectionMenu.OpenClose();
         foreach (PlayerInfo ally in deadAlly)
         {
-            resurrectionMenu.AddResurrectButton(ally.pname, p);
+            resurrectionMenu.AddResurrectButton(ally.pname);
         }
         //resurrectionMenu.AddResurrectButton("test", p);
     }
