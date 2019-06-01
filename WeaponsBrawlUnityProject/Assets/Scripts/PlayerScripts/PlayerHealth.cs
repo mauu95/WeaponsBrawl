@@ -14,6 +14,7 @@ public class PlayerHealth : NetworkBehaviour {
     public void CmdTakeDamage(int damage)
     {
         hp -= damage;
+        hp = Math.Max(0, hp);
         CmdRefreshHealth();
         if (hp <= 0)
             CmdPlayerDie();

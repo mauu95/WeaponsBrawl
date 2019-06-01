@@ -15,9 +15,16 @@ public class AbstractInGameInterfaces : MonoBehaviour
 
     public virtual void OpenClose()
     {
-        bool Active = !UI.activeSelf;
-        UI.SetActive(Active);
-        isActive = Active;
+        if (isActive)
+        {
+            Close();
+        }
+        else
+        {
+            Open();
+        }
+
+
     }
 
     public virtual void Close()

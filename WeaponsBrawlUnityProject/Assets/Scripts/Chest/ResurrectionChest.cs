@@ -7,26 +7,38 @@ public class ResurrectionChest : AbstractChest {
 
     public override void ClientPreInteract(PlayerChestManager p)
     {
+        if (!IsInteractable(p))
+        {
+
+        }
         Color team = p.gameObject.GetComponent<PlayerManager>().GetTeam();
         List<PlayerInfo> deadAlly = MatchManager._instance.DeadPlayerList(team);
         ResurrectionMenuUI resurrectionMenu = GetGameObjectInRoot("Canvas").GetComponentInChildren<ResurrectionMenuUI>(true);
         p.waitingUser = true;
-        resurrectionMenu.OpenResurrectionMenu();
+        resurrectionMenu.OpenClose();
         foreach (PlayerInfo ally in deadAlly)
         {
-            resurrectionMenu.AddResurrectButton(ally.pname);
+            resurrectionMenu.AddResurrectButton(ally.pname, p);
         }
- 
+        //resurrectionMenu.AddResurrectButton("test", p);
     }
 
-    internal override void DoSomething(PlayerChestManager p)
+    internal override bool DoSomething(PlayerChestManager p)
     {
         Color team = p.gameObject.GetComponent<PlayerManager>().GetTeam();
         List<PlayerInfo> deadAlly = MatchManager._instance.DeadPlayerList(team);
         foreach(PlayerInfo ally in deadAlly)
         {
-            Debug.Log(ally.pname);
+            if (ally.pname == p.allyToResurrect)
+            {
+                ally.status = PlayerInfo.Status.alive;
+                ally.transform.position = gameObject.transform.position;
+                ally.CmdResurrect();
+                p.allyToResurrect = null;
+                return true;
+            }
         }
+        return false;
     }
 
     // Use this for initialization

@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 222865679506665114}
   - component: {fileID: 114853095606435106}
   - component: {fileID: 114161974778525792}
+  - component: {fileID: 114384687842424778}
   m_Layer: 5
   m_Name: ResurrectButton
   m_TagString: Untagged
@@ -120,6 +121,17 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &114384687842424778
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1371742223948496}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48e0e99c91d50cc4f82db571e16f34d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114853095606435106
 MonoBehaviour:
   m_ObjectHideFlags: 1

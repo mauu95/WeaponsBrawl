@@ -10,6 +10,7 @@ TagManager:
   - Tree
   - Wall
   - NotJumpable
+  - PartOfPlayer
   layers:
   - Default
   - TransparentFX

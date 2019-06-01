@@ -9,6 +9,8 @@ public class PlayerChestManager : NetworkBehaviour {
     public int InteractionRadius = 3;
     public bool waitingUser=false;
     private bool interactionStart=false;
+    [SyncVar]
+    public string allyToResurrect;
     // Use this for initialization
     void Start () {
         waitingUser = false;
@@ -40,6 +42,12 @@ public class PlayerChestManager : NetworkBehaviour {
             }
         }
 	}
+
+    public void AbortInteraction()
+    {
+        interactionStart = false;
+    }
+
     [Command]
     private void CmdInteract()
     {
@@ -54,7 +62,18 @@ public class PlayerChestManager : NetworkBehaviour {
         }
         
     }
-    
+
+    [Command]
+    public void CmdSetAllyToResurrect(string name)
+    {
+        allyToResurrect = name;
+    }
+
+    public void SelectAllyToResurrect(string name)
+    {
+        CmdSetAllyToResurrect(name);
+        waitingUser = false;
+    }
 
     public void LifeChest(int life)
     {

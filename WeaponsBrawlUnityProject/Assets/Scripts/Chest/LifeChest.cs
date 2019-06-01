@@ -16,8 +16,9 @@ public class LifeChest : AbstractChest {
 		
 	}
     override
-    internal void DoSomething(PlayerChestManager p)
+    internal bool DoSomething(PlayerChestManager p)
     {
         p.LifeChest(25);
+        return true;
     }
 }

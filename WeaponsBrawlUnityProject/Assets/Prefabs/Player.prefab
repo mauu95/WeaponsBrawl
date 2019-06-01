@@ -73,7 +73,7 @@ GameObject:
   - component: {fileID: 114451875916596948}
   m_Layer: 0
   m_Name: GroundCheck
-  m_TagString: Untagged
+  m_TagString: PartOfPlayer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -89,7 +89,7 @@ GameObject:
   - component: {fileID: 114043772680309768}
   m_Layer: 0
   m_Name: ThrowingPowerBar
-  m_TagString: Untagged
+  m_TagString: PartOfPlayer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -283,7 +283,7 @@ GameObject:
   - component: {fileID: 4471321636788730}
   m_Layer: 8
   m_Name: FirePointPivot
-  m_TagString: Untagged
+  m_TagString: PartOfPlayer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -345,7 +345,7 @@ GameObject:
   - component: {fileID: 114171395597215982}
   m_Layer: 0
   m_Name: HealthBar
-  m_TagString: Untagged
+  m_TagString: PartOfPlayer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -831,6 +831,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1616f4e5d233be44a5d6f58396510c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  controller: {fileID: 0}
 --- !u!114 &114163673899386150
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -909,6 +910,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   InteractionRadius: 3
+  waitingUser: 0
+  allyToResurrect: 
 --- !u!114 &114375544405647848
 MonoBehaviour:
   m_ObjectHideFlags: 1

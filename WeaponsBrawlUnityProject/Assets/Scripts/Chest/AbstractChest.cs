@@ -20,8 +20,11 @@ public abstract class AbstractChest : NetworkBehaviour {
     {
         if (IsInteractable(p))
         {
-            DoSomething(p);
-            RpcDestroy();
+            if (DoSomething(p))
+            {
+                RpcDestroy();
+            }
+            
         }
         
         //Destroy(gameObject);
@@ -33,7 +36,7 @@ public abstract class AbstractChest : NetworkBehaviour {
         Destroy(gameObject);
     }
 
-    internal abstract void DoSomething(PlayerChestManager p);
+    internal abstract bool DoSomething(PlayerChestManager p);
 
     public virtual bool IsInteractable(PlayerChestManager p)
     {

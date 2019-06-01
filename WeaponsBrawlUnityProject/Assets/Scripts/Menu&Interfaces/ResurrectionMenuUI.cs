@@ -8,35 +8,42 @@ public class ResurrectionMenuUI : AbstractInGameInterfaces {
 
     public GameObject ResurrectButtonPrefab;
     public Transform ItemsParent;
-
-	public void OpenCloseResurrectionMenu()
+    public PlayerChestManager p;
+    public void Close(bool complete)
     {
-        gameObject.SetActive(!gameObject.activeSelf);
-        if (!gameObject.activeSelf)//if we are closing it
+        base.Close();
+        Button[] buttons = ItemsParent.GetComponentsInChildren<Button>(true);
+        foreach (Button button in buttons)
         {
-            Button[] buttons= ItemsParent.GetComponentsInChildren<Button>(true);
-            foreach (Button button in buttons)
-            {
-                Destroy(button.gameObject);
-            }
+            Destroy(button.gameObject);
         }
+        if (!complete)
+        {
+            p.AbortInteraction();
+        }
+
     }
 
-    public void OpenResurrectionMenu()
+    public override void Close()
     {
-        gameObject.SetActive(true);
+        this.Close(false);
     }
 
-    public void AddResurrectButton(string text, UnityAction listner)
+
+    public void AddResurrectButton(string text, PlayerChestManager p)
     {
+        this.p = p;
         GameObject button = Instantiate(ResurrectButtonPrefab);
         button.transform.SetParent(ItemsParent);
         Text t = button.GetComponentInChildren<Text>();
         t.text = text;
         Button buttonComponenet = button.GetComponent<Button>();
-        buttonComponenet.onClick.AddListener(listner);
+        buttonComponenet.onClick.AddListener(() => { p.SelectAllyToResurrect(text); this.Close(true); });
+        //listner(text);
         button.transform.localScale = Vector3.one;
     }
+
+    
 
 
 

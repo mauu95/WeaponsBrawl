@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -11,6 +12,8 @@ public class PlayerInfo : NetworkBehaviour {
     public Color team;
     [SyncVar]
     public Status status;
+    [SyncVar]
+    public GameObject physicalPlayer;
 
     // Use this for initialization
     void Start () {
@@ -21,4 +24,18 @@ public class PlayerInfo : NetworkBehaviour {
 	void Update () {
 		
 	}
+
+    [Command]
+    internal void CmdResurrect()
+    {
+        PlayerHealth ph= physicalPlayer.GetComponent<PlayerHealth>();
+        ph.CmdGetLife(ph.maxHealth);
+        RpcRestoreUser();
+    }
+
+    [ClientRpc]
+    public void RpcRestoreUser()
+    {
+        physicalPlayer.SetActive(true);
+    }
 }

@@ -31,8 +31,9 @@ public class SpawnPlayer : NetworkBehaviour
     [ClientRpc]
     public void RpcSetController(GameObject p)
     {
-        Debug.Log("trythatshit");
+    
         p.GetComponent<PlayerManager>().controller = gameObject;
+        this.GetComponent<PlayerInfo>().physicalPlayer = p;
     }
     
 

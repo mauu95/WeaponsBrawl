@@ -31,6 +31,8 @@ public class HealthBarScript : MonoBehaviour {
         barSprite.localScale = new Vector3(health * 1f / 100, 1f);
         if(health <= 30)
             barSprite.Find("whiteBar").gameObject.GetComponent<SpriteRenderer>().color = Color.yellow;
+        else
+            barSprite.Find("whiteBar").gameObject.GetComponent<SpriteRenderer>().color = Color.green;
     }
 
     
