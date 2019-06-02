@@ -11,14 +11,13 @@ public class InventoryUI : AbstractInGameInterfaces {
 
     private PlayerWeaponManager_Inventory inventory;
     private InventorySlot[] slots;
-    private int Size = 1; // 2 Initial weapon 
+    private int Size = 0;
 
     public void InitializeInventoryUI(GameObject player)
     {
         Player = player;
         inventory = Player.GetComponent<PlayerWeaponManager_Inventory>();
         inventory.onItemChangedCallBack += UpdateUI;
-        slots = itemsParent.GetComponentsInChildren<InventorySlot>();
 
         UpdateUI();
     }
@@ -34,11 +33,8 @@ public class InventoryUI : AbstractInGameInterfaces {
         int i = 0;
         foreach(AbstractWeaponGeneric weapon in inventory.Weapons)
         {
-            if (i > Size)
-            {
+            if (i >= Size)
                 addSlot();
-                Size++;
-            }
             slots[i].AddItem(weapon);
             i++;
         }
@@ -49,5 +45,7 @@ public class InventoryUI : AbstractInGameInterfaces {
         GameObject newSlot = Instantiate(SlotPrefab);
         newSlot.transform.SetParent(itemsParent);
         newSlot.transform.localScale = Vector3.one;
+        slots = itemsParent.GetComponentsInChildren<InventorySlot>();
+        Size++;
     }
 }

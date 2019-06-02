@@ -13,6 +13,7 @@ public class Weapon3PunchScript : AbstractWeaponGeneric
 
         if (hitted)
         {
+            print(hitted.transform.name);
             PlayerHealth enemy = hitted.transform.GetComponent<PlayerHealth>();
 
             if (enemy)
