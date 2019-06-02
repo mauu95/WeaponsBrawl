@@ -33,7 +33,7 @@ public class AbstractInGameInterfaces : MonoBehaviour
         UI.SetActive(false);
     }
 
-    public void Open()
+    public virtual void Open()
     {
         isActive = true;
         UI.SetActive(true);

@@ -20,15 +20,6 @@ public class BuildInterfaceUI : AbstractInGameInterfaces {
         buildManager.ChangeBuildingStatus();
     }
 
-    public override void Close()
-    {
-        if (isActive)
-        {
-            base.Close();
-            buildManager.ChangeBuildingStatus();
-        }
-    }
-
     public void SelectBuilding(int rotation)
     {
         buildManager.zRotation = rotation;
