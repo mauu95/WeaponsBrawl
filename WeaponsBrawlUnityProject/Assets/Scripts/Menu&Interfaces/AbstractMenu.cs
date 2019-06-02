@@ -15,7 +15,7 @@ public class AbstractMenu : MonoBehaviour {
     private List<string> ResolutionOptions;
 
 
-    private void Start()
+    public void Start()
     {
         Resolution[] resolutions = Screen.resolutions;
         resolutionDropDown.ClearOptions();

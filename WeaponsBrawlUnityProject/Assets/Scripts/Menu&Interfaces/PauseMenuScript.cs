@@ -6,8 +6,9 @@ public class PauseMenuScript : AbstractMenu
     public GameObject PauseMenuUI;
     public AbstractInGameInterfaces[] otherMenu;
 
-    private void Start()
+    private new void Start()
     {
+        base.Start();
         otherMenu = GetComponents<AbstractInGameInterfaces>();
     }
 
