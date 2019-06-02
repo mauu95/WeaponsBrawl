@@ -54,7 +54,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: {fileID: 0}
   info: {fileID: 11400000, guid: 74c01b370880c054e9632f1c0272dcdd, type: 2}
-  attackRange: 20
+  attackRange: 3
   damagePower: 10
 --- !u!212 &212466091138250458
 SpriteRenderer:

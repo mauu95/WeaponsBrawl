@@ -817,8 +817,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: {fileID: 4216280841176650}
   info: {fileID: 11400000, guid: 74c01b370880c054e9632f1c0272dcdd, type: 2}
-  attackRange: 20
+  attackRange: 3
   damagePower: 10
+  PlayerLayer:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!114 &114098965042524706
 MonoBehaviour:
   m_ObjectHideFlags: 1
