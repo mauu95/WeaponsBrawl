@@ -59110,7 +59110,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &441235279
 RectTransform:
   m_ObjectHideFlags: 0
@@ -60425,7 +60425,7 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 2022301099}
         m_MethodName: SetFullScreen
         m_Mode: 0
         m_Arguments:
