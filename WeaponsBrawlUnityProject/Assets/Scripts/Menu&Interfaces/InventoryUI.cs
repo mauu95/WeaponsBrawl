@@ -28,7 +28,7 @@ public class InventoryUI : AbstractInGameInterfaces {
             OpenClose();
     }
 
-    private void UpdateUI()
+    public void UpdateUI()
     {
         int i = 0;
         foreach(AbstractWeaponGeneric weapon in inventory.Weapons)

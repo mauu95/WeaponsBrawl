@@ -18,6 +18,7 @@ public class PlayerWeaponManager_Inventory : NetworkBehaviour {
     public int timeToRepairAfterAttack = 5;
     private bool canAttack = true;
 
+    private InventoryUI inventoryUI;
     private AbstractWeaponGeneric CurrentWeapon;
     private GameObject Axe;
     private GameObject FirePoint;
@@ -40,6 +41,7 @@ public class PlayerWeaponManager_Inventory : NetworkBehaviour {
         Axe = transform.Find("FirePointPivot/Axe").gameObject;
         FirePoint = transform.Find("FirePointPivot/FirePoint").gameObject;
         Pivot = transform.Find("FirePointPivot").gameObject;
+        inventoryUI = FindObjectOfType<InventoryUI>();
     }
 
 
@@ -100,6 +102,33 @@ public class PlayerWeaponManager_Inventory : NetworkBehaviour {
             yield return 0;
         }
         CmdActivateAxe(false);
+    }
+
+    [Command]
+    public void CmdAddWeapon(GameObject weaponToAdd, GameObject player)
+    {
+        RpcAddWeapon(weaponToAdd, player);
+    }
+
+    [ClientRpc]
+    private void RpcAddWeapon(GameObject weaponToAdd, GameObject player)
+    {
+        AddWeapon(weaponToAdd, player);
+    }
+
+    private void AddWeapon(GameObject weaponToAdd, GameObject player)
+    {
+        GameObject localFirePoint = player.transform.Find("FirePointPivot/FirePoint").gameObject;
+        GameObject localPivot = player.transform.Find("FirePointPivot").gameObject;
+
+        weaponToAdd.transform.SetParent(localFirePoint.transform);
+        weaponToAdd.transform.localScale = Vector3.one;
+        weaponToAdd.transform.rotation = localPivot.transform.parent.gameObject.transform.rotation;
+        weaponToAdd.transform.position = localFirePoint.transform.position;
+        weaponToAdd.GetComponent<AbstractWeaponGeneric>().SetPlayer(player);
+
+        Weapons.Add(weaponToAdd.GetComponent<AbstractWeaponGeneric>());
+        inventoryUI.UpdateUI();
     }
 
 
