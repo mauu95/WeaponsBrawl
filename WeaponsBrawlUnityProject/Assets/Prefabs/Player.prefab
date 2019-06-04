@@ -1000,6 +1000,7 @@ MonoBehaviour:
   - {fileID: 114048831964292798}
   throwingChargeBar: {fileID: 1327557382243520}
   AxeSpeed: 30
+  timeToRepairAfterAttack: 5
 --- !u!114 &114439985612114638
 MonoBehaviour:
   m_ObjectHideFlags: 1
