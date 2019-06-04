@@ -16,6 +16,7 @@ public class PlayerWeaponManager_Inventory : NetworkBehaviour {
     public GameObject throwingChargeBar;
     public int AxeSpeed=10;
 
+    private InventoryUI inventoryUI;
     private AbstractWeaponGeneric CurrentWeapon;
     private GameObject Axe;
     private GameObject FirePoint;
@@ -38,6 +39,7 @@ public class PlayerWeaponManager_Inventory : NetworkBehaviour {
         Axe = transform.Find("FirePointPivot/Axe").gameObject;
         FirePoint = transform.Find("FirePointPivot/FirePoint").gameObject;
         Pivot = transform.Find("FirePointPivot").gameObject;
+        inventoryUI = FindObjectOfType<InventoryUI>();
     }
 
 
@@ -94,6 +96,18 @@ public class PlayerWeaponManager_Inventory : NetworkBehaviour {
             yield return 0;
         }
         CmdActivateAxe(false);
+    }
+
+    public void AddWeapon(GameObject weaponToAdd)
+    {
+        weaponToAdd.transform.SetParent(FirePoint.transform);
+        weaponToAdd.transform.localScale = Vector3.one;
+        weaponToAdd.transform.rotation = Pivot.transform.parent.gameObject.transform.rotation;
+        weaponToAdd.transform.position = FirePoint.transform.position;
+        weaponToAdd.GetComponent<AbstractWeaponGeneric>().Player = this.transform;
+        weaponToAdd.SetActive(true);
+        Weapons.Add(weaponToAdd.GetComponent<AbstractWeaponGeneric>());
+        inventoryUI.UpdateUI();
     }
 
 
