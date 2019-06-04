@@ -13,8 +13,7 @@ public class MatchManager : NetworkBehaviour
     public Color turn;
     [SyncVar]
     public float waiting = 30;
-    [SyncVar]
-    public bool boringwaitingTime = false;
+    public float turnDuration=30;
     public static MatchManager _instance = null;
     public List<PlayerInfo> _players = new List<PlayerInfo>();
 
@@ -22,6 +21,7 @@ public class MatchManager : NetworkBehaviour
     {
         _instance = this;
         turn = Color.red;
+        waiting = turnDuration;
         DontDestroyOnLoad(this.gameObject);
     }
 
@@ -33,7 +33,7 @@ public class MatchManager : NetworkBehaviour
             waiting = waiting - Time.deltaTime;
             if (waiting < 0)
             {
-                waiting = 30;
+                waiting = turnDuration;
                 ChangeTurn();
                 RpcChangeTurn(turn);                
             }

@@ -563,7 +563,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   turn: {r: 0, g: 0, b: 0, a: 0}
   waiting: 30
-  boringwaitingTime: 0
+  turnDuration: 30
   _players: []
 --- !u!4 &251504237
 Transform:
