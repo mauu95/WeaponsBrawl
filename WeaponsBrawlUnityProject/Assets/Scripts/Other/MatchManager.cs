@@ -170,7 +170,7 @@ public class MatchManager : NetworkBehaviour
 
     private static void SetPlayerTurn(PlayerInfo p, bool active)
     {
-        p.physicalPlayer.GetComponent<PlayerManager>().ChangeTurn(active);
+        p.physicalPlayer.GetComponent<PlayerManager>().ChangeActiveStatus(active);
     }
 
 }

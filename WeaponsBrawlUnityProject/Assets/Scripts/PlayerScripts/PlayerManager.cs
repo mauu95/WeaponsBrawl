@@ -28,10 +28,16 @@ public class PlayerManager : NetworkBehaviour {
     public IEnumerator LockAfterSec(int sec)
     {
         yield return new WaitForSeconds(5);
-        ChangeTurn(false);
+        ChangeActiveStatus(false);
     }
    
-    public void ChangeTurn(bool active)
+    [ClientRpc]
+    public void RpcChangeActiveStatus(bool active)
+    {
+        ChangeActiveStatus(active);
+    }
+
+    public void ChangeActiveStatus(bool active)
     {
         isInTurn = active;
         foreach (MonoBehaviour c in scriptToDisable)
@@ -40,24 +46,10 @@ public class PlayerManager : NetworkBehaviour {
         }
     }
 
-
-    public void ActivateMovementAfterSec()
-    {
-        StartCoroutine(ActivateMovement());
-    }
-
     internal Color GetTeam()
     {
         return controller.GetComponent<PlayerInfo>().team;
     }
-
-    IEnumerator ActivateMovement()
-    {
-        while (gameObject.GetComponent<Rigidbody2D>().velocity != Vector2.zero)
-            yield return 0;
-        this.GetComponent<PlayerMovement>().enabled = true;
-    }
-
 
     private GameObject GetGameObjectInRoot(string objname)
     {
@@ -67,6 +59,7 @@ public class PlayerManager : NetworkBehaviour {
                 return obj;
         return null;
     }
+
     public void PlayerDie()
     {
         if (isServer)

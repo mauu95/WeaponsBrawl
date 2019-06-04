@@ -36,7 +36,7 @@ public class SpawnPlayer : NetworkBehaviour
         PlayerInfo playerInfo = this.GetComponent<PlayerInfo>();
         playerManager.controller = gameObject;
         playerInfo.physicalPlayer = p;
-        playerManager.ChangeTurn(MatchManager._instance.turn == playerInfo.team);
+        playerManager.ChangeActiveStatus(MatchManager._instance.turn == playerInfo.team);
     }
     
 

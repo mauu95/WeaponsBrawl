@@ -63,9 +63,7 @@ public abstract class AbstractBulletExplosive : NetworkBehaviour {
                 Vector3 heading = hitted.transform.position - transform.position;
                 var distance = heading.magnitude;
                 var direction = heading / distance;
-                hitted.gameObject.GetComponent<PlayerMovement>().enabled = false;
                 hitted.gameObject.GetComponent<Rigidbody2D>().velocity = direction * FlingIntensity;
-                hitted.gameObject.GetComponent<PlayerManager>().ActivateMovementAfterSec();
             }
         }
     }

@@ -18,6 +18,7 @@ public class PlayerHealth : NetworkBehaviour {
         CmdRefreshHealth();
         if (hp <= 0)
             CmdPlayerDie();
+        gameObject.GetComponent<PlayerManager>().RpcChangeActiveStatus(false);
     }
 
 
