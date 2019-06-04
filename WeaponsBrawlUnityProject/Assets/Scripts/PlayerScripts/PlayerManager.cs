@@ -24,9 +24,14 @@ public class PlayerManager : NetworkBehaviour {
             resurrection.InizializeInventoryUI(this.gameObject);
         }
     }
-
-    [ClientRpc]
-    public void RpcChangeTurn(bool active)
+    
+    public IEnumerator LockAfterSec(int sec)
+    {
+        yield return new WaitForSeconds(5);
+        ChangeTurn(false);
+    }
+   
+    public void ChangeTurn(bool active)
     {
         isInTurn = active;
         foreach (MonoBehaviour c in scriptToDisable)
@@ -35,10 +40,6 @@ public class PlayerManager : NetworkBehaviour {
         }
     }
 
-    void Update()
-    {
-
-    }
 
     public void ActivateMovementAfterSec()
     {

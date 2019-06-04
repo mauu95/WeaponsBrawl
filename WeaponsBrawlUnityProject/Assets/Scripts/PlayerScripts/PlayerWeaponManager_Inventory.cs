@@ -15,6 +15,8 @@ public class PlayerWeaponManager_Inventory : NetworkBehaviour {
     //Weapon Manager Stuff
     public GameObject throwingChargeBar;
     public int AxeSpeed=10;
+    public int timeToRepairAfterAttack = 5;
+    private bool canAttack = true;
 
     private InventoryUI inventoryUI;
     private AbstractWeaponGeneric CurrentWeapon;
@@ -48,15 +50,19 @@ public class PlayerWeaponManager_Inventory : NetworkBehaviour {
 
         if (hasAuthority)
         {
-            if (Input.GetButtonDown("Fire1"))
-                throwingChargeBar.SetActive(true);
-
-            if (Input.GetButtonUp("Fire1"))
+            if (canAttack)
             {
-                CmdAttack(throwingChargeBar.GetComponent<ThrowingPowerBarScript>().Charge);
-                throwingChargeBar.SetActive(false);
-            }
-                
+                if (Input.GetButtonDown("Fire1"))
+                    throwingChargeBar.SetActive(true);
+
+                if (Input.GetButtonUp("Fire1"))
+                {
+                    CmdAttack(throwingChargeBar.GetComponent<ThrowingPowerBarScript>().Charge);
+                    canAttack = false;
+                    StartCoroutine(gameObject.GetComponent<PlayerManager>().LockAfterSec(timeToRepairAfterAttack));
+                    throwingChargeBar.SetActive(false);
+                }
+            }                
 
             if (Input.GetKeyDown(KeyCode.Alpha1))
                 CmdSwitchWeapon(0);
@@ -176,4 +182,15 @@ public class PlayerWeaponManager_Inventory : NetworkBehaviour {
     {
         SwitchWeapon(id);
     }
+
+    void OnDisable()
+    {
+        throwingChargeBar.SetActive(false);
+    }
+
+    void OnEnable()
+    {
+        canAttack = true;
+    }
+
 }

@@ -2,17 +2,57 @@
 using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.Networking;
+using System;
 
 //List of players in the match
-public class MatchManager : MonoBehaviour
+public class MatchManager : NetworkBehaviour
 {
+
+    [SyncVar]
+    public Color turn;
+    [SyncVar]
+    public float waiting = 30;
+    public float turnDuration=30;
     public static MatchManager _instance = null;
     public List<PlayerInfo> _players = new List<PlayerInfo>();
 
     public void Start()
     {
         _instance = this;
+        turn = Color.red;
+        waiting = turnDuration;
         DontDestroyOnLoad(this.gameObject);
+    }
+
+   
+    private void Update()
+    {
+        if (isServer)
+        {
+            waiting = waiting - Time.deltaTime;
+            if (waiting < 0)
+            {
+                waiting = turnDuration;
+                ChangeTurn();
+                RpcChangeTurn(turn);                
+            }
+        }
+    }
+
+    //TODO: very simple just for the prototype
+    [Server]
+    private void ChangeTurn()
+    {
+        if (turn == Color.red)
+        {
+            turn = Color.blue;
+        }
+        else
+        {
+            turn = Color.red;
+        }
+
     }
 
     public void AddPlayer(PlayerInfo player)
@@ -109,7 +149,29 @@ public class MatchManager : MonoBehaviour
         }
         return dead;
     }
-        
     
+
+
+    [ClientRpc]
+    void RpcChangeTurn(Color color)
+    {
+        foreach(PlayerInfo p in _players)
+        {
+            if(color== p.team)
+            {
+                SetPlayerTurn(p,true);
+            }
+            else
+            {
+                SetPlayerTurn(p, false);
+            }
+        }
+    }
+
+    private static void SetPlayerTurn(PlayerInfo p, bool active)
+    {
+        p.physicalPlayer.GetComponent<PlayerManager>().ChangeTurn(active);
+    }
+
 }
 

@@ -839,6 +839,7 @@ MonoBehaviour:
   - {fileID: 114363776700077670}
   - {fileID: 114572224886439304}
   - {fileID: 114245090744289954}
+  - {fileID: 114399992208742386}
 --- !u!114 &114163673899386150
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -949,6 +950,7 @@ MonoBehaviour:
   - {fileID: 114098965042524706}
   throwingChargeBar: {fileID: 1327557382243520}
   AxeSpeed: 30
+  timeToRepairAfterAttack: 5
 --- !u!114 &114439985612114638
 MonoBehaviour:
   m_ObjectHideFlags: 1

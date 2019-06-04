@@ -31,9 +31,12 @@ public class SpawnPlayer : NetworkBehaviour
     [ClientRpc]
     public void RpcSetController(GameObject p)
     {
-    
-        p.GetComponent<PlayerManager>().controller = gameObject;
-        this.GetComponent<PlayerInfo>().physicalPlayer = p;
+
+        PlayerManager playerManager = p.GetComponent<PlayerManager>();
+        PlayerInfo playerInfo = this.GetComponent<PlayerInfo>();
+        playerManager.controller = gameObject;
+        playerInfo.physicalPlayer = p;
+        playerManager.ChangeTurn(MatchManager._instance.turn == playerInfo.team);
     }
     
 
