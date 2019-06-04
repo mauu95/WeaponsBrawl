@@ -25,8 +25,8 @@ public class PlayerManager : NetworkBehaviour {
         }
     }
 
-    [ClientRpc]
-    public void RpcChangeTurn(bool active)
+   
+    public void ChangeTurn(bool active)
     {
         isInTurn = active;
         foreach (MonoBehaviour c in scriptToDisable)
@@ -35,10 +35,6 @@ public class PlayerManager : NetworkBehaviour {
         }
     }
 
-    void Update()
-    {
-
-    }
 
     public void ActivateMovementAfterSec()
     {
