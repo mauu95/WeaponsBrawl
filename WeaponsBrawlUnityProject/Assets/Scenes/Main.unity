@@ -61540,21 +61540,13 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114790217879621216, guid: 7723d491ac2ff5141bbf6e8049236f92,
+        type: 2}
+      propertyPath: m_LocalPlayerAuthority
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1054917715719874, guid: 7723d491ac2ff5141bbf6e8049236f92, type: 2}
       propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 212466091138250458, guid: 7723d491ac2ff5141bbf6e8049236f92,
-        type: 2}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4234310453148130, guid: 7723d491ac2ff5141bbf6e8049236f92, type: 2}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4234310453148130, guid: 7723d491ac2ff5141bbf6e8049236f92, type: 2}
-      propertyPath: m_LocalScale.y
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []

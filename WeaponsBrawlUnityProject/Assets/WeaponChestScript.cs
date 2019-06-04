@@ -9,7 +9,7 @@ public class WeaponChestScript : AbstractChest {
     override
     internal bool DoSomething(PlayerChestManager p)
     {
-        p.gameObject.GetComponent<PlayerWeaponManager_Inventory>().AddWeapon(Weapon);
+        p.gameObject.GetComponent<PlayerWeaponManager_Inventory>().CmdAddWeapon(Weapon, p.gameObject);
         return true;
     }
 }

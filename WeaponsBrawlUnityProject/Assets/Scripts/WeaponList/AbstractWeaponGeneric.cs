@@ -14,6 +14,13 @@ public abstract class AbstractWeaponGeneric : NetworkBehaviour {
 
     protected void Awake()
     {
+        if (Player)
+            SetPlayer(Player.gameObject);
+    }
+
+    public void SetPlayer(GameObject player)
+    {
+        Player = player.transform;
         firePoint = Player.Find("FirePointPivot/FirePoint");
     }
 
