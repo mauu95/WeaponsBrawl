@@ -104,23 +104,10 @@ public class PlayerWeaponManager_Inventory : NetworkBehaviour {
         CmdActivateAxe(false);
     }
 
-    [Command]
-    public void CmdAddWeapon(GameObject weaponToAdd, GameObject player)
-    {
-        RpcAddWeapon(weaponToAdd, player);
-    }
-
-    [ClientRpc]
-    private void RpcAddWeapon(GameObject weaponToAdd, GameObject player)
-    {
-        AddWeapon(weaponToAdd, player);
-    }
-
     private void AddWeapon(GameObject weaponToAdd, GameObject player)
     {
         GameObject localFirePoint = player.transform.Find("FirePointPivot/FirePoint").gameObject;
         GameObject localPivot = player.transform.Find("FirePointPivot").gameObject;
-
         weaponToAdd.transform.SetParent(localFirePoint.transform);
         weaponToAdd.transform.localScale = Vector3.one;
         weaponToAdd.transform.rotation = localPivot.transform.parent.gameObject.transform.rotation;
@@ -148,7 +135,17 @@ public class PlayerWeaponManager_Inventory : NetworkBehaviour {
 
 
 
+    [Command]
+    public void CmdAddWeapon(GameObject weaponToAdd, GameObject player)
+    {
+        RpcAddWeapon(weaponToAdd, player);
+    }
 
+    [ClientRpc]
+    private void RpcAddWeapon(GameObject weaponToAdd, GameObject player)
+    {
+        AddWeapon(weaponToAdd, player);
+    }
 
 
     [Command]
