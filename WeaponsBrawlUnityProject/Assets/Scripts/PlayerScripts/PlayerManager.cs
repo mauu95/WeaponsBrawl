@@ -9,6 +9,9 @@ public class PlayerManager : NetworkBehaviour {
     [SyncVar]
     public GameObject controller;
 
+    public bool isInTurn;
+    public List<MonoBehaviour> scriptToDisable;
+
     private void Start()
     {
         if (hasAuthority)
@@ -20,6 +23,21 @@ public class PlayerManager : NetworkBehaviour {
             build.InitializeInventoryUI(this.gameObject);
             resurrection.InizializeInventoryUI(this.gameObject);
         }
+    }
+
+    [ClientRpc]
+    public void RpcChangeTurn(bool active)
+    {
+        isInTurn = active;
+        foreach (MonoBehaviour c in scriptToDisable)
+        {
+            c.enabled = active;
+        }
+    }
+
+    void Update()
+    {
+
     }
 
     public void ActivateMovementAfterSec()

@@ -881,6 +881,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 0}
+  isInTurn: 0
+  scriptToDisable:
+  - {fileID: 114249778459772358}
+  - {fileID: 114375544405647848}
+  - {fileID: 114363776700077670}
+  - {fileID: 114572224886439304}
+  - {fileID: 114245090744289954}
 --- !u!114 &114163673899386150
 MonoBehaviour:
   m_ObjectHideFlags: 1
