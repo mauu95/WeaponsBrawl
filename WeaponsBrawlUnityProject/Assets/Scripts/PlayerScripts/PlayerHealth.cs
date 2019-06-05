@@ -11,7 +11,7 @@ public class PlayerHealth : NetworkBehaviour {
     public GameObject healthBar;
 
     [Command]
-    public void CmdTakeDamage(int damage)
+    public void CmdTakeDamage(int damage, GameObject fromWho)
     {
         hp -= damage;
         hp = Math.Max(0, hp);
@@ -19,6 +19,12 @@ public class PlayerHealth : NetworkBehaviour {
         if (hp <= 0)
             CmdPlayerDie();
         gameObject.GetComponent<PlayerManager>().RpcChangeActiveStatus(false);
+        PlayerInfo hittedInfo = gameObject.GetComponent<PlayerManager>().controller.GetComponent<PlayerInfo>();
+        PlayerInfo hitterInfo =fromWho.GetComponent<PlayerManager>().controller.GetComponent<PlayerInfo>();
+        if (hittedInfo.team == hitterInfo.team)
+        {
+            fromWho.GetComponent<PlayerManager>().RpcChangeActiveStatus(false);
+        }
     }
 
 

@@ -17,7 +17,10 @@ public abstract class AbstractWeaponBulletBased : AbstractWeaponGeneric
     public void Shoot(int charge)
     {
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
-        bullet.GetComponent<AbstractBulletExplosive>().speed *= charge / 100f;
+        AbstractBulletExplosive bulletManager = bullet.GetComponent<AbstractBulletExplosive>();
+        bulletManager.speed *= charge / 100f;
+        bulletManager.shootedBy = Player.gameObject;
+       
         NetworkServer.Spawn(bullet);
     }
 

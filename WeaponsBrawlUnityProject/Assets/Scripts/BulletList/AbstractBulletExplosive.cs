@@ -7,6 +7,7 @@ public abstract class AbstractBulletExplosive : NetworkBehaviour {
 
     [Range(2, 60)] [SerializeField] public int ExplosionRadius = 2;
 
+    public GameObject shootedBy;
     public int BulletPower = 20;
     public int FlingIntensity = 10;
     public float speed = 20f;
@@ -108,7 +109,7 @@ public abstract class AbstractBulletExplosive : NetworkBehaviour {
         {
             if (hitted.CompareTag("Player"))
             {
-                hitted.gameObject.GetComponent<PlayerHealth>().CmdTakeDamage(BulletPower);
+                hitted.gameObject.GetComponent<PlayerHealth>().CmdTakeDamage(BulletPower, shootedBy);
             }
         }
     }
