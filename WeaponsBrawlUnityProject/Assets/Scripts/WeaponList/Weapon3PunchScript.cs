@@ -26,7 +26,7 @@ public class Weapon3PunchScript : AbstractWeaponGeneric
             PlayerHealth enemy = hitted.transform.GetComponent<PlayerHealth>();
 
             if (enemy)
-                enemy.CmdTakeDamage(damagePower);
+                enemy.CmdTakeDamage(damagePower, Player.gameObject);
         }
     }
 
