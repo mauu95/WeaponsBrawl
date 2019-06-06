@@ -11,6 +11,7 @@ public class GameManagerScript : NetworkBehaviour {
     void Start()
     {
         matchInfo = Prototype.NetworkLobby.LobbyManager.s_Singleton.transform.Find("MatchManager").GetComponent<MatchManager>();
+        matchInfo.waiting = matchInfo.turnDuration;
     }
 
     private void Update()
