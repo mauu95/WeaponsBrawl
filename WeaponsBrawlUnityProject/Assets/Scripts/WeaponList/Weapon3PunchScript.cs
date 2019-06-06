@@ -9,7 +9,7 @@ public class Weapon3PunchScript : AbstractWeaponGeneric
     public int damagePower;
     public LayerMask PlayerLayer;
 
-    public GameObject Animation;
+    public GameObject anim;
 
     public override void Attack(int charge)
     {
@@ -32,15 +32,17 @@ public class Weapon3PunchScript : AbstractWeaponGeneric
 
     private void PlayPunchAnimation()
     {
-        GetComponent<SpriteRenderer>().enabled = false;
-        Animation.SetActive(true);
         StartCoroutine(WaitSec());
     }
 
     IEnumerator WaitSec()
     {
-        yield return new WaitForSeconds(Animation.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
+        GetComponent<SpriteRenderer>().enabled = false;
+        if(anim.activeSelf == false)
+            anim.SetActive(true);
+        else
+            anim.GetComponent<Animator>().Play("PunchAnimation", -1, 0f);
+        yield return new WaitForSeconds(anim.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
         GetComponent<SpriteRenderer>().enabled = true;
-        Animation.SetActive(false);
     }
 }
