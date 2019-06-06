@@ -11,27 +11,18 @@ public class BuildingController : NetworkBehaviour {
     private GameObject spawnPoint;
     private GameObject inBuildingObject;
     private bool isBuilding;
+    private PlayerWeaponManager_Inventory Inventory;
 
-    
-    // Use this for initialization
     void Start () {
         isBuilding = false;
         spawnPoint = transform.Find("FirePointPivot/FirePoint").gameObject;
+        Inventory = FindObjectOfType<PlayerWeaponManager_Inventory>();
     }
 
-
-	
-	// Update is called once per frame
 	void Update () {
         
         if (hasAuthority)
-        {/*
-            if (Input.GetKeyDown(KeyCode.C))
-            {
-                ChangeBuildingStatus();   
-            }*/
-                
-
+        {
             if (isBuilding && rotationLock)
             {
                 inBuildingObject.transform.rotation = Quaternion.Euler(0, 0, zRotation);
@@ -57,7 +48,6 @@ public class BuildingController : NetworkBehaviour {
 
     public void ChangeBuildingStatus()
     {
-        PlayerWeaponManager_Inventory Inventory = FindObjectOfType<PlayerWeaponManager_Inventory>();
         Inventory.canAttack = !Inventory.GetCurrentWeapon().activeSelf;
         Inventory.GetCurrentWeapon().SetActive(!Inventory.GetCurrentWeapon().activeSelf);
 
