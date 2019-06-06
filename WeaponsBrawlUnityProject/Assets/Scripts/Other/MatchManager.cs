@@ -39,8 +39,6 @@ public class MatchManager : NetworkBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.L))
-            waiting = 0.01f;
     }
 
     //TODO: very simple just for the prototype
