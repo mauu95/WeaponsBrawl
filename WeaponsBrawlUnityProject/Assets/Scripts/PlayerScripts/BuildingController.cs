@@ -47,7 +47,7 @@ public class BuildingController : NetworkBehaviour {
                 zRotation+=45;
             }
 
-            if (isBuilding && Input.GetKeyDown(KeyCode.Z))
+            if (isBuilding && Input.GetKeyDown(KeyCode.E))
             {
                 CmdSpawnConstruction(zRotation); //syncvar doesn't work well
             }
@@ -57,6 +57,11 @@ public class BuildingController : NetworkBehaviour {
 
     public void ChangeBuildingStatus()
     {
+        PlayerWeaponManager_Inventory Inventory = FindObjectOfType<PlayerWeaponManager_Inventory>();
+        Inventory.canAttack = !Inventory.GetCurrentWeapon().activeSelf;
+        Inventory.GetCurrentWeapon().SetActive(!Inventory.GetCurrentWeapon().activeSelf);
+
+
         isBuilding = !isBuilding;
         if (isBuilding)
         {

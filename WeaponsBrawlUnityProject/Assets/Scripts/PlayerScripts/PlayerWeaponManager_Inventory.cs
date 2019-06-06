@@ -16,7 +16,7 @@ public class PlayerWeaponManager_Inventory : NetworkBehaviour {
     public GameObject throwingChargeBar;
     public int AxeSpeed=10;
     public int timeToRepairAfterAttack = 5;
-    private bool canAttack = true;
+    public bool canAttack = true;
 
     private InventoryUI inventoryUI;
     private AbstractWeaponGeneric CurrentWeapon;
@@ -116,6 +116,11 @@ public class PlayerWeaponManager_Inventory : NetworkBehaviour {
 
         Weapons.Add(weaponToAdd.GetComponent<AbstractWeaponGeneric>());
         inventoryUI.UpdateUI();
+    }
+
+    public GameObject GetCurrentWeapon()
+    {
+        return CurrentWeapon.gameObject;
     }
 
 
