@@ -123,6 +123,11 @@ public class PlayerWeaponManager_Inventory : NetworkBehaviour {
         return CurrentWeapon.gameObject;
     }
 
+    private void SetActiveWeapon(bool active)
+    {
+        if (CurrentWeapon)
+            CurrentWeapon.gameObject.SetActive(active);
+    }
 
 
 
@@ -136,8 +141,17 @@ public class PlayerWeaponManager_Inventory : NetworkBehaviour {
 
 
 
+    [Command]
+    public void CmdSetActiveWeapon(bool active)
+    {
+        RpcSetActiveWeapon(active);
+    }
 
-
+    [ClientRpc]
+    private void RpcSetActiveWeapon(bool active)
+    {
+        SetActiveWeapon(active);
+    }
 
 
     [Command]

@@ -49,7 +49,7 @@ public class BuildingController : NetworkBehaviour {
     public void ChangeBuildingStatus()
     {
         Inventory.canAttack = !Inventory.GetCurrentWeapon().activeSelf;
-        Inventory.GetCurrentWeapon().SetActive(!Inventory.GetCurrentWeapon().activeSelf);
+        Inventory.CmdSetActiveWeapon(!Inventory.GetCurrentWeapon().activeSelf);
 
 
         isBuilding = !isBuilding;
