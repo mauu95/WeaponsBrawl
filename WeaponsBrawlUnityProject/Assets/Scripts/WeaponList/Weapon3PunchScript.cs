@@ -31,20 +31,21 @@ public class Weapon3PunchScript : AbstractWeaponGeneric
     {
         AnimationController.PlayPunchAnimation();
 
-        RaycastHit2D hitted = Physics2D.Raycast(firePoint.position, firePoint.right, attackRange, PlayerLayer);
+        //RaycastHit2D hitted = Physics2D.Raycast(firePoint.position, firePoint.right, attackRange, PlayerLayer);
+        //Debug.DrawRay(new Vector3(firePoint.position.x, firePoint.position.y, 0), firePoint.right * attackRange, Color.yellow, 5f, true);
 
-        Debug.DrawRay(new Vector3(firePoint.position.x, firePoint.position.y, 0), firePoint.right * attackRange, Color.yellow, 5f, true);
+        RaycastHit2D[] hits = Physics2D.RaycastAll(firePoint.position, firePoint.right, attackRange, PlayerLayer);
 
-        if (hitted)
+        foreach (RaycastHit2D hit in hits)
         {
-            print(hitted.transform.name);
+            PlayerHealth enemy = hit.transform.GetComponent<PlayerHealth>();
 
-            PlayerHealth enemy = hitted.transform.GetComponent<PlayerHealth>();
-
-            if (enemy)
+            if (enemy && enemy.gameObject != anim.gameObject)
+            {
                 enemy.CmdTakeDamage(damagePower, Player.gameObject);
+            }
         }
     }
 
-    
+
 }
