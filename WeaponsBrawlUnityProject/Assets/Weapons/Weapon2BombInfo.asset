@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Name: Weapon2BombInfo
   m_EditorClassIdentifier: 
   name: Weapon2Bomb
-  icon: {fileID: 21300000, guid: 1e136cb4f0fe0284281273a5990a728f, type: 3}
+  icon: {fileID: 21300000, guid: fd5d5dadadc18d249a67894e904b11ed, type: 3}

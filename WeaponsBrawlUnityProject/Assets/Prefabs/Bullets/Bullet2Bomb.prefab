@@ -60,7 +60,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 5
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: d3ab217d5c40f9b4d8a0f1d0ebe8d43b, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -144,7 +144,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1114dec5c1e02a41886dd122d654cae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ExplosionRadius: 11
+  ExplosionRadius: 2
+  shootedBy: {fileID: 0}
   BulletPower: 20
   FlingIntensity: 10
   speed: 40
@@ -188,7 +189,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 20
-  m_Sprite: {fileID: 21300000, guid: a818f78b05b4b74499ccd425bff75ef7, type: 3}
+  m_Sprite: {fileID: 21300000, guid: fd5d5dadadc18d249a67894e904b11ed, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

@@ -35,6 +35,13 @@ public class AbstractInGameInterfaces : MonoBehaviour
 
     public virtual void Open()
     {
+        AbstractInGameInterfaces[] uis = GetComponents<AbstractInGameInterfaces>();
+
+        foreach (AbstractInGameInterfaces ui in uis)
+        {
+            ui.Close();
+        }
+
         isActive = true;
         UI.SetActive(true);
     }
