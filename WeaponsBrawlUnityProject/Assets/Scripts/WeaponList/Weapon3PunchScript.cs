@@ -14,6 +14,8 @@ public class Weapon3PunchScript : AbstractWeaponGeneric
     private bool GFXIsActive;
     private bool RenderIsActive = false;
 
+    public PlayerAnimationController AnimationController;
+
     private void Update()
     {
         // Abilito l'oggetto PunchAnimation a seconda se lo sprite render di weapon3punch è abilitato o no
@@ -27,7 +29,7 @@ public class Weapon3PunchScript : AbstractWeaponGeneric
 
     public override void Attack(int charge)
     {
-        StartCoroutine(PlayPunchAnimation());
+        AnimationController.PlayPunchAnimation();
 
         RaycastHit2D hitted = Physics2D.Raycast(firePoint.position, firePoint.right, attackRange, PlayerLayer);
 
@@ -42,13 +44,6 @@ public class Weapon3PunchScript : AbstractWeaponGeneric
             if (enemy)
                 enemy.CmdTakeDamage(damagePower, Player.gameObject);
         }
-    }
-
-    IEnumerator PlayPunchAnimation()
-    {
-        anim.SetBool("isPunching", true);
-        yield return new WaitForSeconds(anim.GetCurrentAnimatorStateInfo(0).length);
-        anim.SetBool("isPunching", false);
     }
 
     

@@ -378,6 +378,7 @@ GameObject:
   - component: {fileID: 114245090744289954}
   - component: {fileID: 95956890194051080}
   - component: {fileID: 114426694492229496}
+  - component: {fileID: 114419350671742658}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -1067,6 +1068,18 @@ MonoBehaviour:
   AxeSpeed: 30
   timeToRepairAfterAttack: 5
   canAttack: 1
+--- !u!114 &114419350671742658
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1956134299243016}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e67ab3136329b643b0f89c0b17ceae5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PunchAnim: {fileID: 95981658103579554}
 --- !u!114 &114426694492229496
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1300,6 +1313,7 @@ MonoBehaviour:
     m_Bits: 256
   PunchGFX: {fileID: 1002649808649318}
   anim: {fileID: 95981658103579554}
+  AnimationController: {fileID: 114419350671742658}
 --- !u!114 &114810577240394090
 MonoBehaviour:
   m_ObjectHideFlags: 1
