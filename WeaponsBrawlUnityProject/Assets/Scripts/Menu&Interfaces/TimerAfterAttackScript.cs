@@ -5,12 +5,17 @@ using TMPro;
 
 public class TimerAfterAttackScript : MonoBehaviour {
 
-    public TextMeshProUGUI timerUI;
+    public static TextMeshProUGUI timerUI;
     public float TimeToDisappear = 3f;
 
-    private float timeLeft;
-    
-    public void SetTimer(float sec)
+    private static float timeLeft;
+
+    private void Start()
+    {
+        timerUI = transform.Find("TimerAfterAttack").gameObject.GetComponent<TextMeshProUGUI>();
+    }
+
+    public static void SetTimer(float sec)
     {
         timeLeft = sec;
         timerUI.gameObject.SetActive(true);

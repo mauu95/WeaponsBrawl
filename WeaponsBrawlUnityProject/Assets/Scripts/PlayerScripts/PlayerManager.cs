@@ -42,7 +42,8 @@ public class PlayerManager : NetworkBehaviour {
     
     public IEnumerator LockAfterSec(int sec)
     {
-        yield return new WaitForSeconds(5);
+        TimerAfterAttackScript.SetTimer(sec);
+        yield return new WaitForSeconds(sec);
         ChangeActiveStatus(false);
     }
    
