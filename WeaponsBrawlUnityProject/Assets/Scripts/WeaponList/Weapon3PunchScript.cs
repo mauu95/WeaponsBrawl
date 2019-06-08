@@ -9,11 +9,25 @@ public class Weapon3PunchScript : AbstractWeaponGeneric
     public int damagePower;
     public LayerMask PlayerLayer;
 
-    public GameObject anim;
+    public GameObject PunchGFX;
+    public Animator anim;
+    private bool GFXIsActive;
+    private bool RenderIsActive = false;
+
+    private void Update()
+    {
+        // Abilito l'oggetto PunchAnimation a seconda se lo sprite render di weapon3punch è abilitato o no
+        RenderIsActive = GetComponent<SpriteRenderer>().enabled;
+        if(GFXIsActive != RenderIsActive)
+        {
+            PunchGFX.SetActive(RenderIsActive);
+            GFXIsActive = RenderIsActive;
+        }
+    }
 
     public override void Attack(int charge)
     {
-        PlayPunchAnimation();
+        StartCoroutine(PlayPunchAnimation());
 
         RaycastHit2D hitted = Physics2D.Raycast(firePoint.position, firePoint.right, attackRange, PlayerLayer);
 
@@ -30,19 +44,12 @@ public class Weapon3PunchScript : AbstractWeaponGeneric
         }
     }
 
-    private void PlayPunchAnimation()
+    IEnumerator PlayPunchAnimation()
     {
-        StartCoroutine(WaitSec());
+        anim.SetBool("isPunching", true);
+        yield return new WaitForSeconds(anim.GetCurrentAnimatorStateInfo(0).length);
+        anim.SetBool("isPunching", false);
     }
 
-    IEnumerator WaitSec()
-    {
-        GetComponent<SpriteRenderer>().enabled = false;
-        if(anim.activeSelf == false)
-            anim.SetActive(true);
-        else
-            anim.GetComponent<Animator>().Play("PunchAnimation", -1, 0f);
-        yield return new WaitForSeconds(anim.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
-        GetComponent<SpriteRenderer>().enabled = true;
-    }
+    
 }
