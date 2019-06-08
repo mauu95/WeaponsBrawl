@@ -8,6 +8,23 @@ public class PlayerAnimationController : NetworkBehaviour {
 
     public Animator PunchAnim;
 
+    public Animator anim;
+    public PlayerMovement mov;
+
+    private void Start()
+    {
+        anim = GetComponent<Animator>();
+        mov= GetComponent<PlayerMovement>();
+    }
+
+    private void Update()
+    {
+        if (!mov.enabled)
+        {
+            anim.SetFloat("Blend", 0f);
+        }
+    }
+
     public void PlayPunchAnimation()
     {
         StartCoroutine(PlayPunch());

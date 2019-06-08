@@ -1080,6 +1080,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PunchAnim: {fileID: 95981658103579554}
+  anim: {fileID: 0}
+  mov: {fileID: 0}
 --- !u!114 &114426694492229496
 MonoBehaviour:
   m_ObjectHideFlags: 1
