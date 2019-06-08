@@ -22,7 +22,22 @@ public class PlayerManager : NetworkBehaviour {
             inventory.InitializeInventoryUI(this.gameObject);
             build.InitializeInventoryUI(this.gameObject);
             resurrection.InizializeInventoryUI(this.gameObject);
+
+
+            CmdSetTeam();
         }
+    }
+
+    [Command]
+    void CmdSetTeam()
+    {
+        RpcSetTeam();
+    }
+
+    [ClientRpc]
+    void RpcSetTeam()
+    {
+        GetComponent<SpriteRenderer>().color = GetTeam();
     }
     
     public IEnumerator LockAfterSec(int sec)
