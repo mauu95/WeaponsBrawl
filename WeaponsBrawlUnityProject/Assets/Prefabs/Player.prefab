@@ -375,6 +375,8 @@ GameObject:
   - component: {fileID: 114399992208742386}
   - component: {fileID: 114572224886439304}
   - component: {fileID: 114245090744289954}
+  - component: {fileID: 95956890194051080}
+  - component: {fileID: 114426694492229496}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -829,6 +831,24 @@ CapsuleCollider2D:
   m_Offset: {x: 0.39, y: -0.46}
   m_Size: {x: 1.6182232, y: 4.929993}
   m_Direction: 0
+--- !u!95 &95956890194051080
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1956134299243016}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: d18009dd591b7764883d8851f3ff3073, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!95 &95981658103579554
 Animator:
   serializedVersion: 3
@@ -955,6 +975,7 @@ MonoBehaviour:
   jumpForce: 15
   speed: 400
   GroundCheck: {fileID: 1260710734376700}
+  anim: {fileID: 95956890194051080}
 --- !u!114 &114296648318813056
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1044,6 +1065,26 @@ MonoBehaviour:
   throwingChargeBar: {fileID: 1327557382243520}
   AxeSpeed: 30
   timeToRepairAfterAttack: 5
+  canAttack: 1
+--- !u!114 &114426694492229496
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1956134299243016}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1590678366, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Animator: {fileID: 95956890194051080}
+  m_ParameterSendBits: 1
+  param0: 
+  param1: 
+  param2: 
+  param3: 
+  param4: 
+  param5: 
 --- !u!114 &114439985612114638
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1307,7 +1348,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 12
-  m_Sprite: {fileID: 21300000, guid: 2a5c2f3ca4ae14e7e91149316db1e054, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a5cbbaaba2fa63142bac3eaa00a41d08, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

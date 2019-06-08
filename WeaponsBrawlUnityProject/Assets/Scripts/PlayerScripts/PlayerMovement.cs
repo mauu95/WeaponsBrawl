@@ -9,8 +9,9 @@ public class PlayerMovement : NetworkBehaviour {
     public float speed = 400f;
 
     public GameObject GroundCheck;
+    public Animator anim;
 
-    private float horizontalMove = 0f;
+    private float horizontalMove;
     private bool m_FacingRight = true;
 
     //private Vector3 m_Velocity = Vector3.zero; bored from the same warning
@@ -30,6 +31,9 @@ public class PlayerMovement : NetworkBehaviour {
         if (hasAuthority)
         {
             Move(horizontalMove * Time.fixedDeltaTime);
+
+            anim.SetFloat("Blend", Mathf.Abs(horizontalMove * 10));
+
             if (Input.GetButtonDown("Jump"))
                 Jump();
         }
