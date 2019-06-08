@@ -54,7 +54,20 @@ public abstract class AbstractBulletExplosive : NetworkBehaviour {
 
 
 
+    [Command]
     void CmdFlingWhoIsInsideTheExplosion()
+    {
+        FlingWhoIsInsideTheExplosion();
+        RpcFlingWhoIsInsideTheExplosion();
+    }
+
+    [ClientRpc]
+    void RpcFlingWhoIsInsideTheExplosion()
+    {
+        FlingWhoIsInsideTheExplosion();
+    }
+
+    void FlingWhoIsInsideTheExplosion()
     {
         Collider2D[] hittedList = Physics2D.OverlapCircleAll(transform.position, ExplosionRadius);
         foreach (Collider2D hitted in hittedList)
