@@ -14,10 +14,23 @@ public class BuildInterfaceUI : AbstractInGameInterfaces {
 
     }
 
-    public override void OpenClose()
+    public override void Close()
     {
-        base.OpenClose();
-        buildManager.ChangeBuildingStatus();
+        if (isActive)
+        {
+            base.Close();
+            buildManager.ChangeBuildingStatus();
+        }
+
+    }
+
+    public override void Open()
+    {
+        if (!isActive)
+        {
+            base.Open();
+            buildManager.ChangeBuildingStatus();
+        }
     }
 
     public void SelectBuilding(int rotation)
