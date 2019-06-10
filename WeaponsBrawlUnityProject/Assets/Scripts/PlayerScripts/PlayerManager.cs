@@ -48,11 +48,21 @@ public class PlayerManager : NetworkBehaviour {
 
     public void ChangeActiveStatus(bool active)
     {
+        if (!active)
+        {
+            CmdNotifyTurnEnd();
+        }
         isInTurn = active;
         foreach (MonoBehaviour c in scriptToDisable)
         {
             c.enabled = active;
         }
+    }
+
+    [Command]
+    public void CmdNotifyTurnEnd()
+    {
+        MatchManager._instance.NotifyTurnEnd(this.controller.GetComponent<PlayerInfo>());
     }
 
     internal Color GetTeam()
