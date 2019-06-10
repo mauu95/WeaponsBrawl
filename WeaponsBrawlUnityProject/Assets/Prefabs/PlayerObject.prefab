@@ -116,7 +116,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1401003072170470}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 23.933126, y: 6.894358, z: -0.21875}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4508493162374732}
@@ -299,7 +299,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pname: 
-  team: 
+  team: {r: 0, g: 0, b: 0, a: 0}
+  status: 0
+  physicalPlayer: {fileID: 0}
 --- !u!114 &114571728771802334
 MonoBehaviour:
   m_ObjectHideFlags: 1
