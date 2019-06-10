@@ -1,11 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
 
-public class PlayerResourceScript : MonoBehaviour {
+public class PlayerResourceScript : NetworkBehaviour {
 
     private ResourceUI UI;
+    [SyncVar]
     public int resources = 100;
 
     private void Start()
@@ -14,10 +16,11 @@ public class PlayerResourceScript : MonoBehaviour {
         UpdateUI();
     }
 
-    public void addResouces(int amount)
+    [Command]
+    public void CmdAddResouces(int amount)
     {
         resources += amount;
-        UpdateUI();
+        RpcUpdateUI();
     }
 
     public bool UseResource(int amount)
@@ -31,9 +34,18 @@ public class PlayerResourceScript : MonoBehaviour {
         return false;
     }
 
+    [ClientRpc]
+    public void RpcUpdateUI()
+    {
+        UpdateUI();
+    }
+
     private void UpdateUI()
     {
-        UI.SetResourceUI(resources);
+        if (hasAuthority)
+        {
+            UI.SetResourceUI(resources);
+        }
     }
 
 

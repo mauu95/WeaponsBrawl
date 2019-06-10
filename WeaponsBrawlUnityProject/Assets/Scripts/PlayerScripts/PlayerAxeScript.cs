@@ -10,17 +10,21 @@ public class PlayerAxeScript : NetworkBehaviour
 
     private void Start()
     {
+        Debug.Log("Client?"+isClient);
+        Debug.Log("server?" + isServer);
         resource = player.GetComponent<PlayerResourceScript>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Tree"))
+       //if (isServer)
         {
-            resource.addResouces(50);
-            NetworkServer.Destroy(collision.gameObject);
-        }
-            
+            if (collision.gameObject.CompareTag("Tree"))
+            {
+                resource.CmdAddResouces(50);
+                NetworkServer.Destroy(collision.gameObject);
+            }
+       }            
     }
 
 }

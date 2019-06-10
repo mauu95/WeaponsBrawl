@@ -124,6 +124,7 @@ public class MatchManager : NetworkBehaviour
     public void Reset()
     {
         _players = new List<PlayerInfo>();
+        
     }
 
     public List<PlayerInfo> DeadPlayerList()
