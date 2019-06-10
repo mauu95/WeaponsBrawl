@@ -23,19 +23,12 @@ public class PlayerManager : NetworkBehaviour {
             build.InitializeInventoryUI(this.gameObject);
             resurrection.InizializeInventoryUI(this.gameObject);
 
-
-            CmdSetTeam();
+            //CmdSetTeam();
         }
+        SetSpriteColor();
     }
 
-    [Command]
-    void CmdSetTeam()
-    {
-        RpcSetTeam();
-    }
-
-    [ClientRpc]
-    void RpcSetTeam()
+    void SetSpriteColor()
     {
         GetComponent<SpriteRenderer>().color = GetTeam();
     }
