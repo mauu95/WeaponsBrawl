@@ -42,24 +42,30 @@ public class BuildingController : NetworkBehaviour {
             {
                 CmdSpawnConstruction(zRotation); //syncvar doesn't work well
             }
-           
+
+            if (isBuilding)
+            {
+                Inventory.canAttack = false;
+                Inventory.CmdSetActiveWeapon(false);
+            }
         }
     }
 
     public void ChangeBuildingStatus()
     {
-        Inventory.canAttack = !Inventory.GetCurrentWeapon().activeSelf;
-        Inventory.CmdSetActiveWeapon(!Inventory.GetCurrentWeapon().activeSelf);
-
 
         isBuilding = !isBuilding;
         if (isBuilding)
         {
             inBuildingObject = Instantiate(building, spawnPoint.transform);
+            Inventory.canAttack = false;
+            Inventory.CmdSetActiveWeapon(false);
         }
         else
         {
             Destroy(inBuildingObject);
+            Inventory.canAttack = true;
+            Inventory.CmdSetActiveWeapon(true);
         }
     }
 
