@@ -9,6 +9,7 @@ public class PlayerManager : NetworkBehaviour {
     [SyncVar]
     public GameObject controller;
 
+    [SyncVar]
     public bool isInTurn;
     public List<MonoBehaviour> scriptToDisable;
 
@@ -48,10 +49,7 @@ public class PlayerManager : NetworkBehaviour {
 
     public void ChangeActiveStatus(bool active)
     {
-        if (!active)
-        {
-            CmdNotifyTurnEnd();
-        }
+        CmdActiveInTurn(active);
         isInTurn = active;
         foreach (MonoBehaviour c in scriptToDisable)
         {
@@ -60,9 +58,9 @@ public class PlayerManager : NetworkBehaviour {
     }
 
     [Command]
-    public void CmdNotifyTurnEnd()
+    private void CmdActiveInTurn(bool active)
     {
-        MatchManager._instance.NotifyTurnEnd(this.controller.GetComponent<PlayerInfo>());
+        isInTurn = active;
     }
 
     internal Color GetTeam()

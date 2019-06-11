@@ -18,12 +18,28 @@ public class MatchManager : NetworkBehaviour
     public List<PlayerInfo> _players = new List<PlayerInfo>();
     public List<PlayerInfo> _playersToWait = new List<PlayerInfo>();
 
+    public List<PlayerInfo> RedTeam = new List<PlayerInfo>();
+    public List<PlayerInfo> BlueTeam = new List<PlayerInfo>();
+
     public void Start()
     {
         _instance = this;
         turn = Color.red;
         waiting = turnDuration;
         DontDestroyOnLoad(this.gameObject);
+
+
+    }
+
+    public void InitializeTeams()
+    {
+        foreach (PlayerInfo player in _players)
+        {
+            if (player.team == Color.red)
+                RedTeam.Add(player);
+            else
+                BlueTeam.Add(player);
+        }
     }
 
    
@@ -31,7 +47,13 @@ public class MatchManager : NetworkBehaviour
     {
         if (isServer)
         {
+
+            if(RedTeam.Count != 0) // GameManagerScript.GameHasStarted.. ma va bene anche cosi
+                if (AllPlayerHasEnded(this.turn))
+                waiting = 0;
+
             waiting = waiting - Time.deltaTime;
+
             if (waiting < 0)
             {
                 ChangeTurn();
@@ -39,6 +61,25 @@ public class MatchManager : NetworkBehaviour
             }
         }
 
+    }
+
+    private bool AllPlayerHasEnded(Color turn)
+    {
+        bool result = true;
+        List<PlayerInfo> CurrentTeam;
+
+        if (turn == Color.red)
+            CurrentTeam = RedTeam;
+        else
+            CurrentTeam = BlueTeam;
+
+        foreach(PlayerInfo player in CurrentTeam)
+        {
+            if(player.physicalPlayer.GetComponent<PlayerManager>().isInTurn)
+                result = false;
+        }
+
+        return result;
     }
 
     //TODO: very simple just for the prototype
