@@ -975,7 +975,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isGrounded: 0
-  jumpForce: 15
+  jumpForce: 18
   speed: 400
   GroundCheck: {fileID: 1260710734376700}
   anim: {fileID: 95956890194051080}
