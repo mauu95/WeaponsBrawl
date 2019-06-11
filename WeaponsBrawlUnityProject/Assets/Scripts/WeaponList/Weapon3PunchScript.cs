@@ -40,7 +40,7 @@ public class Weapon3PunchScript : AbstractWeaponGeneric
         {
             PlayerHealth enemy = hit.transform.GetComponent<PlayerHealth>();
 
-            if (enemy && enemy.gameObject != anim.gameObject)
+            if (enemy && enemy.gameObject != Player.gameObject)
             {
                 enemy.CmdTakeDamage(damagePower, Player.gameObject);
             }
