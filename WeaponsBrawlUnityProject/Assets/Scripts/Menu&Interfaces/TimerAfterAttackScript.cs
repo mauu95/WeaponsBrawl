@@ -9,6 +9,7 @@ public class TimerAfterAttackScript : MonoBehaviour {
     public float TimeToDisappear = 3f;
 
     private static float timeLeft;
+    private string previousSec;
 
     private void Start()
     {
@@ -28,6 +29,15 @@ public class TimerAfterAttackScript : MonoBehaviour {
             if(timeLeft > 0)
             {
                 timeLeft -= Time.deltaTime;
+
+                string timeToPrint = timeLeft.ToString("0");
+
+                if (timeToPrint != previousSec)
+                {
+                    timerUI.GetComponent<Animator>().Play("Bump", -1, 0f);
+                    previousSec = timeToPrint;
+                }
+
                 timerUI.text = timeLeft.ToString("0");
             }
             else
