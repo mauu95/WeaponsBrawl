@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GroundCheckScript : MonoBehaviour {
     private List<string> notGroundedOnTag;
-    public string[] ignoreTag = { "Chest", "Destroyer" };
+    public string[] ignoreTag = {"Destroyer"};
     private PlayerMovement movementScript;
 
     private void Start()

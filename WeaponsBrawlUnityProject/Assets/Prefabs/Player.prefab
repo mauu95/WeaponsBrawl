@@ -1159,7 +1159,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ignoreTag:
-  - Chest
   - Destroyer
   - NotJumpable
 --- !u!114 &114572224886439304
