@@ -379,6 +379,7 @@ GameObject:
   - component: {fileID: 95956890194051080}
   - component: {fileID: 114426694492229496}
   - component: {fileID: 114419350671742658}
+  - component: {fileID: 114378121403663954}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -1050,6 +1051,19 @@ MonoBehaviour:
   firePointRadius: 3.15
   speed: 3
   FirePointPivot: {fileID: 1853822103938912}
+--- !u!114 &114378121403663954
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1956134299243016}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb34384f189c9e34da3e3d726350d4ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Player: {fileID: 50808457054239680}
+  Slippery: {fileID: 6200000, guid: 6f9cdc6cea8f7cc4081e616518b98fe9, type: 2}
 --- !u!114 &114399992208742386
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1145,7 +1159,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ignoreTag:
-  - Chest
   - Destroyer
   - NotJumpable
 --- !u!114 &114572224886439304
