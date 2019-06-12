@@ -7,6 +7,7 @@ using UnityEngine.Networking;
 public class PlayerAnimationController : NetworkBehaviour {
 
     public Animator PunchAnim;
+    public Animator BBatAnim;
 
     public Animator anim;
     public PlayerMovement mov;
@@ -24,6 +25,39 @@ public class PlayerAnimationController : NetworkBehaviour {
             anim.SetFloat("Blend", 0f);
         }
     }
+
+
+    public void PlayBBatAnimation()
+    {
+        StartCoroutine(PlayBBat());
+    }
+
+    IEnumerator PlayBBat()
+    {
+        CmdPlayBBat(true);
+        yield return new WaitForSeconds(PunchAnim.GetCurrentAnimatorStateInfo(0).length);
+        CmdPlayBBat(false);
+    }
+
+    [Command]
+    void CmdPlayBBat(bool yesno)
+    {
+        RpcPlayBBat(yesno);
+    }
+
+    [ClientRpc]
+    private void RpcPlayBBat(bool yesno)
+    {
+        BBatAnim.SetBool("isAttacking", yesno);
+    }
+
+
+
+
+
+
+
+
 
     public void PlayPunchAnimation()
     {
