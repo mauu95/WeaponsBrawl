@@ -21,7 +21,7 @@ public class PlayerChestManager : NetworkBehaviour {
 	void Update () {
         if (hasAuthority)
         {
-            if (Input.GetKeyDown(KeyCode.R))
+            if (Input.GetButtonDown("Chest"))
             {
                 RaycastHit2D[] hits = Physics2D.CircleCastAll(transform.position, InteractionRadius, new Vector2(0, 0));
                 foreach (RaycastHit2D hit in hits)

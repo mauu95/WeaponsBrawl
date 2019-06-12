@@ -53,7 +53,8 @@ public class CameraController : MonoBehaviour
     {
 
         KeyZoom();
-        // MouseZoom(Input.GetAxis("Mouse ScrollWheel"));
+        MouseZoom(Input.GetAxis("Zoom In"));
+        MouseZoom(Input.GetAxis("Zoom Out")*-1);
         zoom = Mathf.Clamp(zoom, maxZoomIn, maxZoomOut);
         float cameraZoomDifference = zoom - cam.m_Lens.OrthographicSize;
         cam.m_Lens.OrthographicSize += cameraZoomDifference * cameraZoomSpeed * Time.deltaTime;
@@ -90,7 +91,7 @@ public class CameraController : MonoBehaviour
         }
 
     }
-
+    /*
     public void OnGUI()
     {
 
@@ -98,17 +99,18 @@ public class CameraController : MonoBehaviour
         {
             MouseZoom(Event.current.delta.y);
         }
-    }
+    }*/
 
     private void MovementHandler()
     {
 
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetButtonDown("Look Around"))
         {   //right mouse button is down so we are looking around
+
             isLooking = true;
         }
 
-        if (Input.GetMouseButtonUp(1))
+        if (Input.GetButtonUp("Look Around"))
         {   //right mouse button has comed up so we heve stopped to look around
             if (automaticCameraComeback)
             {
@@ -117,7 +119,6 @@ public class CameraController : MonoBehaviour
             }
             isLooking = false;
         }
-        //TODO come back when user moves the code below works but bad(remember to uncomment also up)
         if (playerMovementManager && playerMovementManager.isMoving)
         {   //we are moving, better reset the camera offset
             offsetManager.m_Offset = new Vector3(0, 0, 0);

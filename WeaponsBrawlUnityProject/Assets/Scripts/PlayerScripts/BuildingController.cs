@@ -28,24 +28,24 @@ public class BuildingController : NetworkBehaviour {
                 inBuildingObject.transform.rotation = Quaternion.Euler(0, 0, zRotation);
             }
 
-            if (isBuilding && Input.GetKeyDown(KeyCode.F))
+            if (isBuilding && Input.GetButtonDown("Switch Left"))
             {
                 zRotation-=45;  
             }
 
-            if (isBuilding && Input.GetKeyDown(KeyCode.G))
+            if (isBuilding && Input.GetButtonDown("Switch Right"))
             {
                 zRotation+=45;
             }
 
-            if (isBuilding && Input.GetKeyDown(KeyCode.E))
+            if (isBuilding && Input.GetButtonDown("Fire1"))
             {
                 CmdSpawnConstruction(zRotation); //syncvar doesn't work well
             }
 
             if (isBuilding)
             {
-                Inventory.canAttack = false;
+                Inventory.idleByBuilding = true;
                 Inventory.CmdSetActiveWeapon(false);
             }
         }
@@ -58,13 +58,13 @@ public class BuildingController : NetworkBehaviour {
         if (isBuilding)
         {
             inBuildingObject = Instantiate(building, spawnPoint.transform);
-            Inventory.canAttack = false;
+            Inventory.idleByBuilding = true;
             Inventory.CmdSetActiveWeapon(false);
         }
         else
         {
             Destroy(inBuildingObject);
-            Inventory.canAttack = true;
+            Inventory.idleByBuilding = false;
             Inventory.CmdSetActiveWeapon(true);
         }
     }

@@ -9,7 +9,7 @@ public class BuildInterfaceUI : AbstractInGameInterfaces {
 
 	void Update () {
 
-        if (Input.GetKeyDown(KeyCode.C))
+        if (Input.GetButtonDown("Build"))
             OpenClose();  
 
     }

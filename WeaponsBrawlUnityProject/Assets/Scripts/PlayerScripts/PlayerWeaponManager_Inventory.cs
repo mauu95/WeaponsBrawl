@@ -8,7 +8,7 @@ public class PlayerWeaponManager_Inventory : NetworkBehaviour {
 
     //Inventory Stuff
     public List<AbstractWeaponGeneric> Weapons = new List<AbstractWeaponGeneric>();
-
+    public int currentWeaponID;
     public delegate void OnItemChanged();
     public OnItemChanged onItemChangedCallBack;
 
@@ -17,7 +17,7 @@ public class PlayerWeaponManager_Inventory : NetworkBehaviour {
     public int AxeSpeed=10;
     public int timeToRepairAfterAttack = 5;
     public bool canAttack = true;
-
+    public bool idleByBuilding = false;
     private InventoryUI inventoryUI;
     private AbstractWeaponGeneric CurrentWeapon;
     private GameObject Axe;
@@ -48,7 +48,7 @@ public class PlayerWeaponManager_Inventory : NetworkBehaviour {
     protected void Update()
     {
 
-        if (hasAuthority)
+        if (hasAuthority && !idleByBuilding)
         {
             if (canAttack)
             {
@@ -64,13 +64,24 @@ public class PlayerWeaponManager_Inventory : NetworkBehaviour {
                 }
             }                
 
-            if (Input.GetKeyDown(KeyCode.Alpha1))
-                CmdSwitchWeapon(0);
-            if (Input.GetKeyDown(KeyCode.Alpha2))
-                CmdSwitchWeapon(1);
+            if (Input.GetButtonDown("Switch Left"))
+            {
+                int numberOfWeapons = Weapons.Count;
+                int switchTo = currentWeaponID - 1;
+                if (switchTo < 0)
+                {
+                    switchTo += numberOfWeapons;
+                }
+                CmdSwitchWeapon(switchTo);
+            }                
+            if (Input.GetButtonDown("Switch Right"))
+            {
+                int numberOfWeapons = Weapons.Count;
+                CmdSwitchWeapon((currentWeaponID+1)%numberOfWeapons);
+            }
 
 
-            if (Input.GetKeyDown(KeyCode.Q))
+            if (Input.GetButtonDown("Axe"))
             {
                 CmdActivateAxe(true);
                 Pivot.transform.localRotation = Quaternion.Euler(0f, 0f, 90f);
@@ -92,6 +103,7 @@ public class PlayerWeaponManager_Inventory : NetworkBehaviour {
             CurrentWeapon.gameObject.GetComponent<SpriteRenderer>().enabled = false;
         CurrentWeapon = Weapons[id];
         CurrentWeapon.gameObject.GetComponent<SpriteRenderer>().enabled = true;
+        currentWeaponID = id;
     }
 
     IEnumerator SwingAxe()
