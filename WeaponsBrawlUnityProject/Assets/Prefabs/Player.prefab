@@ -1079,10 +1079,12 @@ MonoBehaviour:
   Weapons:
   - {fileID: 114796966594414948}
   - {fileID: 114810577240394090}
+  currentWeaponID: 0
   throwingChargeBar: {fileID: 1327557382243520}
   AxeSpeed: 30
   timeToRepairAfterAttack: 5
   canAttack: 1
+  idleByBuilding: 0
 --- !u!114 &114419350671742658
 MonoBehaviour:
   m_ObjectHideFlags: 1
