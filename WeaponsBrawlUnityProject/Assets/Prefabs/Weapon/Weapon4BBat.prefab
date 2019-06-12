@@ -112,6 +112,7 @@ MonoBehaviour:
   PlayerLayer:
     serializedVersion: 2
     m_Bits: 256
+  FlingIntensity: 20
 --- !u!212 &212288985305794296
 SpriteRenderer:
   m_ObjectHideFlags: 1

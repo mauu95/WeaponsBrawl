@@ -10,6 +10,8 @@ public class Weapon4BBatScript : AbstractWeaponGeneric
     public int damagePower = 20;
     public LayerMask PlayerLayer;
 
+    public float FlingIntensity = 10;
+
     public override void Attack(int charge)
     {
         if (AnimationController == null)
@@ -32,9 +34,8 @@ public class Weapon4BBatScript : AbstractWeaponGeneric
                 enemy.CmdTakeDamage(damagePower, Player.gameObject);
 
 
-                Vector3 direction = firePoint.right + Vector3.up;
-                enemy.gameObject.GetComponent<PlayerManager>().SetVelocity(direction.x*50, direction.y*50);
-                print("called setvel");
+                Vector3 direction = (firePoint.right + Vector3.up) * FlingIntensity;
+                enemy.gameObject.GetComponent<PlayerManager>().SetVelocity(direction.x, direction.y);
             }
         }
     }
