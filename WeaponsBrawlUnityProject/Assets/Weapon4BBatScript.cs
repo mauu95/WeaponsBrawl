@@ -30,6 +30,11 @@ public class Weapon4BBatScript : AbstractWeaponGeneric
             if (enemy && enemy.gameObject != Player.gameObject)
             {
                 enemy.CmdTakeDamage(damagePower, Player.gameObject);
+
+
+                Vector3 direction = firePoint.right + Vector3.up;
+                enemy.gameObject.GetComponent<PlayerManager>().SetVelocity(direction.x*50, direction.y*50);
+                print("called setvel");
             }
         }
     }
