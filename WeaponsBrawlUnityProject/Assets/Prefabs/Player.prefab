@@ -505,7 +505,7 @@ Transform:
   m_GameObject: {fileID: 1327557382243520}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.26000023, y: 2.3599994, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_LocalScale: {x: 1.5, y: 2.5, z: 1}
   m_Children:
   - {fileID: 4110013737789272}
   - {fileID: 4402810605870486}
@@ -551,7 +551,7 @@ Transform:
   m_GameObject: {fileID: 1465541029608722}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalScale: {x: 2, y: 1.5, z: 1}
   m_Children: []
   m_Father: {fileID: 4658069117511918}
   m_RootOrder: 3
@@ -645,8 +645,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1979760286997830}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.26, y: 2.66, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_LocalPosition: {x: 0.26, y: 4, z: 0}
+  m_LocalScale: {x: 1.5, y: 2.5, z: 1}
   m_Children:
   - {fileID: 4459576078311870}
   - {fileID: 4614080310909466}
@@ -975,6 +975,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isGrounded: 0
+  isMoving: 0
   jumpForce: 18
   speed: 400
   GroundCheck: {fileID: 1260710734376700}
