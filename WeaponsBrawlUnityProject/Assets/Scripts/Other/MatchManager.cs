@@ -13,10 +13,9 @@ public class MatchManager : NetworkBehaviour
     public Color turn;
     [SyncVar]
     public float waiting = 30;
-    public float turnDuration=30;
+    public float turnDuration = 30;
     public static MatchManager _instance = null;
     public List<PlayerInfo> _players = new List<PlayerInfo>();
-    public List<PlayerInfo> _playersToWait = new List<PlayerInfo>();
 
     public List<PlayerInfo> RedTeam = new List<PlayerInfo>();
     public List<PlayerInfo> BlueTeam = new List<PlayerInfo>();
@@ -42,22 +41,23 @@ public class MatchManager : NetworkBehaviour
         }
     }
 
-   
+
     private void Update()
     {
         if (isServer)
         {
 
-            if(RedTeam.Count != 0) // GameManagerScript.GameHasStarted.. ma va bene anche cosi
+            if (RedTeam.Count != 0) // GameManagerScript.GameHasStarted.. ma va bene anche cosi
                 if (AllPlayerHasEnded(this.turn))
-                waiting = 0;
+                    waiting = 0;
 
             waiting = waiting - Time.deltaTime;
 
             if (waiting < 0)
             {
+                waiting = turnDuration;
                 ChangeTurn();
-                               
+                RpcChangeTurn(turn);
             }
         }
 
@@ -73,9 +73,9 @@ public class MatchManager : NetworkBehaviour
         else
             CurrentTeam = BlueTeam;
 
-        foreach(PlayerInfo player in CurrentTeam)
+        foreach (PlayerInfo player in CurrentTeam)
         {
-            if(player.physicalPlayer.GetComponent<PlayerManager>().isInTurn)
+            if (player.physicalPlayer.GetComponent<PlayerManager>().isInTurn)
                 result = false;
         }
 
@@ -86,7 +86,6 @@ public class MatchManager : NetworkBehaviour
     [Server]
     private void ChangeTurn()
     {
-        _playersToWait = new List<PlayerInfo>();
         if (turn == Color.red)
         {
             turn = Color.blue;
@@ -95,9 +94,7 @@ public class MatchManager : NetworkBehaviour
         {
             turn = Color.red;
         }
-        _playersToWait = this.AlivePlayerList(turn);
-        RpcChangeTurn(turn);
-        waiting = turnDuration;
+
     }
 
     public void AddPlayer(PlayerInfo player)
@@ -110,15 +107,15 @@ public class MatchManager : NetworkBehaviour
 
     public void RemovePlayer(PlayerInfo player)
     {
-            _players.Remove(player);
+        _players.Remove(player);
     }
 
     public int PlayerAliveNumber()
     {
         int alivePlayer = 0;
-        foreach(PlayerInfo p in _players)
+        foreach (PlayerInfo p in _players)
         {
-            if (p != null&& p.status==PlayerInfo.Status.alive)
+            if (p != null && p.status == PlayerInfo.Status.alive)
             {
                 alivePlayer++;
             }
@@ -131,7 +128,7 @@ public class MatchManager : NetworkBehaviour
         int alivePlayer = 0;
         foreach (PlayerInfo p in _players)
         {
-            if (p != null && p.status == PlayerInfo.Status.alive && p.team==team)
+            if (p != null && p.status == PlayerInfo.Status.alive && p.team == team)
             {
                 alivePlayer++;
             }
@@ -168,65 +165,45 @@ public class MatchManager : NetworkBehaviour
     public void Reset()
     {
         _players = new List<PlayerInfo>();
-        
+
     }
 
     public List<PlayerInfo> DeadPlayerList()
     {
-        return FilterByStatus(PlayerInfo.Status.dead);
-    }
-
-    public List<PlayerInfo> AlivePlayerList()
-    {
-        return FilterByStatus(PlayerInfo.Status.alive);
-    }
-
-    private List<PlayerInfo> FilterByStatus(PlayerInfo.Status status)
-    {
-        List<PlayerInfo> players = new List<PlayerInfo>();
+        List<PlayerInfo> dead = new List<PlayerInfo>();
         foreach (PlayerInfo p in _players)
         {
-            if (p &&(p.status == status))
+            if (p.status == PlayerInfo.Status.dead)
             {
-                players.Add(p);
+                dead.Add(p);
             }
         }
-        return players;
+        return dead;
     }
 
     public List<PlayerInfo> DeadPlayerList(Color team)
     {
-        return FilterByStatusAndTeam(PlayerInfo.Status.dead, team);
-    }
-
-    public List<PlayerInfo> AlivePlayerList(Color team)
-    {
-        return FilterByStatusAndTeam(PlayerInfo.Status.alive, team);
-    }
-
-    private List<PlayerInfo> FilterByStatusAndTeam(PlayerInfo.Status status, Color team)
-    {
-        List<PlayerInfo> players = new List<PlayerInfo>();
+        List<PlayerInfo> dead = new List<PlayerInfo>();
         foreach (PlayerInfo p in _players)
         {
-
-            if (p && (p.status == status && p.team == team))
+            if (p.status == PlayerInfo.Status.dead && p.team == team)
             {
-                players.Add(p);
+                dead.Add(p);
             }
         }
-        return players;
+        return dead;
     }
+
 
 
     [ClientRpc]
     void RpcChangeTurn(Color color)
     {
-        foreach(PlayerInfo p in _players)
+        foreach (PlayerInfo p in _players)
         {
-            if(color== p.team)
+            if (color == p.team)
             {
-                SetPlayerTurn(p,true);
+                SetPlayerTurn(p, true);
             }
             else
             {
@@ -238,17 +215,6 @@ public class MatchManager : NetworkBehaviour
     private static void SetPlayerTurn(PlayerInfo p, bool active)
     {
         p.physicalPlayer.GetComponent<PlayerManager>().ChangeActiveStatus(active);
-    }
-
-    [Server]
-    public void NotifyTurnEnd(PlayerInfo p)
-    {
-        
-        _playersToWait.Remove(p);
-        if (_playersToWait.Count <= 0)
-        {
-            this.ChangeTurn();
-        }
     }
 
 }

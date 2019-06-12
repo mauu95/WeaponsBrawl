@@ -35,7 +35,7 @@ public class PlayerAnimationController : NetworkBehaviour {
     IEnumerator PlayBBat()
     {
         CmdPlayBBat(true);
-        yield return new WaitForSeconds(PunchAnim.GetCurrentAnimatorStateInfo(0).length);
+        yield return new WaitForSeconds(BBatAnim.GetCurrentAnimatorStateInfo(0).length);
         CmdPlayBBat(false);
     }
 
@@ -48,6 +48,8 @@ public class PlayerAnimationController : NetworkBehaviour {
     [ClientRpc]
     private void RpcPlayBBat(bool yesno)
     {
+        if (BBatAnim == null)
+            BBatAnim = FindObjectOfType<Weapon4BBatScript>().gameObject.GetComponent<Animator>();
         BBatAnim.SetBool("isAttacking", yesno);
     }
 
