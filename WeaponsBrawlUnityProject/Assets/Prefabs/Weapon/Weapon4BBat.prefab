@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 212288985305794296}
   - component: {fileID: 95804466844508210}
   - component: {fileID: 114923777341130304}
+  - component: {fileID: 114823282821016240}
   m_Layer: 0
   m_Name: Weapon4BBat
   m_TagString: Untagged
@@ -60,6 +61,38 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &114823282821016240
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1582256517300636}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 137
+    i1: 134
+    i2: 126
+    i3: 27
+    i4: 228
+    i5: 201
+    i6: 106
+    i7: 68
+    i8: 170
+    i9: 111
+    i10: 186
+    i11: 21
+    i12: 179
+    i13: 188
+    i14: 83
+    i15: 19
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0
 --- !u!114 &114923777341130304
 MonoBehaviour:
   m_ObjectHideFlags: 1
