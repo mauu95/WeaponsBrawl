@@ -72,7 +72,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Player: {fileID: 0}
-  info: {fileID: 0}
+  info: {fileID: 11400000, guid: cbc42e7654efdfd469b585cecb1b6ffc, type: 2}
   AnimationController: {fileID: 0}
 --- !u!212 &212288985305794296
 SpriteRenderer:
