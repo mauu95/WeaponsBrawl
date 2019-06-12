@@ -91,7 +91,7 @@ public class CameraController : MonoBehaviour
         }
 
     }
-    /*
+    
     public void OnGUI()
     {
 
@@ -99,7 +99,7 @@ public class CameraController : MonoBehaviour
         {
             MouseZoom(Event.current.delta.y);
         }
-    }*/
+    }
 
     private void MovementHandler()
     {
