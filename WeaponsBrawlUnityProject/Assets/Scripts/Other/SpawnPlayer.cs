@@ -47,6 +47,8 @@ public class SpawnPlayer : NetworkBehaviour
         {
             Cinemachine.CinemachineVirtualCamera virtualController = virtualCamera.GetComponent<Cinemachine.CinemachineVirtualCamera>();
             virtualController.m_Follow = p.transform;
+            CameraController customCameraController = virtualController.gameObject.GetComponent<CameraController>();
+            customCameraController.playerMovementManager = p.GetComponent<PlayerMovement>();
         }
     }
 

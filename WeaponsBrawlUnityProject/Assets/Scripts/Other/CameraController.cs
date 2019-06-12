@@ -5,9 +5,10 @@ using System;
 public class CameraController : MonoBehaviour
 {
     private Cinemachine.CinemachineVirtualCamera cam;
-    private CinemachineCameraOffset offsetManager;  
+    private CinemachineCameraOffset offsetManager;
+    public PlayerMovement playerMovementManager;
     //public GameObject player;                     //Public variable to store a reference to the player game object
-
+    
     private Vector3 offsetToReach;                  //the distance beetween what we are looking and the transform
     private bool targetReach = true;                //have we reach our target offset?  
     //private Func<float> GetCameraZoom;        
@@ -23,7 +24,7 @@ public class CameraController : MonoBehaviour
     public float cameraComebackSpeed = 15f;         //the speed of the camera when come back form a look around action
     public bool costantComebackSpeed=true;          //the comeback speed is costant or propotionated to the distance
     public float acceptableDinstanceToLag = 0.2f;   //as far as we are getting closer to the target but never able to reach the target when comeback speed is not constant we need to set a distance to say it's ok stop to coming closer
-
+    public bool automaticCameraComeback = false; 
     void Start()
     {
         cam = transform.GetComponent<Cinemachine.CinemachineVirtualCamera>();
@@ -104,23 +105,23 @@ public class CameraController : MonoBehaviour
 
         if (Input.GetMouseButtonDown(1))
         {   //right mouse button is down so we are looking around
-            //TODO  remove after using player.isMoving( look below)
-            //transform.hasChanged = false;
             isLooking = true;
         }
 
         if (Input.GetMouseButtonUp(1))
         {   //right mouse button has comed up so we heve stopped to look around
-            offsetToReach = new Vector3(0, 0, 0);
-            targetReach = false;
+            if (automaticCameraComeback)
+            {
+                offsetToReach = new Vector3(0, 0, 0);
+                targetReach = false;
+            }
             isLooking = false;
         }
         //TODO come back when user moves the code below works but bad(remember to uncomment also up)
-       /* if (transform.hasChanged)
+        if (playerMovementManager && playerMovementManager.isMoving)
         {   //we are moving, better reset the camera offset
             offsetManager.m_Offset = new Vector3(0, 0, 0);
-            transform.hasChanged = false;
-        }*/
+        }
 
         if (isLooking)
         {   //we are looking around let's look around
