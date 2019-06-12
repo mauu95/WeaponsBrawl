@@ -565,6 +565,9 @@ MonoBehaviour:
   waiting: 30
   turnDuration: 30
   _players: []
+  _playersToWait: []
+  RedTeam: []
+  BlueTeam: []
 --- !u!4 &251504237
 Transform:
   m_ObjectHideFlags: 0
