@@ -47,12 +47,14 @@ public class SpawnPlayer : NetworkBehaviour
         {
             Cinemachine.CinemachineVirtualCamera virtualController = virtualCamera.GetComponent<Cinemachine.CinemachineVirtualCamera>();
             virtualController.m_Follow = p.transform;
+            CameraController customCameraController = virtualController.gameObject.GetComponent<CameraController>();
+            customCameraController.playerMovementManager = p.GetComponent<PlayerMovement>();
         }
     }
 
     IEnumerator SpawnPlayerWithDelay()
     {
-        yield return new WaitForSeconds(0.01f);
+        yield return new WaitForSeconds(0.5f);
         if (isLocalPlayer)
         {
             CmdSpawnPlayer();

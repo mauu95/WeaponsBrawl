@@ -346,7 +346,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lookAroundSpeed: 100
-  beginZoom: 5
+  beginZoom: 20
   cameraZoomSpeed: 5
   zoomChange: 20
   scrollBoost: 5

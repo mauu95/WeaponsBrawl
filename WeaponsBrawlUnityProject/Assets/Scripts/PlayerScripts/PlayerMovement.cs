@@ -5,7 +5,8 @@ using UnityEngine.Networking;
 public class PlayerMovement : NetworkBehaviour {
 
     public bool isGrounded = false;
-    public float jumpForce = 10;
+    public bool isMoving = false;
+    public float jumpForce = 18;
     public float speed = 400f;
 
     public GameObject GroundCheck;
@@ -30,12 +31,22 @@ public class PlayerMovement : NetworkBehaviour {
     void FixedUpdate(){
         if (hasAuthority)
         {
+            if (horizontalMove != 0)
+            {
+                isMoving = true;
+            }else
+            {
+                isMoving = false;
+            }
             Move(horizontalMove * Time.fixedDeltaTime);
 
             anim.SetFloat("Blend", Mathf.Abs(horizontalMove * 10));
 
             if (Input.GetButtonDown("Jump"))
+            {
                 Jump();
+                isMoving = true;
+            }
         }
 
     }
