@@ -33,12 +33,18 @@ public class MatchManager : NetworkBehaviour
 
     private void Update()
     {
-        if (isServer)
+        if (isServer && FindObjectOfType<Prototype.NetworkLobby.LobbyTopPanel>().isInGame)
         {
 
-            if (RedTeam.Count != 0) // GameManagerScript.GameHasStarted.. ma va bene anche cosi
+            try
+            {
                 if (AllPlayerHasEnded(this.turn))
                     waiting = 0;
+            }
+            catch(Exception e)
+            {
+                print("Eccezione prevista, GO ahead, no problem" + e);
+            }
 
             waiting = waiting - Time.deltaTime;
 
@@ -156,7 +162,7 @@ public class MatchManager : NetworkBehaviour
     public void Reset()
     {
         _players = new List<PlayerInfo>();
-
+        UpdateRedAndBlueTeams();
     }
 
     public List<PlayerInfo> DeadPlayerList()
