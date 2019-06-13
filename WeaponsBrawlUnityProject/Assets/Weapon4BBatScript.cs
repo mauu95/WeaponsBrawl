@@ -35,7 +35,7 @@ public class Weapon4BBatScript : AbstractWeaponGeneric
 
 
                 Vector3 direction = (firePoint.right + Vector3.up) * FlingIntensity;
-                enemy.gameObject.GetComponent<PlayerManager>().SetVelocity(direction.x, direction.y);
+                enemy.gameObject.GetComponent<PlayerManager>().CmdSetVelocity(direction.x, direction.y);
             }
         }
     }
