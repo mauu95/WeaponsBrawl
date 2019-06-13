@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -7,7 +8,6 @@ using UnityEngine.SceneManagement;
 public class PlayerResourceScript : NetworkBehaviour {
 
     private ResourceUI UI;
-    [SyncVar]
     public int resources = 100;
 
     private void Start()
@@ -19,33 +19,35 @@ public class PlayerResourceScript : NetworkBehaviour {
     [Command]
     public void CmdAddResouces(int amount)
     {
+        RpcAddResources(amount);
+    }
+
+    [ClientRpc]
+    private void RpcAddResources(int amount)
+    {
+        AddResources(amount);
+    }
+
+    private void AddResources(int amount)
+    {
         resources += amount;
-        RpcUpdateUI();
+        UpdateUI();
     }
 
     public bool UseResource(int amount)
     {
         if (resources >= amount)
         {
-            resources -= amount;
-            UpdateUI();
+            CmdAddResouces(-amount);
             return true;
         }
         return false;
     }
 
-    [ClientRpc]
-    public void RpcUpdateUI()
-    {
-        UpdateUI();
-    }
-
     private void UpdateUI()
     {
         if (hasAuthority)
-        {
             UI.SetResourceUI(resources);
-        }
     }
 
 

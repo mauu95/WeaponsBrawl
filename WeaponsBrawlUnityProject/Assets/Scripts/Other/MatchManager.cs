@@ -30,17 +30,6 @@ public class MatchManager : NetworkBehaviour
 
     }
 
-    public void InitializeTeams()
-    {
-        foreach (PlayerInfo player in _players)
-        {
-            if (player.team == Color.red)
-                RedTeam.Add(player);
-            else
-                BlueTeam.Add(player);
-        }
-    }
-
 
     private void Update()
     {
@@ -103,11 +92,13 @@ public class MatchManager : NetworkBehaviour
             return;
 
         _players.Add(player);
+        UpdateRedAndBlueTeams();
     }
 
     public void RemovePlayer(PlayerInfo player)
     {
         _players.Remove(player);
+        UpdateRedAndBlueTeams();
     }
 
     public int PlayerAliveNumber()
@@ -215,6 +206,20 @@ public class MatchManager : NetworkBehaviour
     private static void SetPlayerTurn(PlayerInfo p, bool active)
     {
         p.physicalPlayer.GetComponent<PlayerManager>().ChangeActiveStatus(active);
+    }
+
+    private void UpdateRedAndBlueTeams()
+    {
+        RedTeam.Clear();
+        BlueTeam.Clear();
+
+        foreach (PlayerInfo player in _players)
+        {
+            if (player.team == Color.red)
+                RedTeam.Add(player);
+            else
+                BlueTeam.Add(player);
+        }
     }
 
 }
