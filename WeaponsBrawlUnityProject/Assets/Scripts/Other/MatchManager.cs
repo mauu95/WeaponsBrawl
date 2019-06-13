@@ -38,11 +38,12 @@ public class MatchManager : NetworkBehaviour
 
             try
             {
-                if (AllPlayerHasEnded(this.turn))
+                if (_players.Count > 0 && AllPlayerHasEnded(this.turn))
                     waiting = 0;
             }
             catch(Exception e)
             {
+                UpdateRedAndBlueTeams();
                 print("Eccezione prevista, GO ahead, no problem" + e);
             }
 
@@ -50,6 +51,7 @@ public class MatchManager : NetworkBehaviour
 
             if (waiting < 0)
             {
+                UpdateRedAndBlueTeams();
                 waiting = turnDuration;
                 ChangeTurn();
                 RpcChangeTurn(turn);
@@ -218,6 +220,7 @@ public class MatchManager : NetworkBehaviour
     {
         RedTeam.Clear();
         BlueTeam.Clear();
+        _players.RemoveAll(item => item == null);
 
         foreach (PlayerInfo player in _players)
         {
