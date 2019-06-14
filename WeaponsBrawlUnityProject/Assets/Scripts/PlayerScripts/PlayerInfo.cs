@@ -64,4 +64,34 @@ public class PlayerInfo : NetworkBehaviour {
         points = Mathf.Max(points, 0);
         return Mathf.FloorToInt(points);       
     }
+
+    public char getRank()
+    {
+        int points = GetPoints();
+        if (points >= 190 / 2)
+        {
+            return 'S';
+        }
+        if (points >= (130 / 2))
+        {
+            return 'A';
+        }
+        if (points >= (100 / 2))
+        {
+            return 'B';
+        }
+        if (points >= (80 / 2))
+        {
+            return 'C';
+        }
+        if (points >= (50 / 2))
+        {
+            return 'D';
+        }
+        if (points >= (30 / 2))
+        {
+            return 'E';
+        }
+        return 'F';
+    }
 }
