@@ -55,9 +55,31 @@ public class MatchManager : NetworkBehaviour
                 waiting = turnDuration;
                 ChangeTurn();
                 RpcChangeTurn(turn);
+
+                if (AllPlayerIsDead(turn))
+                {
+                    FindObjectOfType<EndGameScreemUI>().Open();
+                }
             }
         }
 
+    }
+
+    private bool AllPlayerIsDead(Color turn)
+    {
+        bool result = true;
+        List<PlayerInfo> CurrentTeam;
+
+        if (turn == Color.red)
+            CurrentTeam = RedTeam;
+        else
+            CurrentTeam = BlueTeam;
+
+        foreach (PlayerInfo player in CurrentTeam)
+            if (player.status == PlayerInfo.Status.alive)
+                result = false;
+
+        return result;
     }
 
     private bool AllPlayerHasEnded(Color turn)
