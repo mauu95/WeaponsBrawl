@@ -32,7 +32,11 @@ public class PlayerInfo : NetworkBehaviour {
 
     // Use this for initialization
     void Start () {
-        MatchManager._instance.AddPlayer(this);	
+        MatchManager._instance.AddPlayer(this);
+        if (isLocalPlayer)
+        {
+            FindObjectOfType<EndGameScreemUI>().localPlayer = this;
+        }
 	}
 	
 
@@ -60,7 +64,7 @@ public class PlayerInfo : NetworkBehaviour {
         points -= 20f * deaths;
         points -= 20f * allyEliminated;
         if (win)
-            points += 50;
+            points += 50/2;
         points = Mathf.Max(points, 0);
         return Mathf.FloorToInt(points);       
     }

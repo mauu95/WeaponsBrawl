@@ -32,7 +32,7 @@ public class PlayerHealth : NetworkBehaviour {
         if (hp <= 0)
         {
             CmdPlayerDie();
-            hitterInfo.deaths += 1;
+            hittedInfo.deaths += 1;
             if (hittedInfo.team == hitterInfo.team)
             {
                 hitterInfo.allyEliminated += 1;

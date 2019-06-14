@@ -58,7 +58,12 @@ public class MatchManager : NetworkBehaviour
 
                 if (AllPlayerIsDead(turn))
                 {
+                    foreach(PlayerInfo p in _players)
+                    {
+                        p.win = (p.team != turn);
+                    }
                     RpcNotifyGameIsOver();
+          
                 }
             }
         }
