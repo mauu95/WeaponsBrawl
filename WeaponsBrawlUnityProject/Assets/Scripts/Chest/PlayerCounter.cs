@@ -3,18 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerCounter : MonoBehaviour {
-    //private int playerCounter;
+
     private Dictionary<Color, int> playerCounter;
     private List<GameObject> inside = new List<GameObject>();
-    // Use this for initialization
+
+
     void Start () {
         playerCounter = new Dictionary<Color, int>();	
 	}
 	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 
     public int GetPlayerCounter(Color c)
     {
