@@ -16,15 +16,33 @@ public class PlayerHealth : NetworkBehaviour {
         hp -= damage;
         hp = Math.Max(0, hp);
         CmdRefreshHealth();
-        if (hp <= 0)
-            CmdPlayerDie();
         gameObject.GetComponent<PlayerManager>().RpcChangeActiveStatus(false);
         PlayerInfo hittedInfo = gameObject.GetComponent<PlayerManager>().controller.GetComponent<PlayerInfo>();
         PlayerInfo hitterInfo =fromWho.GetComponent<PlayerManager>().controller.GetComponent<PlayerInfo>();
         if (hittedInfo.team == hitterInfo.team)
         {
             fromWho.GetComponent<PlayerManager>().RpcChangeActiveStatus(false);
+            hitterInfo.damageToAlly+=damage;
         }
+        else
+        {
+            hitterInfo.damageToEnemy += damage;
+        }
+
+        if (hp <= 0)
+        {
+            CmdPlayerDie();
+            hitterInfo.deaths += 1;
+            if (hittedInfo.team == hitterInfo.team)
+            {
+                hitterInfo.allyEliminated += 1;
+            }
+            else
+            {
+                hitterInfo.kills += 1;
+            }
+        }
+            
     }
 
 
