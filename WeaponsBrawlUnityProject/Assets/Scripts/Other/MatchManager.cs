@@ -58,11 +58,17 @@ public class MatchManager : NetworkBehaviour
 
                 if (AllPlayerIsDead(turn))
                 {
-                    FindObjectOfType<EndGameScreemUI>().Open();
+                    RpcNotifyGameIsOver();
                 }
             }
         }
 
+    }
+
+    [ClientRpc]
+    private void RpcNotifyGameIsOver()
+    {
+        FindObjectOfType<EndGameScreemUI>().Open();
     }
 
     private bool AllPlayerIsDead(Color turn)
