@@ -9,6 +9,7 @@ public abstract class AbstractChest : NetworkBehaviour {
 
     public int level;
     public CircleCollider2D playerNextToRay;
+    public SpriteRenderer PressRImg;
 
     internal abstract bool DoSomething(PlayerChestManager p);
 
@@ -47,5 +48,38 @@ public abstract class AbstractChest : NetworkBehaviour {
         return playerNextToRay.GetComponent<PlayerCounter>().GetPlayerCounter(team);
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        Transform player = collision.transform;
+
+
+        if (player.CompareTag("Player") == false)
+            return;
+
+        bool bol1 = player.GetComponent<NetworkIdentity>().hasAuthority;
+        bool bol2 = IsInteractable(player.GetComponent<PlayerChestManager>());
+
+        if ( bol1 && bol2 )
+        {
+            PressRImg.enabled = true;
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+
+        Transform player = collision.transform;
+
+        if (player.CompareTag("Player") == false)
+            return;
+
+        bool bol1 = player.GetComponent<NetworkIdentity>().hasAuthority;
+        bool bol2 = IsInteractable(player.GetComponent<PlayerChestManager>());
+
+        if (bol1 && bol2)
+        {
+            PressRImg.enabled = false;
+        }
+    }
 
 }
