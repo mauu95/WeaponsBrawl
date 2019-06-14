@@ -10,6 +10,8 @@ public abstract class AbstractChest : NetworkBehaviour {
     public int level;
     public CircleCollider2D playerNextToRay;
 
+    internal abstract bool DoSomething(PlayerChestManager p);
+
     public virtual void ClientPreInteract(PlayerChestManager p)
     {
         p.waitingUser = false;
@@ -19,15 +21,9 @@ public abstract class AbstractChest : NetworkBehaviour {
     public void Interact(PlayerChestManager p)
     {
         if (IsInteractable(p))
-        {
             if (DoSomething(p))
-            {
                 RpcDestroy();
-            }
             
-        }
-        
-        //Destroy(gameObject);
     }
 
     [ClientRpc]
@@ -35,8 +31,6 @@ public abstract class AbstractChest : NetworkBehaviour {
     {
         Destroy(gameObject);
     }
-
-    internal abstract bool DoSomething(PlayerChestManager p);
 
     public virtual bool IsInteractable(PlayerChestManager p)
     {
@@ -52,17 +46,6 @@ public abstract class AbstractChest : NetworkBehaviour {
     {
         return playerNextToRay.GetComponent<PlayerCounter>().GetPlayerCounter(team);
     }
-
-
-
-    // Use this for initialization
-    void Start () {
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 
 
 }
