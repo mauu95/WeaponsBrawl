@@ -114,8 +114,7 @@ public class CameraController : MonoBehaviour
         {   //right mouse button has comed up so we heve stopped to look around
             if (automaticCameraComeback)
             {
-                offsetToReach = new Vector3(0, 0, 0);
-                targetReach = false;
+                CameraComeback();
             }
             isLooking = false;
         }
@@ -133,6 +132,17 @@ public class CameraController : MonoBehaviour
             ComebackBehaviour();   
         }
 
+        if (Input.GetButtonDown("Reset Camera Position"))
+        {
+            CameraComeback();
+        }
+
+    }
+
+    private void CameraComeback()
+    {
+        offsetToReach = new Vector3(0, 0, 0);
+        targetReach = false;
     }
 
     private void LookAroundBehaviour()

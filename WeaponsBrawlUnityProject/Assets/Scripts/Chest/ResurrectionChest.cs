@@ -35,6 +35,7 @@ public class ResurrectionChest : AbstractChest {
                 ally.transform.position = gameObject.transform.position;
                 ally.CmdResurrect();
                 p.allyToResurrect = null;
+                p.gameObject.GetComponent<PlayerManager>().controller.GetComponent<PlayerInfo>().resurrectedAlly += 1;
                 return true;
             }
         }
