@@ -89,7 +89,7 @@ public class PlayerManager : NetworkBehaviour {
 
     private void SetVelocity(float velx, float vely)
     {
-        print("Setting velocity of " + name + "to : velx= " + velx + " vely= " + vely);
+        //print("Setting velocity of " + name + "to : velx= " + velx + " vely= " + vely);
         GetComponent<Rigidbody2D>().velocity = new Vector2(velx, vely);
     }
 
