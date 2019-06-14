@@ -89,7 +89,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1865388493637912}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.711906, y: 1.4233224, z: 0}
+  m_LocalPosition: {x: -7.11, y: 1.14, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4018927595067102}
@@ -202,6 +202,12 @@ MonoBehaviour:
   Player: {fileID: 0}
   info: {fileID: 11400000, guid: cbc42e7654efdfd469b585cecb1b6ffc, type: 2}
   AnimationController: {fileID: 0}
+  attackRange: 5
+  damagePower: 20
+  PlayerLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  FlingIntensity: 20
 --- !u!114 &114053030818529416
 MonoBehaviour:
   m_ObjectHideFlags: 1

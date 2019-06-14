@@ -35,10 +35,9 @@ public class PauseMenuScript : AbstractMenu
 
     public void LoadStartMenu()
     {
-
-        Prototype.NetworkLobby.LobbyManager.s_Singleton.GoBackButton();
-        Prototype.NetworkLobby.LobbyManager.s_Singleton.gameObject.GetComponent<LobbyMyFeature>().LoadStartMenu();
         MatchManager._instance.Reset();
+        Prototype.NetworkLobby.LobbyManager.s_Singleton.GoBackButton();
+        //Prototype.NetworkLobby.LobbyManager.s_Singleton.gameObject.GetComponent<LobbyMyFeature>().LoadStartMenu();
     }
 }
 

@@ -79,15 +79,17 @@ public class PlayerWeaponManager_Inventory : NetworkBehaviour {
                 int numberOfWeapons = Weapons.Count;
                 CmdSwitchWeapon((currentWeaponID+1)%numberOfWeapons);
             }
+                
+        }
 
-
+        if (hasAuthority)
+        {
             if (Input.GetButtonDown("Axe"))
             {
                 CmdActivateAxe(true);
                 Pivot.transform.localRotation = Quaternion.Euler(0f, 0f, 90f);
                 StartCoroutine(SwingAxe());
             }
-                
         }
     }
 

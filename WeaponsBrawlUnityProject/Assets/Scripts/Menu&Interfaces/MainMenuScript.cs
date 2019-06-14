@@ -9,10 +9,4 @@ public class MainMenuScript : AbstractMenu {
         SceneManager.LoadScene(1);
     }
 
-    private void Awake()
-    {
-        if (Prototype.NetworkLobby.LobbyManager.s_Singleton != null)
-            Destroy(Prototype.NetworkLobby.LobbyManager.s_Singleton.gameObject);
-    }
-
 }

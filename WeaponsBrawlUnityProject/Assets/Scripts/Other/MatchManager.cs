@@ -30,37 +30,56 @@ public class MatchManager : NetworkBehaviour
 
     }
 
-    public void InitializeTeams()
-    {
-        foreach (PlayerInfo player in _players)
-        {
-            if (player.team == Color.red)
-                RedTeam.Add(player);
-            else
-                BlueTeam.Add(player);
-        }
-    }
-
 
     private void Update()
     {
-        if (isServer)
+        if (isServer && FindObjectOfType<Prototype.NetworkLobby.LobbyTopPanel>().isInGame)
         {
 
-            if (RedTeam.Count != 0) // GameManagerScript.GameHasStarted.. ma va bene anche cosi
-                if (AllPlayerHasEnded(this.turn))
+            try
+            {
+                if (_players.Count > 0 && AllPlayerHasEnded(this.turn))
                     waiting = 0;
+            }
+            catch(Exception e)
+            {
+                UpdateRedAndBlueTeams();
+                print("Eccezione prevista, GO ahead, no problem" + e);
+            }
 
             waiting = waiting - Time.deltaTime;
 
             if (waiting < 0)
             {
+                UpdateRedAndBlueTeams();
                 waiting = turnDuration;
                 ChangeTurn();
                 RpcChangeTurn(turn);
+
+                if (AllPlayerIsDead(turn))
+                {
+                    FindObjectOfType<EndGameScreemUI>().Open();
+                }
             }
         }
 
+    }
+
+    private bool AllPlayerIsDead(Color turn)
+    {
+        bool result = true;
+        List<PlayerInfo> CurrentTeam;
+
+        if (turn == Color.red)
+            CurrentTeam = RedTeam;
+        else
+            CurrentTeam = BlueTeam;
+
+        foreach (PlayerInfo player in CurrentTeam)
+            if (player.status == PlayerInfo.Status.alive)
+                result = false;
+
+        return result;
     }
 
     private bool AllPlayerHasEnded(Color turn)
@@ -103,11 +122,13 @@ public class MatchManager : NetworkBehaviour
             return;
 
         _players.Add(player);
+        UpdateRedAndBlueTeams();
     }
 
     public void RemovePlayer(PlayerInfo player)
     {
         _players.Remove(player);
+        UpdateRedAndBlueTeams();
     }
 
     public int PlayerAliveNumber()
@@ -165,7 +186,7 @@ public class MatchManager : NetworkBehaviour
     public void Reset()
     {
         _players = new List<PlayerInfo>();
-
+        UpdateRedAndBlueTeams();
     }
 
     public List<PlayerInfo> DeadPlayerList()
@@ -215,6 +236,21 @@ public class MatchManager : NetworkBehaviour
     private static void SetPlayerTurn(PlayerInfo p, bool active)
     {
         p.physicalPlayer.GetComponent<PlayerManager>().ChangeActiveStatus(active);
+    }
+
+    private void UpdateRedAndBlueTeams()
+    {
+        RedTeam.Clear();
+        BlueTeam.Clear();
+        _players.RemoveAll(item => item == null);
+
+        foreach (PlayerInfo player in _players)
+        {
+            if (player.team == Color.red)
+                RedTeam.Add(player);
+            else
+                BlueTeam.Add(player);
+        }
     }
 
 }
