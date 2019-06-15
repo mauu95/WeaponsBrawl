@@ -105,7 +105,7 @@ public class MatchManager : NetworkBehaviour
 
         foreach (PlayerInfo player in CurrentTeam)
         {
-            if (player.physicalPlayer.GetComponent<PlayerManager>().isInTurn)
+            if (player.physicalPlayer.GetComponent<PlayerManager>().isInTurn && player.status == PlayerInfo.Status.alive)
                 result = false;
         }
 
