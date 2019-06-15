@@ -118,7 +118,8 @@ public class CameraController : MonoBehaviour
             }
             isLooking = false;
         }
-        if (playerMovementManager && playerMovementManager.isMoving)
+
+        if (playerMovementManager!= null && playerMovementManager.isActiveAndEnabled && playerMovementManager.isMoving)
         {   //we are moving, better reset the camera offset
             offsetManager.m_Offset = new Vector3(0, 0, 0);
         }

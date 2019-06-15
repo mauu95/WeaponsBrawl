@@ -19,6 +19,7 @@ public class MatchManager : NetworkBehaviour
 
     public List<PlayerInfo> RedTeam = new List<PlayerInfo>();
     public List<PlayerInfo> BlueTeam = new List<PlayerInfo>();
+    private bool gameIsOver;
 
     public void Start()
     {
@@ -63,7 +64,6 @@ public class MatchManager : NetworkBehaviour
                         p.win = (p.team != turn);
                     }
                     RpcNotifyGameIsOver();
-          
                 }
             }
         }
@@ -73,7 +73,11 @@ public class MatchManager : NetworkBehaviour
     [ClientRpc]
     private void RpcNotifyGameIsOver()
     {
-        FindObjectOfType<EndGameScreemUI>().Open();
+        gameIsOver = true;
+        EndGameScreemUI endScreen = FindObjectOfType<EndGameScreemUI>();
+
+        if (!endScreen.isActive)
+            endScreen.Open();
     }
 
     private bool AllPlayerIsDead(Color turn)
@@ -242,7 +246,7 @@ public class MatchManager : NetworkBehaviour
                 SetPlayerTurn(p, false);
             }
 
-            if (p.hasAuthority)
+            if (p.hasAuthority && !gameIsOver)
             {
                 if(color == p.team)
                     MessageManager.Instance.PlayYourTurnAnimation();
