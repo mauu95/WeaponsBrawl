@@ -12,7 +12,7 @@ public class PlayerChestManager : NetworkBehaviour {
     public int InteractionRadius = 3;
     public bool waitingUser=false;
 
-    private bool interactionStart=false;
+    public bool interactionStart=false;
 
     void Start () {
         waitingUser = false;
@@ -29,9 +29,8 @@ public class PlayerChestManager : NetworkBehaviour {
                 {
                     if (hit.collider != null && hit.collider.tag == "Chest")
                     {
-                        interactionStart=true;
                         hit.collider.gameObject.GetComponent<AbstractChest>().ClientPreInteract(this);
-                        
+                        interactionStart = true;
                     }
                 }
                 

@@ -15,7 +15,7 @@ public class ResurrectionChest : AbstractChest {
         List<PlayerInfo> deadAlly = MatchManager._instance.DeadPlayerList(team);
         ResurrectionMenuUI resurrectionMenu = GetGameObjectInRoot("Canvas").GetComponentInChildren<ResurrectionMenuUI>(true);
         p.waitingUser = true;
-        resurrectionMenu.OpenClose();
+        resurrectionMenu.Open();
         foreach (PlayerInfo ally in deadAlly)
         {
             resurrectionMenu.AddResurrectButton(ally.pname);
@@ -25,12 +25,15 @@ public class ResurrectionChest : AbstractChest {
 
     internal override bool DoSomething(PlayerChestManager p)
     {
+        Debug.Log("chest is on server");
         Color team = p.gameObject.GetComponent<PlayerManager>().GetTeam();
         List<PlayerInfo> deadAlly = MatchManager._instance.DeadPlayerList(team);
         foreach(PlayerInfo ally in deadAlly)
         {
+            Debug.Log("ally: " + ally.pname + " expected: "+ p.allyToResurrect);
             if (ally.pname == p.allyToResurrect)
             {
+                Debug.Log("found");
                 ally.status = PlayerInfo.Status.alive;
                 ally.transform.position = gameObject.transform.position;
                 ally.CmdResurrect();
@@ -41,16 +44,6 @@ public class ResurrectionChest : AbstractChest {
         }
         return false;
     }
-
-    // Use this for initialization
-    void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 
     public override bool IsInteractable(PlayerChestManager p)
     {

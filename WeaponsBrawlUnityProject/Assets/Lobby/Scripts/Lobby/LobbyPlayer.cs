@@ -259,7 +259,7 @@ namespace Prototype.NetworkLobby
                 playerColor = Color.red;
                 red++;
             }
-            //playerColor = Color.red;// todo remove that line, is he rejust for easy test
+            //playerColor = Color.red;// todo remove that line, is here just for easy test
             
         }
 
