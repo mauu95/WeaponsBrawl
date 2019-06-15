@@ -51,7 +51,6 @@ public class PlayerAnimationController : NetworkBehaviour {
         if (BBatAnim == null)
             BBatAnim = FindObjectOfType<Weapon4BBatScript>().gameObject.GetComponent<Animator>();
         BBatAnim.SetBool("isAttacking", yesno);
-        DebugConsole.Instance.print(BBatAnim.GetBool("isAttacking").ToString());
     }
 
 
