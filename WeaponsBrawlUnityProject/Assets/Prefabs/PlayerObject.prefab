@@ -302,6 +302,13 @@ MonoBehaviour:
   team: {r: 0, g: 0, b: 0, a: 0}
   status: 0
   physicalPlayer: {fileID: 0}
+  kills: 0
+  damageToEnemy: 0
+  resurrectedAlly: 0
+  win: 0
+  deaths: 0
+  damageToAlly: 0
+  allyEliminated: 0
 --- !u!114 &114571728771802334
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -345,16 +352,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e54d37b6e800b3f43b54baa5f7548bdd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerMovementManager: {fileID: 0}
   lookAroundSpeed: 100
   beginZoom: 20
   cameraZoomSpeed: 5
   zoomChange: 20
   scrollBoost: 5
   maxZoomIn: 5
-  maxZoomOut: 100
+  maxZoomOut: 40
   cameraComebackSpeed: 25
   costantComebackSpeed: 1
   acceptableDinstanceToLag: 0.2
+  automaticCameraComeback: 0
 --- !u!114 &114804712237600016
 MonoBehaviour:
   m_ObjectHideFlags: 1
