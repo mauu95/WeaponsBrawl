@@ -241,6 +241,14 @@ public class MatchManager : NetworkBehaviour
             {
                 SetPlayerTurn(p, false);
             }
+
+            if (p.hasAuthority)
+            {
+                if(color == p.team)
+                    MessageManager.Instance.PlayYourTurnAnimation();
+                else
+                    MessageManager.Instance.PlayEndTurnAnimation();
+            }
         }
     }
 
