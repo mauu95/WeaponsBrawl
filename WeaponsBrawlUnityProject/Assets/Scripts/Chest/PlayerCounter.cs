@@ -16,10 +16,8 @@ public class PlayerCounter : MonoBehaviour {
     public int GetPlayerCounter(Color c)
     {
         if (!playerCounter.ContainsKey(c))
-        {
             playerCounter[c] = 0;
-        }
-        //Debug.Log("key:" + c + " value:" + playerCounter[c]);
+
         return playerCounter[c];
     }
     
@@ -34,7 +32,6 @@ public class PlayerCounter : MonoBehaviour {
                 playerCounter[team] = 0;
             }
             playerCounter[team]++;
-            //Debug.Log("key:" + team + " value" + playerCounter[team]);
         }
     }
 
@@ -50,7 +47,6 @@ public class PlayerCounter : MonoBehaviour {
             }
             playerCounter[team]--;
             playerCounter[team] = Mathf.Max(playerCounter[team], 0);
-            //Debug.Log("key:" + team + " value" + playerCounter[team]);
         }
     }
 

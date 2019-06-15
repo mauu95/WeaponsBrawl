@@ -6,18 +6,19 @@ using UnityEngine.Networking;
 
 
 public class PlayerChestManager : NetworkBehaviour {
-    public int InteractionRadius = 3;
-    public bool waitingUser=false;
-    private bool interactionStart=false;
+
     [SyncVar]
     public string allyToResurrect;
-    // Use this for initialization
+    public int InteractionRadius = 3;
+    public bool waitingUser=false;
+
+    private bool interactionStart=false;
+
     void Start () {
         waitingUser = false;
         interactionStart = false;
 	}
 	
-	// Update is called once per frame
 	void Update () {
         if (hasAuthority)
         {
@@ -58,7 +59,6 @@ public class PlayerChestManager : NetworkBehaviour {
             {
                 hit.collider.gameObject.GetComponent<AbstractChest>().Interact(this);
             }
-            //Debug.Log(hit.collider);
         }
         
     }

@@ -9,6 +9,9 @@ public abstract class AbstractChest : NetworkBehaviour {
 
     public int level;
     public CircleCollider2D playerNextToRay;
+    public SpriteRenderer PressRImg;
+
+    internal abstract bool DoSomething(PlayerChestManager p);
 
     public virtual void ClientPreInteract(PlayerChestManager p)
     {
@@ -19,15 +22,9 @@ public abstract class AbstractChest : NetworkBehaviour {
     public void Interact(PlayerChestManager p)
     {
         if (IsInteractable(p))
-        {
             if (DoSomething(p))
-            {
                 RpcDestroy();
-            }
             
-        }
-        
-        //Destroy(gameObject);
     }
 
     [ClientRpc]
@@ -35,8 +32,6 @@ public abstract class AbstractChest : NetworkBehaviour {
     {
         Destroy(gameObject);
     }
-
-    internal abstract bool DoSomething(PlayerChestManager p);
 
     public virtual bool IsInteractable(PlayerChestManager p)
     {
@@ -53,16 +48,38 @@ public abstract class AbstractChest : NetworkBehaviour {
         return playerNextToRay.GetComponent<PlayerCounter>().GetPlayerCounter(team);
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        Transform player = collision.transform;
 
 
-    // Use this for initialization
-    void Start () {
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+        if (player.CompareTag("Player") == false)
+            return;
 
+        bool bol1 = player.GetComponent<NetworkIdentity>().hasAuthority;
+        bool bol2 = IsInteractable(player.GetComponent<PlayerChestManager>());
+
+        if ( bol1 && bol2 )
+        {
+            PressRImg.enabled = true;
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+
+        Transform player = collision.transform;
+
+        if (player.CompareTag("Player") == false)
+            return;
+
+        bool bol1 = player.GetComponent<NetworkIdentity>().hasAuthority;
+        bool bol2 = IsInteractable(player.GetComponent<PlayerChestManager>());
+
+        if (bol1 && bol2)
+        {
+            PressRImg.enabled = false;
+        }
+    }
 
 }

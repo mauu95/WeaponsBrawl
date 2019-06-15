@@ -1035,9 +1035,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4d4e4beb5a44eb4da7934e3c49b1ac7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  allyToResurrect: 
   InteractionRadius: 3
   waitingUser: 0
-  allyToResurrect: 
 --- !u!114 &114375544405647848
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1414,7 +1414,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 21
+  m_SortingOrder: 22
   m_Sprite: {fileID: 21300000, guid: a5cbbaaba2fa63142bac3eaa00a41d08, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1875,7 +1875,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 30
-  m_Sprite: {fileID: 21300000, guid: f3eb051ef5280fb468d5c200435d8a2d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 82e9584a1263e02469177a3d0e2b14ac, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
