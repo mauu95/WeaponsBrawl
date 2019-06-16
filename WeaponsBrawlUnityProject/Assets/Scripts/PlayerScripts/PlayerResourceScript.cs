@@ -10,6 +10,8 @@ public class PlayerResourceScript : NetworkBehaviour {
     private ResourceUI UI;
     public int resources = 100;
 
+    private bool canAdd = true;
+
     private void Start()
     {
         UI = GetGameObjectInRoot("Canvas").GetComponent<ResourceUI>();
@@ -30,9 +32,21 @@ public class PlayerResourceScript : NetworkBehaviour {
 
     private void AddResources(int amount)
     {
-        resources += amount;
-        UpdateUI();
+        if (canAdd)
+        {
+            canAdd = false;
+            resources += amount;
+            UpdateUI();
+            StartCoroutine(enableCanAdd());
+        }
     }
+
+    IEnumerator enableCanAdd()
+    {
+        yield return new WaitForSeconds(0.2f);
+        canAdd = true;
+    }
+
 
     public bool UseResource(int amount)
     {
