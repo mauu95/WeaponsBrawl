@@ -52,19 +52,19 @@ public class MatchManager : NetworkBehaviour
 
             if (waiting < 0)
             {
-                UpdateRedAndBlueTeams();
-                waiting = turnDuration;
-                ChangeTurn();
-                RpcChangeTurn(turn);
-
                 if (AllPlayerIsDead(turn))
                 {
-                    foreach(PlayerInfo p in _players)
+                    foreach (PlayerInfo p in _players)
                     {
                         p.win = (p.team != turn);
                     }
                     RpcNotifyGameIsOver();
                 }
+
+                UpdateRedAndBlueTeams();
+                waiting = turnDuration;
+                ChangeTurn();
+                RpcChangeTurn(turn);
             }
         }
 
