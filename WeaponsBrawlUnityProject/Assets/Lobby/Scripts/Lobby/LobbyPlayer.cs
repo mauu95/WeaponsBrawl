@@ -12,8 +12,8 @@ namespace Prototype.NetworkLobby
     public class LobbyPlayer : NetworkLobbyPlayer
     {
         //used on server to avoid assigning the same color to two player
-        static int red=0;
-        static int blue=0;
+        static int numberOfRed=0;
+        static int numberOfBlue=0;
         public int maxPlayerPerColor=2;
         public Button colorButton;
         public InputField nameInput;
@@ -72,8 +72,8 @@ namespace Prototype.NetworkLobby
 
             //if we return from a game, color of text can still be the one for "Ready"
             readyButton.transform.GetChild(0).GetComponent<Text>().color = Color.white;
-
-           SetupLocalPlayer();
+            this.Reset();
+            SetupLocalPlayer();
         }
 
         void ChangeReadyButtonColor(Color c)
@@ -251,13 +251,13 @@ namespace Prototype.NetworkLobby
             if (playerColor == Color.blue)
             {
                 playerColor = Color.red;
-                red++;
-                blue--;
+                numberOfRed++;
+                numberOfBlue--;
             }else
             {
                 playerColor = Color.blue;
-                red--;
-                blue++;
+                numberOfRed--;
+                numberOfBlue++;
             }
             //playerColor = Color.red;// todo remove that line, is here just for easy test
 
@@ -265,22 +265,23 @@ namespace Prototype.NetworkLobby
 
         public void Reset()
         {
-            blue = 0;
-            red = 0;
+            Debug.Log("reset called");
+            numberOfBlue = 0;
+            numberOfRed = 0;
         }
 
         [Command]
         public void CmdColorChange()
         {
-            if (blue < red && maxPlayerPerColor>blue)
+            if (numberOfBlue < numberOfRed && maxPlayerPerColor>numberOfBlue)
             {
                 playerColor = Color.blue;
-                blue++;
+                numberOfBlue++;
             }
-            else if(maxPlayerPerColor > red)
+            else if(maxPlayerPerColor > numberOfRed)
             {
                 playerColor = Color.red;
-                red++;
+                numberOfRed++;
             }
             //playerColor = Color.red;// todo remove that line, is here just for easy test
             
@@ -299,11 +300,11 @@ namespace Prototype.NetworkLobby
             if (LobbyManager.s_Singleton != null) LobbyManager.s_Singleton.OnPlayersNumberModified(-1);
             if (playerColor == Color.blue)
             {
-                blue--;
+                numberOfBlue--;
             }
             if (playerColor == Color.red)
             {
-                red--;
+                numberOfRed--;
             }
 
 
