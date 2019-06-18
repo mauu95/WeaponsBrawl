@@ -54,11 +54,11 @@ public class MatchManager : NetworkBehaviour
             {
                 if (AllPlayerIsDead(turn))
                 {
-                    foreach (PlayerInfo p in _players)
-                    {
-                        p.win = (p.team != turn);
-                    }
-                    RpcNotifyGameIsOver();
+                    bool redWin = false;
+                    if (turn != Color.red)
+                        redWin = true;
+
+                    RpcNotifyGameIsOver(redWin);
                 }
 
                 UpdateRedAndBlueTeams();
@@ -71,10 +71,25 @@ public class MatchManager : NetworkBehaviour
     }
 
     [ClientRpc]
-    private void RpcNotifyGameIsOver()
+    private void RpcNotifyGameIsOver(bool redWin)
     {
         gameIsOver = true;
         EndGameScreemUI endScreen = FindObjectOfType<EndGameScreemUI>();
+        PlayerInfo localPlayer = endScreen.localPlayer;
+        if (redWin)
+        {
+            if (localPlayer.team == Color.red)
+                localPlayer.win = true;
+            else
+                localPlayer.win = false;
+        }
+        else
+        {
+            if(localPlayer.team == Color.blue)
+                localPlayer.win = true;
+            else
+                localPlayer.win = false;
+        }
 
         if (!endScreen.isActive)
             endScreen.Open();
