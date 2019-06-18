@@ -25,15 +25,12 @@ public class ResurrectionChest : AbstractChest {
 
     internal override bool DoSomething(PlayerChestManager p)
     {
-        Debug.Log("chest is on server");
         Color team = p.gameObject.GetComponent<PlayerManager>().GetTeam();
         List<PlayerInfo> deadAlly = MatchManager._instance.DeadPlayerList(team);
         foreach(PlayerInfo ally in deadAlly)
         {
-            Debug.Log("ally: " + ally.pname + " expected: "+ p.allyToResurrect);
             if (ally.pname == p.allyToResurrect)
             {
-                Debug.Log("found");
                 ally.status = PlayerInfo.Status.alive;
                 ally.transform.position = gameObject.transform.position;
                 ally.CmdResurrect();
