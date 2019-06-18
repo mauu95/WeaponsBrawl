@@ -265,7 +265,6 @@ namespace Prototype.NetworkLobby
 
         public void Reset()
         {
-            Debug.Log("reset called");
             numberOfBlue = 0;
             numberOfRed = 0;
         }
