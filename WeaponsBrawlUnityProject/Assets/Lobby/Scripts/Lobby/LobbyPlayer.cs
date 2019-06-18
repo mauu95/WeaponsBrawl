@@ -201,7 +201,7 @@ namespace Prototype.NetworkLobby
         //so that all client get the new value throught syncvar
         public void OnColorClicked()
         {
-            //CmdColorChange();
+            CmdForcedColorChange();
         }
 
         public void OnReadyClicked()
@@ -245,6 +245,29 @@ namespace Prototype.NetworkLobby
         }
 
         //====== Server Command
+        [Command]
+        public void CmdForcedColorChange()
+        {
+            if (playerColor == Color.blue)
+            {
+                playerColor = Color.red;
+                red++;
+                blue--;
+            }else
+            {
+                playerColor = Color.blue;
+                red--;
+                blue++;
+            }
+            //playerColor = Color.red;// todo remove that line, is here just for easy test
+
+        }
+
+        public void Reset()
+        {
+            blue = 0;
+            red = 0;
+        }
 
         [Command]
         public void CmdColorChange()
