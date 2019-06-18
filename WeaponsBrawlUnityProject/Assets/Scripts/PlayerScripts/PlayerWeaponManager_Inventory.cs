@@ -120,6 +120,11 @@ public class PlayerWeaponManager_Inventory : NetworkBehaviour {
 
     private void AddWeapon(GameObject weaponToAdd, GameObject player)
     {
+        foreach (AbstractWeaponGeneric w in Weapons)
+            if (w.name == weaponToAdd.name)
+                return;
+
+
         GameObject localFirePoint = player.transform.Find("FirePointPivot/FirePoint").gameObject;
         GameObject localPivot = player.transform.Find("FirePointPivot").gameObject;
         weaponToAdd.transform.SetParent(localFirePoint.transform);

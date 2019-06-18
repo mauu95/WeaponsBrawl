@@ -19,6 +19,7 @@ public class MatchManager : NetworkBehaviour
 
     public List<PlayerInfo> RedTeam = new List<PlayerInfo>();
     public List<PlayerInfo> BlueTeam = new List<PlayerInfo>();
+    private bool gameIsOver;
 
     public void Start()
     {
@@ -51,29 +52,47 @@ public class MatchManager : NetworkBehaviour
 
             if (waiting < 0)
             {
+                if (AllPlayerIsDead(turn))
+                {
+                    bool redWin = false;
+                    if (turn != Color.red)
+                        redWin = true;
+
+                    RpcNotifyGameIsOver(redWin);
+                }
+
                 UpdateRedAndBlueTeams();
                 waiting = turnDuration;
                 ChangeTurn();
                 RpcChangeTurn(turn);
-
-                if (AllPlayerIsDead(turn))
-                {
-                    foreach(PlayerInfo p in _players)
-                    {
-                        p.win = (p.team != turn);
-                    }
-                    RpcNotifyGameIsOver();
-          
-                }
             }
         }
 
     }
 
     [ClientRpc]
-    private void RpcNotifyGameIsOver()
+    private void RpcNotifyGameIsOver(bool redWin)
     {
-        FindObjectOfType<EndGameScreemUI>().Open();
+        gameIsOver = true;
+        EndGameScreemUI endScreen = FindObjectOfType<EndGameScreemUI>();
+        PlayerInfo localPlayer = endScreen.localPlayer;
+        if (redWin)
+        {
+            if (localPlayer.team == Color.red)
+                localPlayer.win = true;
+            else
+                localPlayer.win = false;
+        }
+        else
+        {
+            if(localPlayer.team == Color.blue)
+                localPlayer.win = true;
+            else
+                localPlayer.win = false;
+        }
+
+        if (!endScreen.isActive)
+            endScreen.Open();
     }
 
     private bool AllPlayerIsDead(Color turn)
@@ -105,7 +124,7 @@ public class MatchManager : NetworkBehaviour
 
         foreach (PlayerInfo player in CurrentTeam)
         {
-            if (player.physicalPlayer.GetComponent<PlayerManager>().isInTurn)
+            if (player.physicalPlayer.GetComponent<PlayerManager>().isInTurn && player.status == PlayerInfo.Status.alive)
                 result = false;
         }
 
@@ -240,6 +259,14 @@ public class MatchManager : NetworkBehaviour
             else
             {
                 SetPlayerTurn(p, false);
+            }
+
+            if (p.hasAuthority && !gameIsOver)
+            {
+                if(color == p.team)
+                    MessageManager.Instance.PlayYourTurnAnimation();
+                else
+                    MessageManager.Instance.PlayEndTurnAnimation();
             }
         }
     }

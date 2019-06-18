@@ -91,7 +91,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea1b9152679331641b2b84c55a639455, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ExplosionRadius: 4
+  ExplosionRadius: 6
   shootedBy: {fileID: 0}
   BulletPower: 20
   FlingIntensity: 20
