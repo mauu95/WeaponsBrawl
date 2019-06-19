@@ -22,8 +22,11 @@ public class PlayerHealth : NetworkBehaviour {
         PlayerInfo hitterInfo =fromWho.GetComponent<PlayerManager>().controller.GetComponent<PlayerInfo>();
         if (hittedInfo.team == hitterInfo.team)
         {
-            fromWho.GetComponent<PlayerManager>().RpcChangeActiveStatus(false);
-            hitterInfo.damageToAlly+=damage;
+            if (hitterInfo != hittedInfo)
+            {
+                fromWho.GetComponent<PlayerManager>().RpcChangeActiveStatus(false);
+                hitterInfo.damageToAlly += damage;
+            }
         }
         else
         {
@@ -36,7 +39,10 @@ public class PlayerHealth : NetworkBehaviour {
             hittedInfo.deaths += 1;
             if (hittedInfo.team == hitterInfo.team)
             {
-                hitterInfo.allyEliminated += 1;
+                if (hitterInfo != hittedInfo)
+                {
+                    hitterInfo.allyEliminated += 1;
+                }
             }
             else
             {
