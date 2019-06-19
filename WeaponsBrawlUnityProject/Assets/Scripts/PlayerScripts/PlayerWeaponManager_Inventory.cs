@@ -18,6 +18,8 @@ public class PlayerWeaponManager_Inventory : NetworkBehaviour {
     public int timeToRepairAfterAttack = 5;
     public bool canAttack = true;
     public bool idleByBuilding = false;
+
+    public BuildingController buildingController;
     private InventoryUI inventoryUI;
     private AbstractWeaponGeneric CurrentWeapon;
     private GameObject Axe;
@@ -81,7 +83,15 @@ public class PlayerWeaponManager_Inventory : NetworkBehaviour {
                 
         }
 
-        if (hasAuthority && canAttack)
+        if (hasAuthority)
+        {
+            if (buildingController.isBuilding)
+                CmdSetActiveWeapon(false);
+            else
+                CmdSetActiveWeapon(true);
+        }
+
+        if (hasAuthority && gameObject.GetComponent<PlayerManager>().isInTurn)
         {
             if (Input.GetButtonDown("Axe"))
             {

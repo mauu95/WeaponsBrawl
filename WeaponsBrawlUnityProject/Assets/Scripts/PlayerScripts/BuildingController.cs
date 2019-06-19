@@ -10,7 +10,7 @@ public class BuildingController : NetworkBehaviour {
 
     private GameObject spawnPoint;
     private GameObject inBuildingObject;
-    private bool isBuilding;
+    public bool isBuilding;
     private PlayerWeaponManager_Inventory Inventory;
 
     void Start () {
