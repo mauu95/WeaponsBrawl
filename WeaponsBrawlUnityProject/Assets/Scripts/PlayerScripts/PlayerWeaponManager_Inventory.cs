@@ -51,7 +51,7 @@ public class PlayerWeaponManager_Inventory : NetworkBehaviour {
     {
         if (hasAuthority && !idleByBuilding)
         {
-            if (canAttack)
+            if (canAttack && buildingController.isBuilding == false)
             {
                 if (Input.GetButtonDown("Fire1"))
                     throwingChargeBar.SetActive(true);
