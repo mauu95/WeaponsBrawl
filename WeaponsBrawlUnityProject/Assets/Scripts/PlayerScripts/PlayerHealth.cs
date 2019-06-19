@@ -13,6 +13,7 @@ public class PlayerHealth : NetworkBehaviour {
     [Command]
     public void CmdTakeDamage(int damage, GameObject fromWho)
     {
+        damage = Math.Min(hp,damage);
         hp -= damage;
         hp = Math.Max(0, hp);
         CmdRefreshHealth();

@@ -26,12 +26,15 @@ public class Bullet2BombScript : AbstractBulletExplosive
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        var enemy = collision.gameObject.GetComponent<PlayerHealth>();
-        if (enemy)
+        if (isServer)
         {
-            float vel = GetComponent<Rigidbody2D>().velocity.magnitude;
-            if(vel>5)
-                enemy.CmdTakeDamage(Mathf.CeilToInt(vel/3), shootedBy);
+            var enemy = collision.gameObject.GetComponent<PlayerHealth>();
+            if (enemy)
+            {
+                float vel = GetComponent<Rigidbody2D>().velocity.magnitude;
+                if (vel > 5)
+                    enemy.CmdTakeDamage(Mathf.CeilToInt(vel / 3), shootedBy);
+            }
         }
     }
 
