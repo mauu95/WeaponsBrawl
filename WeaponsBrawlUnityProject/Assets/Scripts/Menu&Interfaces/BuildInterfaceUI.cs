@@ -14,6 +14,15 @@ public class BuildInterfaceUI : AbstractInGameInterfaces {
 
     }
 
+    public override void OpenClose()
+    {
+        if (isActive)
+            Close();
+        else
+            Open();
+
+    }
+
     public override void Close()
     {
         if (isActive)
