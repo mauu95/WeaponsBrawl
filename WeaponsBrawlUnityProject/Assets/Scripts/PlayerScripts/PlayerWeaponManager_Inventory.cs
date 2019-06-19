@@ -96,8 +96,8 @@ public class PlayerWeaponManager_Inventory : NetworkBehaviour {
             if (Input.GetButtonDown("Axe"))
             {
                 CmdActivateAxe(true);
-                Pivot.transform.localRotation = Quaternion.Euler(0f, 0f, 90f);
                 StartCoroutine(SwingAxe());
+                //Pivot.transform.SetPositionAndRotation(previousPosition, previousRotation);
             }
         }
     }
@@ -119,11 +119,15 @@ public class PlayerWeaponManager_Inventory : NetworkBehaviour {
 
     IEnumerator SwingAxe()
     {
+        Vector3 previousPosition = Pivot.transform.position;
+        Quaternion previousRotation = Pivot.transform.rotation;
+        Pivot.transform.localRotation = Quaternion.Euler(0f, 0f, 90f);
         while (Pivot.transform.localRotation.eulerAngles.z <= 90 || Pivot.transform.localRotation.eulerAngles.z > 300)
         {
             Pivot.transform.Rotate(0f, 0f, -10f * AxeSpeed * Time.deltaTime);
             yield return 0;
         }
+        Pivot.transform.SetPositionAndRotation(previousPosition, previousRotation);
         CmdActivateAxe(false);
     }
 
