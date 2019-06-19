@@ -57,16 +57,16 @@ public class PlayerInfo : NetworkBehaviour {
     public int GetPoints()
     {
         float points = 0;
-        points += 0.1f * damageToEnemy;
+        points += 0.2f * damageToEnemy;
         points += 20f * kills;
         points += 20f * resurrectedAlly;
-        points -= 0.5f * damageToAlly;
+        points -= 0.2f * damageToAlly;
         points -= 20f * deaths;
         points -= 20f * allyEliminated;
         if (win)
             points += 50/2;
         points = Mathf.Max(points, 0);
-        return Mathf.FloorToInt(points);       
+        return Mathf.CeilToInt(points);       
     }
 
     public char getRank()
