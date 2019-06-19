@@ -47,11 +47,9 @@ public class PlayerWeaponManager_Inventory : NetworkBehaviour {
 
     protected void Update()
     {
-        bool inTurn = gameObject.GetComponent<PlayerManager>().isInTurn;
-
         if (hasAuthority && !idleByBuilding)
         {
-            if (canAttack && inTurn)
+            if (canAttack)
             {
                 if (Input.GetButtonDown("Fire1"))
                     throwingChargeBar.SetActive(true);
@@ -83,7 +81,7 @@ public class PlayerWeaponManager_Inventory : NetworkBehaviour {
                 
         }
 
-        if (hasAuthority && inTurn)
+        if (hasAuthority && canAttack)
         {
             if (Input.GetButtonDown("Axe"))
             {

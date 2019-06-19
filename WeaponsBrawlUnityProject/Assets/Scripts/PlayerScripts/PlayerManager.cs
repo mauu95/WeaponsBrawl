@@ -49,6 +49,7 @@ public class PlayerManager : NetworkBehaviour {
 
     public void ChangeActiveStatus(bool active)
     {
+        GetComponent<PlayerWeaponManager_Inventory>().canAttack = active;
         CmdActiveInTurn(active);
         isInTurn = active;
         foreach (MonoBehaviour c in scriptToDisable)
