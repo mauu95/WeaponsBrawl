@@ -25,15 +25,18 @@ public abstract class AbstractBulletExplosive : NetworkBehaviour {
 
     public void ExplodeCircle()
     {
-        DestroyMapCircle();
-        CmdDestroyWalls();
-        CmdDamageWhoIsInsideTheExplosion();
-        CmdFlingWhoIsInsideTheExplosion();
-        CmdExplosionAnimation();
+        if (isServer)
+        {
+            DestroyMapCircle();
+            DestroyWalls();
+            DamageWhoIsInsideTheExplosion();
+            FlingWhoIsInsideTheExplosionCallback();
+            ExplosionAnimationCallback();
+        }
     }
 
 
-
+    [Server]
     private void DestroyMapCircle()
     {
         foreach (var p in new BoundsInt(-ExplosionRadius, -ExplosionRadius, 0, 2 * ExplosionRadius + 1, 2 * ExplosionRadius + 1, 1).allPositionsWithin)
@@ -54,11 +57,11 @@ public abstract class AbstractBulletExplosive : NetworkBehaviour {
 
 
 
-    [Command]
-    void CmdFlingWhoIsInsideTheExplosion()
+    [Server]
+    void FlingWhoIsInsideTheExplosionCallback()
     {
-        FlingWhoIsInsideTheExplosion();
-        RpcFlingWhoIsInsideTheExplosion();
+        //FlingWhoIsInsideTheExplosion();
+        RpcFlingWhoIsInsideTheExplosion(); //rpc are called also on the server
     }
 
     [ClientRpc]
@@ -85,11 +88,11 @@ public abstract class AbstractBulletExplosive : NetworkBehaviour {
 
 
 
-    [Command]
-    void CmdExplosionAnimation()
+    [Server]
+    void ExplosionAnimationCallback()
     {
-        ExplosionAnimation();
-        RpcExplosionAnimation();
+        //ExplosionAnimation();
+        RpcExplosionAnimation(); //rpc are called also on the server
     }
 
 
@@ -114,8 +117,8 @@ public abstract class AbstractBulletExplosive : NetworkBehaviour {
 
 
 
-    [Command]
-    void CmdDamageWhoIsInsideTheExplosion()
+    [Server]
+    void DamageWhoIsInsideTheExplosion()
     {
         Collider2D[] hittedList = Physics2D.OverlapCircleAll(transform.position, ExplosionRadius);
         foreach (Collider2D hitted in hittedList)
@@ -127,8 +130,8 @@ public abstract class AbstractBulletExplosive : NetworkBehaviour {
         }
     }
 
-    [Command]
-    void CmdDestroyWalls()
+    [Server]
+    void DestroyWalls()
     {
         Collider2D[] hittedList = Physics2D.OverlapCircleAll(transform.position, ExplosionRadius);
         foreach (Collider2D hitted in hittedList)
