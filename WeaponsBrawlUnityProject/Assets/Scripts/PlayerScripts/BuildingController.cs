@@ -38,7 +38,7 @@ public class BuildingController : NetworkBehaviour {
                 zRotation+=45;
             }
 
-            if (isBuilding && Input.GetButtonDown("Fire1"))
+            if (isBuilding && Input.GetButtonDown("Fire1") && gameObject.GetComponent<PlayerManager>().isInTurn)
             {
                 CmdSpawnConstruction(zRotation); //syncvar doesn't work well
             }

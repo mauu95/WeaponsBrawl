@@ -47,10 +47,11 @@ public class PlayerWeaponManager_Inventory : NetworkBehaviour {
 
     protected void Update()
     {
+        bool inTurn = gameObject.GetComponent<PlayerManager>().isInTurn;
 
         if (hasAuthority && !idleByBuilding)
         {
-            if (canAttack)
+            if (canAttack && inTurn)
             {
                 if (Input.GetButtonDown("Fire1"))
                     throwingChargeBar.SetActive(true);
@@ -62,7 +63,7 @@ public class PlayerWeaponManager_Inventory : NetworkBehaviour {
                     StartCoroutine(gameObject.GetComponent<PlayerManager>().LockAfterSec(timeToRepairAfterAttack));
                     throwingChargeBar.SetActive(false);
                 }
-            }                
+            }
 
             if (Input.GetButtonDown("Switch Left"))
             {
@@ -82,7 +83,7 @@ public class PlayerWeaponManager_Inventory : NetworkBehaviour {
                 
         }
 
-        if (hasAuthority)
+        if (hasAuthority && inTurn)
         {
             if (Input.GetButtonDown("Axe"))
             {

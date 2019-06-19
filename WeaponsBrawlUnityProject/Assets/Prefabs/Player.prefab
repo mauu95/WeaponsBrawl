@@ -919,11 +919,7 @@ MonoBehaviour:
   isInTurn: 1
   scriptToDisable:
   - {fileID: 114249778459772358}
-  - {fileID: 114375544405647848}
   - {fileID: 114363776700077670}
-  - {fileID: 114572224886439304}
-  - {fileID: 114245090744289954}
-  - {fileID: 114399992208742386}
 --- !u!114 &114163673899386150
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1038,6 +1034,7 @@ MonoBehaviour:
   allyToResurrect: 
   InteractionRadius: 3
   waitingUser: 0
+  interactionStart: 0
 --- !u!114 &114375544405647848
 MonoBehaviour:
   m_ObjectHideFlags: 1
