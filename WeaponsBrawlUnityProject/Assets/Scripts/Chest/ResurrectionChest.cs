@@ -7,20 +7,21 @@ public class ResurrectionChest : AbstractChest {
 
     public override void ClientPreInteract(PlayerChestManager p)
     {
-        if (!IsInteractable(p))
-        {
-
-        }
         Color team = p.gameObject.GetComponent<PlayerManager>().GetTeam();
         List<PlayerInfo> deadAlly = MatchManager._instance.DeadPlayerList(team);
         ResurrectionMenuUI resurrectionMenu = GetGameObjectInRoot("Canvas").GetComponentInChildren<ResurrectionMenuUI>(true);
+
         p.waitingUser = true;
+
         resurrectionMenu.Open();
+
+        if (!IsInteractable(p)) // No dead ally
+            resurrectionMenu.SetSubTitle("No dead ally to resurrect");
+        else
+            resurrectionMenu.SetSubTitle("Select one ally to resurrect");
+
         foreach (PlayerInfo ally in deadAlly)
-        {
             resurrectionMenu.AddResurrectButton(ally.pname);
-        }
-        //resurrectionMenu.AddResurrectButton("test", p);
     }
 
     internal override bool DoSomething(PlayerChestManager p)
