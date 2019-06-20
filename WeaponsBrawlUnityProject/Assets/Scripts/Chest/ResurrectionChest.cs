@@ -20,7 +20,6 @@ public class ResurrectionChest : AbstractChest {
         {
             resurrectionMenu.AddResurrectButton(ally.pname);
         }
-        //resurrectionMenu.AddResurrectButton("test", p);
     }
 
     internal override bool DoSomething(PlayerChestManager p)
@@ -33,7 +32,7 @@ public class ResurrectionChest : AbstractChest {
             {
                 ally.status = PlayerInfo.Status.alive;
                 ally.transform.position = gameObject.transform.position;
-                ally.CmdResurrect();
+                ally.CmdResurrect(gameObject.transform.position);
                 p.allyToResurrect = null;
                 p.gameObject.GetComponent<PlayerManager>().controller.GetComponent<PlayerInfo>().resurrectedAlly += 1;
                 return true;

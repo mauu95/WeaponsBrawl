@@ -41,16 +41,18 @@ public class PlayerInfo : NetworkBehaviour {
 	
 
     [Command]
-    internal void CmdResurrect()
+    internal void CmdResurrect(Vector3 position)
     {
         PlayerHealth ph= physicalPlayer.GetComponent<PlayerHealth>();
         ph.CmdGetLife(ph.maxHealth);
-        RpcRestoreUser();
+        RpcRestoreUser(position.x, position.y, position.z);
     }
 
     [ClientRpc]
-    public void RpcRestoreUser()
+    public void RpcRestoreUser(float x, float y, float z)
     {
+        Vector3 pos = new Vector3(x, y, z);
+        physicalPlayer.transform.position = pos;
         physicalPlayer.SetActive(true);
     }
 
