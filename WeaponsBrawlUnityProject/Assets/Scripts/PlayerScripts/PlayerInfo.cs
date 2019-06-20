@@ -59,7 +59,7 @@ public class PlayerInfo : NetworkBehaviour {
     public int GetPoints()
     {
         float points = 0;
-        points += 0.2f * damageToEnemy;
+        points += 0.5f * damageToEnemy;
         points += 20f * kills;
         points += 20f * resurrectedAlly;
         points -= 0.2f * damageToAlly;
