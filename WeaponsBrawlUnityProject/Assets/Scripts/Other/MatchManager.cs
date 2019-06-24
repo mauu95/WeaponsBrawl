@@ -57,7 +57,6 @@ public class MatchManager : NetworkBehaviour
                     bool redWin = false;
                     if (turn != Color.red)
                         redWin = true;
-
                     RpcNotifyGameIsOver(redWin);
                 }
 
@@ -93,6 +92,7 @@ public class MatchManager : NetworkBehaviour
 
         if (!endScreen.isActive)
             endScreen.Open();
+
     }
 
     private bool AllPlayerIsDead(Color turn)

@@ -5,9 +5,13 @@ using UnityEngine;
 
 public class EndGameScreemUI : AbstractInGameInterfaces {
     public PlayerInfo localPlayer;
-
+    public GlobalStatsUI globalStatsUI;
     public override void Open()
     {
+        if (globalStatsUI.isActive)
+        {
+            return;
+        }
         base.Open();
         
         Transform winLose = UI.transform.Find("YouWinLoseText");

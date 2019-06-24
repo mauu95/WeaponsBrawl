@@ -48,6 +48,18 @@ public class PlayerInfo : NetworkBehaviour {
         RpcRestoreUser(position.x, position.y, position.z);
     }
 
+    internal string KDRatio()
+    {
+        if (deaths == 0)
+        {
+            return kills.ToString() + "*";
+        }
+        else
+        {
+            return (kills / deaths).ToString("F2");
+        }
+    }
+
     [ClientRpc]
     public void RpcRestoreUser(float x, float y, float z)
     {

@@ -22,7 +22,7 @@ public class ResurrectionMenuUI : AbstractInGameInterfaces {
         foreach (Button button in buttons)
             Destroy(button.gameObject);
 
-        if (!complete)
+        if (!complete && p)
             p.AbortInteraction();
     }
 
