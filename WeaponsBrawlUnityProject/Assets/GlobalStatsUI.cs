@@ -5,9 +5,16 @@ using TMPro;
 using UnityEngine;
 
 public class GlobalStatsUI : AbstractInGameInterfaces {
+
+    public TextMeshProUGUI SingleScoreYouWinText;
+    public TextMeshProUGUI GlobalScoreYouWinText;
+
     public override void Open()
     {
         base.Open();
+
+        GlobalScoreYouWinText.text = SingleScoreYouWinText.text;
+
         Transform red = UI.transform.Find("RedScore");
         Transform blue = UI.transform.Find("BlueScore");
         List<PlayerInfo> redplayers = MatchManager._instance.RedTeam;

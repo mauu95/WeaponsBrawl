@@ -130211,6 +130211,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UI: {fileID: 583419537}
   isActive: 0
+  SingleScoreYouWinText: {fileID: 728620900}
+  GlobalScoreYouWinText: {fileID: 1108194634}
 --- !u!1001 &2022391525
 Prefab:
   m_ObjectHideFlags: 0
