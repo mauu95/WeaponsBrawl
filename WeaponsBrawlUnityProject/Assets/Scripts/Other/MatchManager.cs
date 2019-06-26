@@ -19,8 +19,8 @@ public class MatchManager : NetworkBehaviour
 
     public List<PlayerInfo> RedTeam = new List<PlayerInfo>();
     public List<PlayerInfo> BlueTeam = new List<PlayerInfo>();
-    private bool gameIsOver;
-    private bool gameIsStart; 
+    public bool gameIsOver;
+    public bool gameIsStart; 
 
     public void Start()
     {
