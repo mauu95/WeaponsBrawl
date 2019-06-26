@@ -20,9 +20,11 @@ public class MatchManager : NetworkBehaviour
     public List<PlayerInfo> RedTeam = new List<PlayerInfo>();
     public List<PlayerInfo> BlueTeam = new List<PlayerInfo>();
     private bool gameIsOver;
+    private bool gameIsStart; 
 
     public void Start()
     {
+        gameIsStart = false;
         _instance = this;
         turn = Color.red;
         waiting = turnDuration;
@@ -36,9 +38,13 @@ public class MatchManager : NetworkBehaviour
     {
         if (isServer && FindObjectOfType<Prototype.NetworkLobby.LobbyTopPanel>().isInGame)
         {
-
+            if (RedTeam.Count > 0  && BlueTeam.Count>0)
+            {
+                gameIsStart = true;
+            }
             try
             {
+
                 if (_players.Count > 0 && AllPlayerHasEnded(this.turn))
                     waiting = 0;
             }
@@ -52,7 +58,7 @@ public class MatchManager : NetworkBehaviour
 
             if (waiting < 0)
             {
-                if (AllPlayerIsDead(turn))
+                if (AllPlayerIsDead(turn) && gameIsStart)
                 {
                     bool redWin = false;
                     if (turn != Color.red)
