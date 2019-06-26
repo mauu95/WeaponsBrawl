@@ -98,7 +98,7 @@ public class MatchManager : NetworkBehaviour
 
         if (!endScreen.isActive)
             endScreen.Open();
-
+        gameIsStart = false;
     }
 
     private bool AllPlayerIsDead(Color turn)
