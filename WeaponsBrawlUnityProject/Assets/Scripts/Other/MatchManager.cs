@@ -38,7 +38,7 @@ public class MatchManager : NetworkBehaviour
     {
         if (isServer && FindObjectOfType<Prototype.NetworkLobby.LobbyTopPanel>().isInGame)
         {
-            if (RedTeam.Count > 0  && BlueTeam.Count>0)
+            if (RedTeam.Count > 0  && BlueTeam.Count>0 && !gameIsOver) 
             {
                 gameIsStart = true;
             }
