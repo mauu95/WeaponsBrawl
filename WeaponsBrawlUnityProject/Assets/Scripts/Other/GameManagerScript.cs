@@ -13,6 +13,8 @@ public class GameManagerScript : NetworkBehaviour {
     {
         matchInfo = Prototype.NetworkLobby.LobbyManager.s_Singleton.transform.Find("MatchManager").GetComponent<MatchManager>();
         matchInfo.waiting = matchInfo.turnDuration;
+        matchInfo.gameIsOver = false;
+       
     }
 
     private void Update()
